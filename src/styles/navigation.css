@@ -1,4 +1,4 @@
-.container {
+.navigation-bar {
   display: inline-flex;
   width: 100%;
   background-color: #232f3e;
@@ -6,11 +6,12 @@
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  padding: 5px;
+  box-sizing: border-box;
 }
 
 .buttons {
   display: inline-flex;
+  height: fit-content;
   padding: 8px;
   margin: 5px;
   cursor: pointer;
@@ -18,7 +19,7 @@
 }
 
 .buttons:hover {
-  border: 1px solid white;
+  outline: 1px solid white;
 }
 
 .icon {
@@ -27,7 +28,11 @@
 
 .bar {
   width: 35px;
-  height: 5px;
+  height: 4px;
   background-color: white;
   margin-bottom: 5px;
+}
+
+.last-bar {
+  margin: 0;
 }

@@ -10,8 +10,9 @@ export default () => {
     icon.appendChild(bar);
   }
 
+  icon.lastChild.classList.add('last-bar');
   navigationBar.appendChild(icon);
-  navigationBar.classList.add('container');
+  navigationBar.classList.add('navigation-bar');
   topics.forEach(topics => {
     const menu = document.createElement('div');
     navigationBar.appendChild(menu);
