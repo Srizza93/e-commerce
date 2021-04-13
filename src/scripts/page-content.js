@@ -1,4 +1,4 @@
-import background from '../images/background.jpeg';
+import background from 'https://srizza93.github.io/e-commerce/src/images/background.jpeg';
 
 export default () => {
   const cover = document.createElement('img');
