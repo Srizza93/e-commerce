@@ -1,4 +1,4 @@
-import logoBar from '../images/doelogo.png';
+import logoBar from '../src/images/doelogo.png';
 
 export default () => {
   const logo = document.createElement('img');
