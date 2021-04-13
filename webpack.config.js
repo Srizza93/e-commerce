@@ -8,8 +8,7 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'deploy'),
-    publicPath: "/e-commerce/"
+    path: path.resolve(__dirname, 'deploy')
   },
   devServer: {
     contentBase: './deploy',
