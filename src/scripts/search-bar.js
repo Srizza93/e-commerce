@@ -19,7 +19,7 @@ export default () => {
   searchForm.type = 'search';
   searchForm.placeholder = 'Write something...'
   lensContaniner.type = 'submit';
-  lensContaniner.value = 'Search';
+  lensContaniner.value = 'Click';
   searchForm.classList.add('search-form');
   containerForm.classList.add('container-form');
   lensContaniner.classList.add('lens', 'selected');
