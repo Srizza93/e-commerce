@@ -68,6 +68,7 @@
   display: flex;
   flex-wrap: wrap;
   position: absolute;
+  visibility: hidden;
   opacity: 0;
   max-width: 500px;
   top: 58px;
@@ -99,6 +100,7 @@
 }
 
 .show_suggestions {
+  visibility: visible;
   opacity: 100%;
 }
 </style>
