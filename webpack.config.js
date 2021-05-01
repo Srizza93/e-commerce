@@ -1,15 +1,28 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
 
 module.exports = {
+  // !!!!!! MAKE SURE TO CHANGE MODE TO PRODUCTION WHEN DOPLOYING FOR PRODUCTION !!!!!!!!!
+  mode: 'development',
   entry: {
-    main: path.resolve(__dirname, './src/app.js'),
+    main:  {
+      import: path.resolve(__dirname, './src/scripts/app.js'),
+    },
+    research: {
+      import: path.resolve(__dirname, './src/scripts/research.js'),
+    },
   },
+  // devtool: 'inline-source-map', ONLY FOR DEVLOPMENT MODE
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'deploy')
+    path: path.resolve(__dirname, 'deploy'),
+    clean: true
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   devServer: {
     contentBase: './deploy',
@@ -43,9 +56,14 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "e-commerce",
+      title: 'e-commerce',
+      chunks: ['main']
     }),
-    new VueLoaderPlugin(),
-    new CleanWebpackPlugin()
-  ]
+    new HtmlWebpackPlugin({
+      title: 'e-commerce',
+      filename: 'research.html',
+      chunks: ['research']
+    }),
+    new VueLoaderPlugin()
+    ]
 };

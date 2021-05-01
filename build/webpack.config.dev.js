@@ -3,7 +3,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
   mode: 'development',
   entry: [
-    './src/app.js'
+    './src/scripts/app.js'
   ],
   module: {
     rules: [

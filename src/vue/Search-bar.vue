@@ -38,7 +38,7 @@
 }
 
 .select {
-  width: 80px;
+  width: auto;
   padding: 12px;
   border: 1px solid #ccc;
   border-right-width: 10px;
@@ -68,6 +68,7 @@
   display: flex;
   flex-wrap: wrap;
   position: absolute;
+  visibility: hidden;
   opacity: 0;
   max-width: 500px;
   top: 58px;
@@ -99,6 +100,7 @@
 }
 
 .show_suggestions {
+  visibility: visible;
   opacity: 100%;
 }
 </style>
@@ -136,7 +138,7 @@ export default {
           text: 'Tech',
           subtopics: [
             { 
-              link: 'https://vuejs.org/v2/api/#v-bind',
+              link: './research.html',
               text: 'TV' 
             },
             { 

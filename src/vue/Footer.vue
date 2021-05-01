@@ -6,7 +6,7 @@
     :key="topic.text" 
     class="footer_ul_li"
     > 
-      <a 
+      <a
       class="footer_ul_li_link"
       :href="topic.link"
         >{{topic.text}}
@@ -69,6 +69,8 @@
 
 <style scoped>
 .footer {
+  position: absolute;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,4 +1,7 @@
 .sub-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 5px;
   text-align: center;
   background-color: red;

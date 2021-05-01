@@ -23,6 +23,7 @@ export default () => {
     const topicPic = document.createElement('img');
     title.innerHTML = topic;
     topicPic.src = pic;
+    topicPic.alt = topic;
     container.classList.add('galery__topics');
     title.classList.add('galery__topics__title');
     topicPic.classList.add('galery__topics__pic')
