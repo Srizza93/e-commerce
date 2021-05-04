@@ -15,7 +15,7 @@ module.exports = {
   },
   // devtool: 'inline-source-map', ONLY FOR DEVLOPMENT MODE
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'deploy'),
     clean: true
   },
