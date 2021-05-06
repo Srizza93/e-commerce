@@ -5,25 +5,32 @@
       v-for="filter in filters"
       :key="filter.text"
       class="filters_filter">
-      <h4 class="filters_filter_title">{{filter.text}}</h4>
-      <span
-      v-for="subtopic in filter.subtopics"
-      :key="subtopic.text"
-      class="filters_filter_topic">
-      <input type="checkbox" id="filters_filter" name="filters_filter" :value="subtopic.text">
-      <span>{{subtopic.text}}</span>
-      </span>
+        <h4 class="filters_filter_title">{{filter.text}}</h4>
+        <span
+        v-for="subtopic in filter.subtopics"
+        :key="subtopic.text"
+        class="filters_filter_topic">
+          <input type="checkbox" 
+          :id="subtopic.text" 
+          name="filters_filter" 
+          :value="subtopic.text" 
+          v-on:click="filterTicked">
+          <span>{{subtopic.text}}</span>
+        </span>
       </div>
     </div>
     <div class="products">
       <div 
       class="products_product"
-      v-for="product in products"
+      v-for="product in productsFiltered"
       :key="product.text">
-      <h4>{{product.text}}</h4>
-      <img v-bind:src="getImgUrl(product.image)" :alt="product.text" class="products_product_images">
-      <span class="products_product_description">{{product.descritpion}}</span>
-      <span class="products_product_price">{{product.price}}</span>
+        <h4>{{product.text}}</h4>
+        <img v-bind:src="getImgUrl(product.image)" 
+        :alt="product.text" class="products_product_images">
+        <span class="products_product_brand">{{product.brand}}</span>
+        <span class="products_product_description">{{product.descritpion}}</span>
+        <span class="products_product_price">{{product.price}}</span>
+        <span class="products_product_reviews"><span class="star"></span> {{product.reviews}}</span>
       </div>
     </div>
   </div>
@@ -92,6 +99,13 @@
   font-weight: bold;
   font-size: 21px;
 }
+
+.star {
+  color: #FF8C00;
+}
+.star::before {
+  content: "\2605";
+}
 </style>
 
 <script>
@@ -102,10 +116,32 @@ export default {
     getImgUrl(pic) {
     var images = require.context('../images/', false, /\.jpeg$/)
     return images('./' + pic)
-  }
+    },
+    filterTicked(event) {
+      const filter = event.target.value;
+      if (this.tickedFilters.includes(filter)) {
+        this.tickedFilters.splice(this.tickedFilters.indexOf(filter), 1);
+      }
+      else {
+        this.tickedFilters.push(event.target.value);
+      }
+    }
+  },
+  computed: {
+    productsFiltered(event) {
+      if (this.tickedFilters.length > 0) {
+        return this.products.filter(product => {
+          return Object.values(product).some(subtopic => {
+            return this.tickedFilters.includes(subtopic);
+          })
+        });
+      }
+      return this.products;
+    }
   },
   data() {
     return { 
+      tickedFilters: [],
       filters: [
         {
           text: 'Reviews',
@@ -148,22 +184,22 @@ export default {
           text: 'Products',
           subtopics: [
             {
-              text: 'All'
-            },
-            {
-              text: 'Computers'
+              text: 'Computer'
             },
             {
               text: 'Food'
             },
             {
-              text: 'Clothes'
+              text: 'Garden'
             },
             {
               text: 'Beauty'
             },
             {
-              text: 'Baby'
+              text: 'Guitar'
+            },
+            {
+              text: 'Shoes'
             }
           ]
         },
@@ -196,55 +232,82 @@ export default {
           text: 'Shoes',
           image: 'shoes.jpeg',
           descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€'
+          price: '20€',
+          range: '0 to 25€',
+          reviews: 'Excellent',
+          brand: 'Adidas'
         },
         {
           text: 'Computer',
           image: 'computer-product.jpeg',
           descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '2000€'
+          price: '2000€',
+          range: '101 to 200€',
+          reviews: 'Excellent',
+          brand: 'Nike'
         },
         {
           text: 'Guitar',
           image: 'guitar.jpeg',
           descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€'
+          price: '20€',
+          range: '0 to 25€',
+          reviews: 'Great',
+          brand: 'Findus'
         },
         {
           text: 'Garden',
           image: 'garden.jpeg',
           descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€'
+          price: '20€',
+          range: '26 to 50€',
+          reviews: 'Ok',
+          brand: 'Adidas'
         },
         {
           text: 'Home',
           image: 'home.jpeg',
           descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€'
+          price: '20€',
+          range: '51 to 100€',
+          reviews: 'Excellent',
+          brand: 'Nike'
         },
         {
           text: 'Toys',
           image: 'toys.jpeg',
           descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€'
+          price: '20€',
+          range: '26 to 50€',
+          reviews: 'Bad',
+          brand: 'Apple'
         },
         {
           text: 'Food',
           image: 'food.jpeg',
           descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€'
+          price: '20€',
+          range: '101 to 200€',
+          reviews: 'Good',
+          brand: 'Nike'
         },
         {
           text: 'Beauty',
           image: 'beauty.jpeg',
           descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€'
+          price: '20€',
+          range: '0 to 25€',
+          reviews: 'Good',
+          brand: 'Samsung'
         },
         {
           text: 'Computers',
           image: 'computers.jpeg',
           descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€'
+          price: '20€',
+          range: '101 to 200€',
+          reviews: 'Excellent',
+          brand: 'Lacoste'
         }
       ]
     }
