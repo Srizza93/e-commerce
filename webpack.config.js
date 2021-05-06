@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
@@ -44,11 +45,11 @@ module.exports = {
         test: /\.vue$/,
         use: 'vue-loader'
       },
-      { 
-        test: /\.css$/, 
-        use: ["style-loader", "css-loader"] 
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       },
-      { 
+      {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource',
       },
@@ -57,12 +58,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'e-commerce',
-      chunks: ['main']
+      chunks: ['main'],
     }),
     new HtmlWebpackPlugin({
       title: 'e-commerce',
       filename: 'research.html',
-      chunks: ['research']
+      chunks: ['research'],
     }),
     new VueLoaderPlugin()
     ]

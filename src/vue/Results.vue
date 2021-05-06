@@ -1,46 +1,301 @@
 <template>
   <div class="results">
     <div class="filters">
-      <div 
-      v-for="filter in filters"
-      :key="filter.text"
-      class="filters_filter">
-        <h4 class="filters_filter_title">{{filter.text}}</h4>
+      <div v-for="filter in filters" :key="filter.id" class="filters_filter">
+        <h4 class="filters_filter_title">
+          {{ filter.text }}
+        </h4>
         <span
-        v-for="subtopic in filter.subtopics"
-        :key="subtopic.text"
-        class="filters_filter_topic">
-          <input type="checkbox" 
-          :id="subtopic.text" 
-          name="filters_filter" 
-          :value="subtopic.text" 
-          v-on:click="filterTicked">
-          <span>{{subtopic.text}}</span>
+          v-for="subtopic in filter.subtopics"
+          :key="filter.text + '-' + subtopic.id"
+          class="filters_filter_topic"
+        >
+          <input
+            type="checkbox"
+            :id="subtopic.text"
+            name="filters_filter"
+            :value="subtopic.text"
+            @click="filterTicked"
+          />
+          <span>
+            {{ subtopic.text }}
+          </span>
         </span>
       </div>
     </div>
     <div class="products">
-      <div 
-      class="products_product"
-      v-for="product in productsFiltered"
-      :key="product.text">
-        <h4>{{product.text}}</h4>
-        <img v-bind:src="getImgUrl(product.image)" 
-        :alt="product.text" class="products_product_images">
-        <span class="products_product_brand">{{product.brand}}</span>
-        <span class="products_product_description">{{product.descritpion}}</span>
-        <span class="products_product_price">{{product.price}}</span>
-        <span class="products_product_reviews"><span class="star"></span> {{product.reviews}}</span>
+      <div
+        class="products_product"
+        v-for="product in productsFiltered"
+        :key="product.text"
+      >
+        <h4>
+          {{ product.text }}
+        </h4>
+        <img
+          v-bind:src="getImgUrl(product.image)"
+          :alt="product.text"
+          class="products_product_images"
+        />
+        <span class="products_product_brand">{{ product.brand }}</span>
+        <span class="products_product_description">
+          {{product.descritpion}}
+        </span>
+        <span class="products_product_price">{{ product.price }}</span>
+        <span class="products_product_reviews">
+          <span class="star"></span>
+          {{ product.reviews }}
+        </span
+        >
       </div>
     </div>
   </div>
 </template>
 
+<script>
+export default {
+  name: "Footer",
+  data() {
+    return {
+      tickedFilters: [],
+      filters: [
+        {
+          id: 1,
+          text: "Reviews",
+          subtopics: [
+            {
+              id: 1,
+              text: "Excellent",
+            },
+            {
+              id: 2,
+              text: "Great",
+            },
+            {
+              id: 3,
+              text: "Good",
+            },
+            {
+              id: 4,
+              text: "Ok",
+            },
+            {
+              id: 5,
+              text: "Bad",
+            },
+          ],
+        },
+        {
+          id: 2,
+          text: "Price",
+          subtopics: [
+            {
+              id: 1,
+              text: "0 to 25€",
+            },
+            {
+              id: 2,
+              text: "26 to 50€",
+            },
+            {
+              id: 3,
+              text: "51 to 100€",
+            },
+            {
+              id: 4,
+              text: "101 to 200€",
+            },
+          ],
+        },
+        {
+          id: 3,
+          text: "Products",
+          subtopics: [
+            {
+              id: 1,
+              text: "Computer",
+            },
+            {
+              id: 2,
+              text: "Food",
+            },
+            {
+              id: 3,
+              text: "Garden",
+            },
+            {
+              id: 4,
+              text: "Beauty",
+            },
+            {
+              id: 5,
+              text: "Guitar",
+            },
+            {
+              id: 6,
+              text: "Shoes",
+            },
+          ],
+        },
+        {
+          id: 4,
+          text: "Brands",
+          subtopics: [
+            {
+              id: 1,
+              text: "Adidas",
+            },
+            {
+              id: 2,
+              text: "Nike",
+            },
+            {
+              id: 3,
+              text: "Apple",
+            },
+            {
+              id: 4,
+              text: "Samsung",
+            },
+            {
+              id: 5,
+              text: "Findus",
+            },
+            {
+              id: 6,
+              text: "Lacoste",
+            },
+          ],
+        },
+      ],
+      products: [
+        {
+          id: 1,
+          text: "Shoes",
+          image: "shoes.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "20€",
+          range: "0 to 25€",
+          reviews: "Excellent",
+          brand: "Adidas",
+        },
+        {
+          id: 2,
+          text: "Computer",
+          image: "computer-product.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "2000€",
+          range: "101 to 200€",
+          reviews: "Excellent",
+          brand: "Nike",
+        },
+        {
+          id: 3,
+          text: "Guitar",
+          image: "guitar.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "20€",
+          range: "0 to 25€",
+          reviews: "Great",
+          brand: "Findus",
+        },
+        {
+          id: 4,
+          text: "Garden",
+          image: "garden.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "20€",
+          range: "26 to 50€",
+          reviews: "Ok",
+          brand: "Adidas",
+        },
+        {
+          id: 5,
+          text: "Home",
+          image: "home.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "20€",
+          range: "51 to 100€",
+          reviews: "Excellent",
+          brand: "Nike",
+        },
+        {
+          id: 6,
+          text: "Toys",
+          image: "toys.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "20€",
+          range: "26 to 50€",
+          reviews: "Bad",
+          brand: "Apple",
+        },
+        {
+          id: 7,
+          text: "Food",
+          image: "food.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "20€",
+          range: "101 to 200€",
+          reviews: "Good",
+          brand: "Nike",
+        },
+        {
+          id: 8,
+          text: "Beauty",
+          image: "beauty.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "20€",
+          range: "0 to 25€",
+          reviews: "Good",
+          brand: "Samsung",
+        },
+        {
+          id: 9,
+          text: "Computers",
+          image: "computers.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "20€",
+          range: "101 to 200€",
+          reviews: "Excellent",
+          brand: "Lacoste",
+        },
+      ],
+    };
+  },
+  methods: {
+    getImgUrl(pic) {
+      var images = require.context("../images/", false, /\.jpeg$/);
+      return images("./" + pic);
+    },
+    filterTicked(event) {
+      const filter = event.target.value;
+      if (this.tickedFilters.includes(filter)) {
+        this.tickedFilters.splice(this.tickedFilters.indexOf(filter), 1);
+      } else {
+        this.tickedFilters.push(event.target.value);
+      }
+    },
+  },
+  computed: {
+    productsFiltered(event) {
+      if (this.tickedFilters.length > 0) {
+        return this.products.filter((product) => {
+          return Object.values(product).some((subtopic) => {
+            return this.tickedFilters.includes(subtopic);
+          });
+        });
+      }
+      return this.products;
+    },
+  }
+};
+</script>
+
 <style scoped>
 .results {
   display: flex;
   flex-direction: row;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   padding: 10px 0 10px 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -62,6 +317,11 @@
   padding: 15px;
 }
 
+.filters_filter_topic {
+  display: flex;
+  flex-direction: row;
+}
+
 .filters_filter_title {
   margin: 10px 0 10px 0;
 }
@@ -72,7 +332,7 @@
   justify-content: left;
   flex-basis: 80%;
   margin: 0 0 0 5%;
-  font-weight: 400px;
+  font-weight: 400;
   padding-top: 25px;
 }
 
@@ -91,227 +351,25 @@
 }
 
 .products_product_description {
-  padding: 1.33em 0 .50em 0;
+  padding: 1.33em 0 0.5em 0;
 }
 
 .products_product_price {
-  padding-bottom: .50em;
+  padding-bottom: 0.5em;
   font-weight: bold;
   font-size: 21px;
 }
 
 .star {
-  color: #FF8C00;
+  color: #ff8c00;
 }
 .star::before {
   content: "\2605";
 }
-</style>
 
-<script>
-
-export default {
-  name: 'Footer',
-  methods: {
-    getImgUrl(pic) {
-    var images = require.context('../images/', false, /\.jpeg$/)
-    return images('./' + pic)
-    },
-    filterTicked(event) {
-      const filter = event.target.value;
-      if (this.tickedFilters.includes(filter)) {
-        this.tickedFilters.splice(this.tickedFilters.indexOf(filter), 1);
-      }
-      else {
-        this.tickedFilters.push(event.target.value);
-      }
-    }
-  },
-  computed: {
-    productsFiltered(event) {
-      if (this.tickedFilters.length > 0) {
-        return this.products.filter(product => {
-          return Object.values(product).some(subtopic => {
-            return this.tickedFilters.includes(subtopic);
-          })
-        });
-      }
-      return this.products;
-    }
-  },
-  data() {
-    return { 
-      tickedFilters: [],
-      filters: [
-        {
-          text: 'Reviews',
-          subtopics: [
-            {
-              text: 'Excellent'
-            },
-            {
-              text: 'Great'
-            },
-            {
-              text: 'Good'
-            },
-            {
-              text: 'Ok'
-            },
-            {
-              text: 'Bad'
-            }
-          ]
-        },
-        {
-          text: 'Price',
-          subtopics: [
-            {
-              text: '0 to 25€'
-            },
-            {
-              text: '26 to 50€'
-            },
-            {
-              text: '51 to 100€'
-            },
-            {
-              text: '101 to 200€'
-            }
-          ]
-        },
-        {
-          text: 'Products',
-          subtopics: [
-            {
-              text: 'Computer'
-            },
-            {
-              text: 'Food'
-            },
-            {
-              text: 'Garden'
-            },
-            {
-              text: 'Beauty'
-            },
-            {
-              text: 'Guitar'
-            },
-            {
-              text: 'Shoes'
-            }
-          ]
-        },
-        {
-          text: 'Brands',
-          subtopics: [
-            {
-              text: 'Adidas'
-            },
-            {
-              text: 'Nike'
-            },
-            {
-              text: 'Apple'
-            },
-            {
-              text: 'Samsung'
-            },
-            {
-              text: 'Findus'
-            },
-            {
-              text: 'Lacoste'
-            }
-          ]
-        }
-      ],
-      products: [
-        {
-          text: 'Shoes',
-          image: 'shoes.jpeg',
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€',
-          range: '0 to 25€',
-          reviews: 'Excellent',
-          brand: 'Adidas'
-        },
-        {
-          text: 'Computer',
-          image: 'computer-product.jpeg',
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '2000€',
-          range: '101 to 200€',
-          reviews: 'Excellent',
-          brand: 'Nike'
-        },
-        {
-          text: 'Guitar',
-          image: 'guitar.jpeg',
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€',
-          range: '0 to 25€',
-          reviews: 'Great',
-          brand: 'Findus'
-        },
-        {
-          text: 'Garden',
-          image: 'garden.jpeg',
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€',
-          range: '26 to 50€',
-          reviews: 'Ok',
-          brand: 'Adidas'
-        },
-        {
-          text: 'Home',
-          image: 'home.jpeg',
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€',
-          range: '51 to 100€',
-          reviews: 'Excellent',
-          brand: 'Nike'
-        },
-        {
-          text: 'Toys',
-          image: 'toys.jpeg',
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€',
-          range: '26 to 50€',
-          reviews: 'Bad',
-          brand: 'Apple'
-        },
-        {
-          text: 'Food',
-          image: 'food.jpeg',
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€',
-          range: '101 to 200€',
-          reviews: 'Good',
-          brand: 'Nike'
-        },
-        {
-          text: 'Beauty',
-          image: 'beauty.jpeg',
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€',
-          range: '0 to 25€',
-          reviews: 'Good',
-          brand: 'Samsung'
-        },
-        {
-          text: 'Computers',
-          image: 'computers.jpeg',
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: '20€',
-          range: '101 to 200€',
-          reviews: 'Excellent',
-          brand: 'Lacoste'
-        }
-      ]
-    }
+@media only screen and (max-width: 600px) {
+  .products_product {
+    padding: 0;
   }
 }
-
-</script>
+</style>
