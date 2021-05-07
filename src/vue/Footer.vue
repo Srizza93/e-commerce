@@ -164,7 +164,6 @@ export default {
   justify-content: center;
   align-items: center;
   overflow-y: hidden;
-  margin-top: 30px;
   height: 100px;
   width: 100%;
   background-color: #232f3e;

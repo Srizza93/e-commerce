@@ -339,7 +339,7 @@ export default {
 .products_product {
   display: flex;
   flex-direction: column;
-  padding: 0 12px;
+  padding: 0 12px 30px 12px;
   max-width: 200px;
   border-bottom: 2px solid #ddd;
 }

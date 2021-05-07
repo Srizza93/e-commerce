@@ -8,6 +8,7 @@
     <input
       v-model="search"
       @click="showSuggestions"
+      @blur="showSuggestions"
       type="search"
       placeholder="Write something..."
       class="search-form"/>
@@ -281,7 +282,7 @@ export default {
   color: black;
   line-height: 1.5em;
   z-index: 99999;
-  border-radius: 5%;
+  border-radius: 0 5% 5% 5%;
   transition-duration: 2s;
 }
 
