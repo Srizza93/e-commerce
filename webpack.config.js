@@ -14,7 +14,7 @@ module.exports = {
       import: path.resolve(__dirname, './src/scripts/research.js'),
     },
   },
-  // devtool: 'inline-source-map', ONLY FOR DEVLOPMENT MODE
+  // devtool: 'inline-source-map', // ONLY FOR DEVLOPMENT MODE
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'deploy'),

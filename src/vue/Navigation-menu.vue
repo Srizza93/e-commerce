@@ -106,7 +106,7 @@ export default {
 }
 
 .icon {
-  display: inline-block;
+  display: none;
 }
 
 .hamburger-open {
@@ -137,6 +137,10 @@ export default {
 
   .hamburger-clicked {
     display: block;
+  }
+
+  .icon {
+    display: inline-block;
   }
 }
 </style>

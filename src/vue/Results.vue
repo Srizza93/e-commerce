@@ -1,52 +1,61 @@
 <template>
   <div class="results">
     <div class="filters">
-      <div v-for="filter in filters" :key="filter.id" class="filters_filter">
-        <h4 class="filters_filter_title">
-          {{ filter.text }}
-        </h4>
-        <span
-          v-for="subtopic in filter.subtopics"
-          :key="filter.text + '-' + subtopic.id"
-          class="filters_filter_topic"
-        >
+      <label
+        v-for="filter in filteredFilters"
+        :key="'filter-' + filter.id"
+        :pkey="'filter-' + filter.id"
+        class="filters_filter_topic"
+      >
+        <div>
           <input
+            class="filters_filter_topic_checkbox"
             type="checkbox"
-            :id="subtopic.text"
+            :id="filter.id"
             name="filters_filter"
-            :value="subtopic.text"
+            :value="filter.text"
             @click="filterTicked"
           />
-          <span>
-            {{ subtopic.text }}
+          <span class="filters_filter_topic_checkmark"></span>
+          <span class="filters_filter_topic_container"></span>
+          <span class="filters_filter_topic_label_text">
+            {{ filter.text }}
           </span>
+        </div>
+        <span class="filters_filter_topic_label_count">
+          ({{ filteredProductsLength }})
         </span>
-      </div>
+      </label>
     </div>
     <div class="products">
-      <div
-        class="products_product"
-        v-for="product in productsFiltered"
-        :key="product.text"
-      >
-        <h4>
-          {{ product.text }}
-        </h4>
-        <img
-          v-bind:src="getImgUrl(product.image)"
-          :alt="product.text"
-          class="products_product_images"
-        />
-        <span class="products_product_brand">{{ product.brand }}</span>
-        <span class="products_product_description">
-          {{product.descritpion}}
-        </span>
-        <span class="products_product_price">{{ product.price }}</span>
-        <span class="products_product_reviews">
-          <span class="star"></span>
-          {{ product.reviews }}
-        </span
+      <h2 class="products_count">
+        {{ filteredProductsLength }} Product(s) Found
+      </h2>
+      <div class="products_container">
+        <div
+          class="products_product"
+          v-for="product in filteredProducts"
+          :key="`products-` + product.id"
+          :pkey="'product-' + product.id"
         >
+          <h4>
+            {{ product.text }}
+          </h4>
+          <img
+            v-bind:src="getImgUrl(product.image)"
+            :alt="product.text"
+            class="products_product_images"
+          />
+          <span class="products_product_brand">{{ product.brand }}</span>
+          <span class="products_product_description">
+            {{ product.descritpion }}
+          </span>
+          <span class="products_product_price">{{ product.price }}</span>
+          <span class="products_product_reviews">
+            <span class="star"></span>
+            {{ product.reviews }}
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -55,117 +64,116 @@
 <script>
 export default {
   name: "Footer",
+  props: ["pkey"],
   data() {
     return {
       tickedFilters: [],
+      shownProducts: [],
       filters: [
         {
           id: 1,
-          text: "Reviews",
-          subtopics: [
-            {
-              id: 1,
-              text: "Excellent",
-            },
-            {
-              id: 2,
-              text: "Great",
-            },
-            {
-              id: 3,
-              text: "Good",
-            },
-            {
-              id: 4,
-              text: "Ok",
-            },
-            {
-              id: 5,
-              text: "Bad",
-            },
-          ],
+          topic: "Reviews",
+          text: "Excellent",
         },
         {
           id: 2,
-          text: "Price",
-          subtopics: [
-            {
-              id: 1,
-              text: "0 to 25€",
-            },
-            {
-              id: 2,
-              text: "26 to 50€",
-            },
-            {
-              id: 3,
-              text: "51 to 100€",
-            },
-            {
-              id: 4,
-              text: "101 to 200€",
-            },
-          ],
+          topic: "Reviews",
+          text: "Great",
         },
         {
           id: 3,
-          text: "Products",
-          subtopics: [
-            {
-              id: 1,
-              text: "Computer",
-            },
-            {
-              id: 2,
-              text: "Food",
-            },
-            {
-              id: 3,
-              text: "Garden",
-            },
-            {
-              id: 4,
-              text: "Beauty",
-            },
-            {
-              id: 5,
-              text: "Guitar",
-            },
-            {
-              id: 6,
-              text: "Shoes",
-            },
-          ],
+          topic: "Reviews",
+          text: "Good",
         },
         {
           id: 4,
-          text: "Brands",
-          subtopics: [
-            {
-              id: 1,
-              text: "Adidas",
-            },
-            {
-              id: 2,
-              text: "Nike",
-            },
-            {
-              id: 3,
-              text: "Apple",
-            },
-            {
-              id: 4,
-              text: "Samsung",
-            },
-            {
-              id: 5,
-              text: "Findus",
-            },
-            {
-              id: 6,
-              text: "Lacoste",
-            },
-          ],
+          topic: "Reviews",
+          text: "Ok",
+        },
+        {
+          id: 5,
+          topic: "Reviews",
+          text: "Bad",
+        },
+        {
+          id: 6,
+          topic: "Price",
+          text: "0 to 25€",
+        },
+        {
+          id: 7,
+          topic: "Price",
+          text: "26 to 50€",
+        },
+        {
+          id: 8,
+          topic: "Price",
+          text: "51 to 100€",
+        },
+        {
+          id: 9,
+          topic: "Price",
+          text: "101 to 200€",
+        },
+        {
+          id: 10,
+          topic: "Products",
+          text: "Computer",
+        },
+        {
+          id: 11,
+          topic: "Products",
+          text: "Food",
+        },
+        {
+          id: 12,
+          topic: "Products",
+          text: "Garden",
+        },
+        {
+          id: 13,
+          topic: "Products",
+          text: "Beauty",
+        },
+        {
+          id: 14,
+          topic: "Products",
+          text: "Guitar",
+        },
+        {
+          id: 15,
+          topic: "Products",
+          text: "Shoes",
+        },
+        {
+          id: 16,
+          topic: "Brands",
+          text: "Adidas",
+        },
+        {
+          id: 17,
+          topic: "Brands",
+          text: "Nike",
+        },
+        {
+          id: 18,
+          topic: "Brands",
+          text: "Apple",
+        },
+        {
+          id: 19,
+          topic: "Brands",
+          text: "Samsung",
+        },
+        {
+          id: 20,
+          topic: "Brands",
+          text: "Findus",
+        },
+        {
+          id: 21,
+          topic: "Brands",
+          text: "Lacoste",
         },
       ],
       products: [
@@ -187,7 +195,7 @@ export default {
           price: "2000€",
           range: "101 to 200€",
           reviews: "Excellent",
-          brand: "Nike",
+          brand: "Apple",
         },
         {
           id: 3,
@@ -259,6 +267,16 @@ export default {
           reviews: "Excellent",
           brand: "Lacoste",
         },
+        {
+          id: 10,
+          text: "Computers",
+          image: "computers.jpeg",
+          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          price: "20€",
+          range: "101 to 200€",
+          reviews: "Excellent",
+          brand: "Lacoste",
+        },
       ],
     };
   },
@@ -272,22 +290,44 @@ export default {
       if (this.tickedFilters.includes(filter)) {
         this.tickedFilters.splice(this.tickedFilters.indexOf(filter), 1);
       } else {
-        this.tickedFilters.push(event.target.value);
+        this.tickedFilters.push(filter);
       }
+      this.shownProducts = [];
     },
   },
   computed: {
-    productsFiltered(event) {
+    filteredFilters() {
+      if (this.tickedFilters.length > 0) {
+        this.filteredProducts.forEach((product) => {
+          this.shownProducts = this.shownProducts.concat(
+            Object.values(product)
+          );
+        });
+        return this.filters.filter((filter) => {
+          return this.shownProducts.includes(filter.text);
+        });
+      }
+      return this.filters;
+    },
+    filteredProducts() {
       if (this.tickedFilters.length > 0) {
         return this.products.filter((product) => {
-          return Object.values(product).some((subtopic) => {
-            return this.tickedFilters.includes(subtopic);
-          });
+          return (
+            Object.values(product).some((subtopic) => {
+              return this.tickedFilters.includes(subtopic);
+            }) &&
+            this.tickedFilters.every((filter) => {
+              return Object.values(product).includes(filter);
+            })
+          );
         });
       }
       return this.products;
     },
-  }
+    filteredProductsLength() {
+      return this.filteredProducts.length;
+    },
+  },
 };
 </script>
 
@@ -319,21 +359,92 @@ export default {
 
 .filters_filter_topic {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 0 5px 0;
 }
 
-.filters_filter_title {
-  margin: 10px 0 10px 0;
+.filters_filter_topic_label {
+  cursor: pointer;
+}
+
+.filters_filter_topic_label:hover {
+  opacity: 0.7;
+}
+
+.filters_filter_topic_container {
+  position: absolute;
+  left: 10px;
+  border: 1px solid black;
+  opacity: 0.4;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.filters_filter_topic_container:hover {
+  opacity: 0.2;
+}
+
+.filters_filter_topic_checkbox:checked ~ .filters_filter_topic_container {
+  background-color: #2196f3;
+  opacity: 1;
+}
+
+.filters_filter_topic_checkbox {
+  transform: scale(1.5);
+  opacity: 0;
+}
+
+.filters_filter_topic_checkmark {
+  content: "";
+  position: absolute;
+  display: none;
+  cursor: pointer;
+  left: 18px;
+  width: 5px;
+  height: 10px;
+  padding-top: 4px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  z-index: 999;
+}
+
+.filters_filter_topic_checkbox:checked ~ .filters_filter_topic_checkmark {
+  display: inline-flex;
+}
+
+.filters_filter_topic_label_text {
+  cursor: pointer;
+  padding-right: 30px;
+}
+
+.filters_filter_topic_label_count {
+  cursor: pointer;
+  font-size: 13px;
+  text-align: right;
+  color: #6b6b6b;
 }
 
 .products {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
+  flex-direction: column;
   flex-basis: 80%;
   margin: 0 0 0 5%;
   font-weight: 400;
   padding-top: 25px;
+}
+
+.products_count {
+  padding-left: 12px;
+}
+
+.products_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
 }
 
 .products_product {
@@ -345,8 +456,8 @@ export default {
 }
 
 .products_product_images {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: auto;
   cursor: pointer;
 }
 
@@ -368,7 +479,19 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
+  .filters {
+    padding: 0;
+  }
+
+  .results {
+    padding: 25px 25px 0 0;
+  }
+
   .products_product {
+    padding: 0 0 30px 0;
+  }
+
+  .products_count {
     padding: 0;
   }
 }
