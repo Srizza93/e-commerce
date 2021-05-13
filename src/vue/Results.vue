@@ -1,5 +1,8 @@
 <template>
   <div class="results">
+    <button class="filters_button" @click="openFilters">
+      Filters
+    </button>
     <div class="filters">
       <label
         v-for="filter in filteredFilters"
@@ -42,7 +45,7 @@
             {{ product.text }}
           </h4>
           <img
-            v-bind:src="getImgUrl(product.image)"
+            :src="getImgUrl(product.image)"
             :alt="product.text"
             class="products_product_images"
           />
@@ -294,6 +297,12 @@ export default {
       }
       this.shownProducts = [];
     },
+    openFilters() {
+      const container = document.querySelector(".filters");
+      return container.classList.contains("open-filters")
+        ? container.classList.remove("open-filters")
+        : container.classList.add("open-filters");
+    },
   },
   computed: {
     filteredFilters() {
@@ -336,7 +345,7 @@ export default {
   display: flex;
   flex-direction: row;
   background-color: #f5f5f5;
-  padding: 10px 0 10px 0;
+  padding: 40px 0 10px 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -346,9 +355,29 @@ export default {
   display: flex;
   flex-direction: column;
   flex-basis: 20%;
+  min-width: 170px;
   height: 100%;
   padding: 0 12px;
   border-right: 2px solid #ddd;
+}
+
+.filters_button {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 0;
+  align-self: center;
+  min-height: 40px;
+  width: 100px;
+  margin-bottom: 20px;
+  border-radius: 0 10px 10px 0;
+  background-color: #ff8c00;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.filters_button:hover {
+  opacity: 0.7;
 }
 
 .filters_filter {
@@ -480,18 +509,47 @@ export default {
 
 @media only screen and (max-width: 600px) {
   .filters {
-    padding: 0;
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    justify-content: initial;
+    overflow: auto;
+    top: 50px;
+    left: 0;
+    min-width: 180px;
+    width: 180px;
+    height: 100%;
+    padding: 12px;
+    border: 0;
+    border-radius: 0 10px 10px 0;
+    background-color: white;
+    box-shadow: 10px 10px 5px #131921;
+  }
+
+  .open-filters {
+    display: flex;
+  }
+
+  .filters_button {
+    display: block;
   }
 
   .results {
-    padding: 25px 25px 0 0;
+    justify-content: center;
+    padding: 25px 0 0 0;
+  }
+
+  .products_container {
+    justify-content: center;
   }
 
   .products_product {
     padding: 0 0 30px 0;
+    margin: 10px;
   }
 
   .products_count {
+    text-align: center;
     padding: 0;
   }
 }

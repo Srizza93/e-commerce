@@ -11,21 +11,24 @@
       @blur="showSuggestions"
       type="search"
       placeholder="Write something..."
-      class="search-form"/>
+      class="search-form"
+    />
     <input type="submit" value="Search" class="lens selected" />
     <div class="suggestions">
       <span
         class="suggestions_topic"
         v-for="option in filteredList"
-        :key="option.id">
-          {{ option.text }}
-          <a
-            class="suggestions_topic_subtopic"
-            v-for="subtopic in option.subtopics"
-            :key="subtopic.text + '-' + subtopic.id"
-            :href="subtopic.link">
+        :key="option.id"
+      >
+        {{ option.text }}
+        <a
+          class="suggestions_topic_subtopic"
+          v-for="subtopic in option.subtopics"
+          :key="subtopic.text + '-' + subtopic.id"
+          :href="subtopic.link"
+        >
           {{ subtopic.text }}
-          </a>
+        </a>
       </span>
     </div>
   </div>
@@ -39,168 +42,168 @@ export default {
       search: [],
       options: [
         {
-          id:1,
+          id: 1,
           text: "Tech",
           subtopics: [
             {
-              id:1,
+              id: 1,
               link: "./research.html",
               text: "TV",
             },
             {
-              id:2,
+              id: 2,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Speakers",
             },
             {
-              id:3,
+              id: 3,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Earphones",
             },
           ],
         },
         {
-          id:2,
+          id: 2,
           text: "Arts",
           subtopics: [
             {
-              id:1,
+              id: 1,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Colours",
             },
             {
-              id:2,
+              id: 2,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Pictures",
             },
             {
-              id:3,
+              id: 3,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Music",
             },
           ],
         },
         {
-          id:3,
+          id: 3,
           text: "Baby",
           subtopics: [
             {
-              id:1,
+              id: 1,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Toys",
             },
             {
-              id:2,
+              id: 2,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Milk",
             },
             {
-              id:3,
+              id: 3,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Food",
             },
           ],
         },
         {
-          id:4,
+          id: 4,
           text: "Books",
           subtopics: [
             {
-              id:1,
+              id: 1,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Thriller",
             },
             {
-              id:2,
+              id: 2,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Horror",
             },
             {
-              id:3,
+              id: 3,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Adventure",
             },
           ],
         },
         {
-          id:5,
+          id: 5,
           text: "Computers",
           subtopics: [
             {
-              id:1,
+              id: 1,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Desktop",
             },
             {
-              id:2,
+              id: 2,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Laptop",
             },
             {
-              id:3,
+              id: 3,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Tablet",
             },
           ],
         },
         {
-          id:6,
+          id: 6,
           text: "Smartphone",
           subtopics: [
             {
-              id:1,
+              id: 1,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "LG",
             },
             {
-              id:2,
+              id: 2,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Samsung",
             },
             {
-              id:3,
+              id: 3,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Huawei",
             },
           ],
         },
         {
-          id:7,
+          id: 7,
           text: "Apple",
           subtopics: [
             {
-              id:1,
+              id: 1,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Iphone",
             },
             {
-              id:2,
+              id: 2,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Macbook",
             },
             {
-              id:3,
+              id: 3,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Ipad",
             },
           ],
         },
         {
-          id:8,
+          id: 8,
           text: "Dogs",
           subtopics: [
             {
-              id:1,
+              id: 1,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Food",
             },
             {
-              id:2,
+              id: 2,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Toys",
             },
             {
-              id:3,
+              id: 3,
               link: "https://vuejs.org/v2/api/#v-bind",
               text: "Clothes",
             },
@@ -232,7 +235,7 @@ export default {
         return this.options;
       }
     },
-  }
+  },
 };
 </script>
 
@@ -263,7 +266,7 @@ export default {
   border: 1px solid #ccc;
   border-radius: 0 4px 4px 0;
   border-right: 0;
-  background-color: orange;
+  background-color: #ff8c00;
   margin-top: 6px;
   margin-bottom: 16px;
   cursor: pointer;
@@ -277,7 +280,7 @@ export default {
   opacity: 0;
   max-width: 500px;
   top: 58px;
-  border: 2px solid orange;
+  border: 2px solid #ff8c00;
   background-color: white;
   color: black;
   line-height: 1.5em;
@@ -301,7 +304,7 @@ export default {
 }
 
 .suggestions_topic_subtopic:hover {
-  color: orange;
+  color: #ff8c00;
 }
 
 .show_suggestions {

@@ -1,161 +1,152 @@
 <template>
-<div class="footer">
-  <ul class="footer_ul">
-    <li
-    v-for="topic in locations"
-    :key="'locations-' + topic.id"
-    class="footer_ul_li">
-      <a
-      class="footer_ul_li_link"
-      :href="topic.link">
-        {{ topic.text }}
-      </a>
-    </li>
-  </ul>
-  <ul class="footer_ul">
-    <li
-    v-for="topic in mainProducts"
-    :key="'mainProducts-' + topic.id"
-    class="footer_ul_li">
-      <a
-      class="footer_ul_li_link"
-      :href="topic.link">
-        {{ topic.text }}
-      </a>
-    </li>
-  </ul>
-  <ul class="footer_ul">
-    <li
-      v-for="topic in company"
-      :key="'company-' + topic.id"
-      class="footer_ul_li">
-        <a
-        class="footer_ul_li_link"
-        :href="topic.link">
+  <div class="footer">
+    <ul class="footer_ul">
+      <li
+        v-for="topic in locations"
+        :key="'locations-' + topic.id"
+        class="footer_ul_li"
+      >
+        <a class="footer_ul_li_link" :href="topic.link">
           {{ topic.text }}
         </a>
-    </li>
-  </ul>
-  <ul class="footer_ul">
-    <li
-    v-for="topic in general"
-    :key="'general-' + topic.id"
-    class="footer_ul_li">
-      <a
-      class="footer_ul_li_link"
-      :href="topic.link">
-        {{ topic.text }}
-      </a>
-    </li>
-  </ul>
-  <ul class="footer_ul">
-    <li
-    v-for="topic in news"
-    :key="'news-' + topic.id"
-    class="footer_ul_li">
-      <a
-      class="footer_ul_li_link"
-      :href="topic.link">
-        {{ topic.text }}
-      </a>
-    </li>
-  </ul>
-</div>
+      </li>
+    </ul>
+    <ul class="footer_ul">
+      <li
+        v-for="topic in mainProducts"
+        :key="'mainProducts-' + topic.id"
+        class="footer_ul_li"
+      >
+        <a class="footer_ul_li_link" :href="topic.link">
+          {{ topic.text }}
+        </a>
+      </li>
+    </ul>
+    <ul class="footer_ul">
+      <li
+        v-for="topic in company"
+        :key="'company-' + topic.id"
+        class="footer_ul_li"
+      >
+        <a class="footer_ul_li_link" :href="topic.link">
+          {{ topic.text }}
+        </a>
+      </li>
+    </ul>
+    <ul class="footer_ul">
+      <li
+        v-for="topic in general"
+        :key="'general-' + topic.id"
+        class="footer_ul_li"
+      >
+        <a class="footer_ul_li_link" :href="topic.link">
+          {{ topic.text }}
+        </a>
+      </li>
+    </ul>
+    <ul class="footer_ul">
+      <li v-for="topic in news" :key="'news-' + topic.id" class="footer_ul_li">
+        <a class="footer_ul_li_link" :href="topic.link">
+          {{ topic.text }}
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Footer',
+  name: "Footer",
   data() {
     return {
-      locations:  [
+      locations: [
         {
           id: 1,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Countries'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Countries",
         },
         {
           id: 2,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Regions'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Regions",
         },
         {
           id: 3,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Cities'
-        }
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Cities",
+        },
       ],
-      mainProducts:  [
+      mainProducts: [
         {
           id: 1,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Computers'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Computers",
         },
         {
           id: 2,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Home'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Home",
         },
         {
           id: 3,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Food'
-        }
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Food",
+        },
       ],
-      company:  [
+      company: [
         {
           id: 1,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'About us'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "About us",
         },
         {
           id: 2,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Careers'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Careers",
         },
         {
           id: 3,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'World'
-        }
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "World",
+        },
       ],
-      general:  [
+      general: [
         {
           id: 1,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Reviews'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Reviews",
         },
         {
           id: 2,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Partners'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Partners",
         },
         {
           id: 3,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Discounts'
-        }
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Discounts",
+        },
       ],
-      news:  [
+      news: [
         {
           id: 1,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'COVID'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "COVID",
         },
         {
           id: 2,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Growth'
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Growth",
         },
         {
           id: 3,
-          link: 'https://vuejs.org/v2/api/#v-bind',
-          text: 'Plans'
-        }
-      ]
-    }
-  }
-}
+          link: "https://vuejs.org/v2/api/#v-bind",
+          text: "Plans",
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style scoped>
