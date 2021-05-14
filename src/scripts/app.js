@@ -1,7 +1,6 @@
 import "../styles/style.css";
 
 import searchBar from "./search-bar";
-import "../styles/search-bar.css";
 
 import navigation from "./navigation";
 

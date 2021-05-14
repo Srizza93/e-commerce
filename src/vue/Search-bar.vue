@@ -1,35 +1,44 @@
 <template>
-  <div class="container-form">
-    <select class="select selected select_responsive">
-      <option v-for="option in options" :key="option.id">
-        {{ option.text }}
-      </option>
-    </select>
-    <input
-      v-model="search"
-      @click="showSuggestions"
-      @blur="showSuggestions"
-      type="search"
-      placeholder="Write something..."
-      class="search-form"
-    />
-    <input type="submit" value="Search" class="lens selected" />
-    <div class="suggestions">
-      <span
-        class="suggestions_topic"
-        v-for="option in filteredList"
-        :key="option.id"
-      >
-        {{ option.text }}
-        <a
-          class="suggestions_topic_subtopic"
-          v-for="subtopic in option.subtopics"
-          :key="subtopic.text + '-' + subtopic.id"
-          :href="subtopic.link"
+  <div class="search-bar">
+    <a href="./index.html">
+      <img
+        src="http://localhost:8080/ca523d69565a17d52a27.png"
+        alt="logo"
+        class="logo"
+      />
+    </a>
+    <div class="container-form">
+      <select class="select selected select_responsive">
+        <option v-for="option in options" :key="option.id">
+          {{ option.text }}
+        </option>
+      </select>
+      <input
+        v-model="search"
+        @click="showSuggestions"
+        @blur="showSuggestions"
+        type="search"
+        placeholder="Write something..."
+        class="search-form"
+      />
+      <input type="submit" value="Search" class="lens selected" />
+      <div class="suggestions">
+        <span
+          class="suggestions_topic"
+          v-for="option in filteredList"
+          :key="option.id"
         >
-          {{ subtopic.text }}
-        </a>
-      </span>
+          {{ option.text }}
+          <a
+            class="suggestions_topic_subtopic"
+            v-for="subtopic in option.subtopics"
+            :key="subtopic.text + '-' + subtopic.id"
+            :href="subtopic.link"
+          >
+            {{ subtopic.text }}
+          </a>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -240,6 +249,30 @@ export default {
 </script>
 
 <style scoped>
+.search-bar {
+  display: flex;
+  background-color: #131921;
+  color: white;
+  padding: 5px;
+}
+
+.search-form {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  padding: 2px 35px 0px 15px;
+  cursor: pointer;
+}
+
 .container-form {
   overflow: hidden;
   display: flex;

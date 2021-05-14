@@ -1,6 +1,6 @@
 <template>
   <div class="results">
-    <button class="filters_button" @click="openFilters">
+    <button class="filters_button" @click="openFilters" @blur="openFilters">
       Filters
     </button>
     <div class="filters">
