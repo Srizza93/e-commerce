@@ -48,7 +48,7 @@ export default {
         {
           id: 5,
           text: "Toys",
-          link: "toys.jpeg",
+          link: "ball.jpeg",
         },
         {
           id: 6,

@@ -120,61 +120,66 @@ export default {
         },
         {
           id: 10,
-          topic: "Products",
-          text: "Computer",
+          topic: "Price",
+          text: "+200€",
         },
         {
           id: 11,
           topic: "Products",
-          text: "Food",
+          text: "Computer",
         },
         {
           id: 12,
           topic: "Products",
-          text: "Garden",
+          text: "Food",
         },
         {
           id: 13,
           topic: "Products",
-          text: "Beauty",
+          text: "Garden",
         },
         {
           id: 14,
           topic: "Products",
-          text: "Guitar",
+          text: "Beauty",
         },
         {
           id: 15,
           topic: "Products",
-          text: "Shoes",
+          text: "Guitar",
         },
         {
           id: 16,
-          topic: "Brands",
-          text: "Adidas",
+          topic: "Products",
+          text: "Shoes",
         },
         {
           id: 17,
           topic: "Brands",
-          text: "Nike",
+          text: "Adidas",
         },
         {
           id: 18,
           topic: "Brands",
-          text: "Apple",
+          text: "Nike",
         },
         {
           id: 19,
           topic: "Brands",
-          text: "Samsung",
+          text: "Apple",
         },
         {
           id: 20,
           topic: "Brands",
-          text: "Findus",
+          text: "Samsung",
         },
         {
           id: 21,
+          topic: "Brands",
+          text: "Kenzo",
+        },
+        {
+          id: 22,
           topic: "Brands",
           text: "Lacoste",
         },
@@ -184,8 +189,8 @@ export default {
           id: 1,
           text: "Shoes",
           image: "shoes.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: "20€",
+          descritpion: "Jaguar, Red and white",
+          price: "21.99€",
           range: "0 to 25€",
           reviews: "Excellent",
           brand: "Adidas",
@@ -194,9 +199,9 @@ export default {
           id: 2,
           text: "Computer",
           image: "computer-product.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: "2000€",
-          range: "101 to 200€",
+          descritpion: "Mac 120, limited edition",
+          price: "2199.00€",
+          range: "+200€",
           reviews: "Excellent",
           brand: "Apple",
         },
@@ -204,11 +209,11 @@ export default {
           id: 3,
           text: "Guitar",
           image: "guitar.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: "20€",
-          range: "0 to 25€",
+          descritpion: "Kenzo Music, Standard",
+          price: "127.51€",
+          range: "101 to 200€",
           reviews: "Great",
-          brand: "Findus",
+          brand: "Kenzo",
         },
         {
           id: 4,
@@ -280,6 +285,16 @@ export default {
           reviews: "Excellent",
           brand: "Lacoste",
         },
+        {
+          id: 11,
+          text: "Toys",
+          image: "ball.jpeg",
+          descritpion: "Nike Sport, white and blue",
+          price: "120.99€",
+          range: "101 to 200€",
+          reviews: "Good",
+          brand: "Nike",
+        },
       ],
     };
   },
@@ -299,9 +314,13 @@ export default {
     },
     openFilters() {
       const container = document.querySelector(".filters");
-      return container.classList.contains("open-filters")
+      const button = document.querySelector(".filters_button");
+      container.classList.contains("open-filters")
         ? container.classList.remove("open-filters")
         : container.classList.add("open-filters");
+      button.classList.contains("open-button")
+        ? button.classList.remove("open-button")
+        : button.classList.add("open-button");
     },
   },
   computed: {
@@ -356,7 +375,8 @@ export default {
   flex-direction: column;
   flex-basis: 20%;
   min-width: 170px;
-  height: 100%;
+  box-sizing: border-box;
+  height: 100vh;
   padding: 0 12px;
   border-right: 2px solid #ddd;
 }
@@ -364,7 +384,7 @@ export default {
 .filters_button {
   display: none;
   position: fixed;
-  top: 10px;
+  top: 130px;
   left: 0;
   align-self: center;
   min-height: 40px;
@@ -378,6 +398,10 @@ export default {
 
 .filters_button:hover {
   opacity: 0.7;
+}
+
+.open-button {
+  left: 185px;
 }
 
 .filters_filter {
@@ -514,12 +538,11 @@ export default {
     position: fixed;
     justify-content: initial;
     overflow: auto;
-    top: 50px;
+    top: 0;
     left: 0;
-    min-width: 180px;
     width: 180px;
     height: 100%;
-    padding: 12px;
+    padding: 12px 12px 0 12px;
     border: 0;
     border-radius: 0 10px 10px 0;
     background-color: white;

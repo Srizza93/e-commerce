@@ -56,6 +56,7 @@ export default {
 
 .banner_main {
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
   width: 100%;
 }
@@ -81,7 +82,7 @@ export default {
 }
 
 .banner_main_text {
-  padding: 10px 0px 10px 20px;
+  padding: 10px 20px 10px 20px;
 }
 
 .banner_main_arrow {
