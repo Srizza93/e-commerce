@@ -75,6 +75,7 @@ export default {
   flex-direction: column;
   max-width: 260px;
   text-align: center;
+  border-radius: 50px;
   margin: 4%;
   background-color: white;
   cursor: pointer;
@@ -83,5 +84,9 @@ export default {
 
 .galery__topics__title {
   margin: 5px;
+}
+
+.galery__topics__pic {
+  border-radius: 0 0 50px 50px;
 }
 </style>

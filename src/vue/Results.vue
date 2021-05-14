@@ -5,7 +5,7 @@
     </button>
     <div class="filters">
       <label
-        v-for="filter in filteredFilters"
+        v-for="(filter, index) in filteredFilters"
         :key="'filter-' + filter.id"
         :pkey="'filter-' + filter.id"
         class="filters_filter_topic"
@@ -25,9 +25,7 @@
             {{ filter.text }}
           </span>
         </div>
-        <span class="filters_filter_topic_label_count">
-          ({{ filteredProductsLength }})
-        </span>
+        <span> ({{ productsForFilter[index] }}) </span>
       </label>
     </div>
     <div class="products">
@@ -355,6 +353,19 @@ export default {
     filteredProductsLength() {
       return this.filteredProducts.length;
     },
+    productsForFilter() {
+      return Object.values(this.filteredFilters).map((filter) => {
+        return Object.values(this.filteredProducts).reduce(
+          (accumulator, currentProduct) => {
+            if (Object.values(currentProduct).includes(filter.text)) {
+              return accumulator + 1;
+            }
+            return accumulator;
+          },
+          0
+        );
+      });
+    },
   },
 };
 </script>
@@ -540,7 +551,7 @@ export default {
     overflow: auto;
     top: 0;
     left: 0;
-    width: 180px;
+    width: 185px;
     height: 100%;
     padding: 12px 12px 0 12px;
     border: 0;
