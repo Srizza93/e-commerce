@@ -3,7 +3,7 @@
     <SearchBar />
     <NavigationMenu />
     <Banner />
-    <Results />
+    <Home />
     <Footer />
   </div>
 </template>
@@ -12,7 +12,7 @@
   import SearchBar from '../vue/SearchBar.vue';
   import NavigationMenu from '../vue/Navigation-menu.vue';
   import Banner from '../vue/Banner.vue';
-  import Results from '../vue/Results.vue';
+  import Home from '../vue/HomeContent.vue';
   import Footer from '../vue/Footer.vue';
   export default {
     name: "App",
@@ -20,7 +20,7 @@
       SearchBar,
       NavigationMenu,
       Banner,
-      Results,
+      Home,
       Footer
     }
   }

@@ -2,9 +2,10 @@
   <div class="search-bar">
     <a href="./index.html">
       <img
-        src="http://localhost:8080/ca523d69565a17d52a27.png"
-        alt="logo"
         class="logo"
+        :key="logo.id"
+        :src="getImgUrl(logo.link)"
+        :alt="logo.link"
       />
     </a>
     <div class="container-form">
@@ -49,6 +50,11 @@ export default {
   data() {
     return {
       search: [],
+      logo: {
+        text: 'doelogo',
+        link: 'doelogo.png'
+
+      },
       options: [
         {
           id: 1,
@@ -222,6 +228,10 @@ export default {
     };
   },
   methods: {
+    getImgUrl(pic) {
+      var images = require.context("../images/", false, /\.png$/);
+      return images("./" + pic);
+    },
     showSuggestions: function() {
       const suggestions = document.querySelector(".suggestions");
       const classes = suggestions.classList;

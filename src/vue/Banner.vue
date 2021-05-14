@@ -48,7 +48,7 @@ export default {
 <style scoped>
 .banner {
   padding: 5px 30px 5px 30px;
-  background-color: #ff8c00;
+  background-color: red;
   border: 1px solid black;
   font-weight: bold;
   cursor: pointer;
