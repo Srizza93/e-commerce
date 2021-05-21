@@ -340,8 +340,11 @@ export default {
             Object.values(product)
           );
         });
-        return this.filters.map((filter) => {
-          return {...filter, subtopics: element.subtopics.filter((subElement) => this.shownProducts.includes(subElement))};
+        return this.filters.filter((filter) => {
+          filter.subtopics = filter.subtopics.filter((subtopic) => {
+            return this.shownProducts.includes(subtopic.text);
+          });
+          return filter.subtopics.length > 0;
         });
       }
       return this.filters;
