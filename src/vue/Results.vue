@@ -4,29 +4,37 @@
       Filters
     </button>
     <div class="filters">
-      <label
-        v-for="(filter, index) in filteredFilters"
-        :key="'filter-' + filter.id"
-        :pkey="'filter-' + filter.id"
-        class="filters_filter_topic"
+      <h3 class="filters_by filters_box">Filter by:</h3>
+      <div
+        v-for="filter in filteredFilters"
+        :key="'filter-' + filter.topic + filter.id"
+        class="filters_box"
       >
-        <div>
-          <input
-            class="filters_filter_topic_checkbox"
-            type="checkbox"
-            :id="filter.id"
-            name="filters_filter"
-            :value="filter.text"
-            @click="filterTicked"
-          />
-          <span class="filters_filter_topic_checkmark"></span>
-          <span class="filters_filter_topic_container"></span>
-          <span class="filters_filter_topic_label_text">
-            {{ filter.text }}
-          </span>
-        </div>
-        <span> ({{ productsForFilter[index] }}) </span>
-      </label>
+        <h4 class="filters_titles">{{ filter.topic }}</h4>
+        <label
+          v-for="filter in filter.subtopics"
+          :key="filter.text + filter.id"
+          :pkey="'filter-' + filter.id"
+          class="filters_filter_topic"
+        >
+          <div>
+            <input
+              class="filters_filter_topic_checkbox"
+              type="checkbox"
+              :id="filter.id"
+              name="filters_filter"
+              :value="filter.text"
+              @click="filterTicked"
+            />
+            <span class="filters_filter_topic_checkmark"></span>
+            <span class="filters_filter_topic_container"></span>
+            <span class="filters_filter_topic_label_text">
+              {{ filter.text }}
+            </span>
+          </div>
+          <span> ({{ productsForFilter[counter] }}) </span>
+        </label>
+      </div>
     </div>
     <div class="products">
       <h2 class="products_count">
@@ -70,116 +78,119 @@ export default {
     return {
       tickedFilters: [],
       shownProducts: [],
+      counter: 0,
       filters: [
         {
           id: 1,
           topic: "Reviews",
-          text: "Excellent",
+          subtopics: [
+            {
+              id: 1,
+              text: "Excellent",
+            },
+            {
+              id: 2,
+              text: "Great",
+            },
+            {
+              id: 3,
+              text: "Good",
+            },
+            {
+              id: 4,
+              text: "Ok",
+            },
+            {
+              id: 5,
+              text: "Bad",
+            },
+          ],
         },
         {
           id: 2,
-          topic: "Reviews",
-          text: "Great",
+          topic: "Price",
+          subtopics: [
+            {
+              id: 1,
+              text: "0 to 25€",
+            },
+            {
+              id: 2,
+              text: "26 to 50€",
+            },
+            {
+              id: 3,
+              text: "51 to 100€",
+            },
+            {
+              id: 4,
+              text: "101 to 200€",
+            },
+            {
+              id: 5,
+              text: "+200€",
+            },
+          ],
         },
         {
           id: 3,
-          topic: "Reviews",
-          text: "Good",
+          topic: "Computer",
+          subtopics: [
+            {
+              id: 1,
+              text: "Computer",
+            },
+            {
+              id: 2,
+              text: "Food",
+            },
+            {
+              id: 3,
+              text: "Garden",
+            },
+            {
+              id: 4,
+              text: "Beauty",
+            },
+            {
+              id: 5,
+              text: "Guitar",
+            },
+            {
+              id: 6,
+              text: "Shoes",
+            },
+          ],
         },
         {
           id: 4,
-          topic: "Reviews",
-          text: "Ok",
-        },
-        {
-          id: 5,
-          topic: "Reviews",
-          text: "Bad",
-        },
-        {
-          id: 6,
-          topic: "Price",
-          text: "0 to 25€",
-        },
-        {
-          id: 7,
-          topic: "Price",
-          text: "26 to 50€",
-        },
-        {
-          id: 8,
-          topic: "Price",
-          text: "51 to 100€",
-        },
-        {
-          id: 9,
-          topic: "Price",
-          text: "101 to 200€",
-        },
-        {
-          id: 10,
-          topic: "Price",
-          text: "+200€",
-        },
-        {
-          id: 11,
-          topic: "Products",
-          text: "Computer",
-        },
-        {
-          id: 12,
-          topic: "Products",
-          text: "Food",
-        },
-        {
-          id: 13,
-          topic: "Products",
-          text: "Garden",
-        },
-        {
-          id: 14,
-          topic: "Products",
-          text: "Beauty",
-        },
-        {
-          id: 15,
-          topic: "Products",
-          text: "Guitar",
-        },
-        {
-          id: 16,
-          topic: "Products",
-          text: "Shoes",
-        },
-        {
-          id: 17,
           topic: "Brands",
-          text: "Adidas",
-        },
-        {
-          id: 18,
-          topic: "Brands",
-          text: "Nike",
-        },
-        {
-          id: 19,
-          topic: "Brands",
-          text: "Apple",
-        },
-        {
-          id: 20,
-          topic: "Brands",
-          text: "Samsung",
-        },
-        {
-          id: 21,
-          topic: "Brands",
-          text: "Kenzo",
-        },
-        {
-          id: 22,
-          topic: "Brands",
-          text: "Lacoste",
+          subtopics: [
+            {
+              id: 1,
+              text: "Adidas",
+            },
+            {
+              id: 2,
+              text: "Nike",
+            },
+            {
+              id: 3,
+              text: "Apple",
+            },
+            {
+              id: 4,
+              text: "Samsung",
+            },
+            {
+              id: 5,
+              text: "Kenzo",
+            },
+            {
+              id: 6,
+              text: "Lacoste",
+            },
+          ],
         },
       ],
       products: [
@@ -329,8 +340,8 @@ export default {
             Object.values(product)
           );
         });
-        return this.filters.filter((filter) => {
-          return this.shownProducts.includes(filter.text);
+        return this.filters.map((filter) => {
+          return {...filter, subtopics: element.subtopics.filter((subElement) => this.shownProducts.includes(subElement))};
         });
       }
       return this.filters;
@@ -354,17 +365,20 @@ export default {
       return this.filteredProducts.length;
     },
     productsForFilter() {
-      return Object.values(this.filteredFilters).map((filter) => {
-        return Object.values(this.filteredProducts).reduce(
-          (accumulator, currentProduct) => {
-            if (Object.values(currentProduct).includes(filter.text)) {
-              return accumulator + 1;
-            }
-            return accumulator;
-          },
-          0
-        );
+      var result = this.filteredFilters.map((filter, index) => {
+        return filter.subtopics.map((subtopic) => {
+          return Object.values(this.filteredProducts).reduce(
+            (products, currentProduct) => {
+              if (Object.values(currentProduct).includes(subtopic.text)) {
+                return products + 1;
+              }
+              return products;
+            },
+            0
+          );
+        });
       });
+      return [].concat.apply([], result);
     },
   },
 };
@@ -380,11 +394,10 @@ export default {
   font-size: 16px;
   line-height: 24px;
 }
-
 .filters {
   display: flex;
   flex-direction: column;
-  flex-basis: 20%;
+  flex-basis: 25%;
   min-width: 170px;
   box-sizing: border-box;
   height: 100vh;
@@ -392,6 +405,25 @@ export default {
   border-right: 2px solid #ddd;
 }
 
+.filters_by {
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  border-radius: 5px 5px 0 0;
+  margin: 0;
+  padding: 10px 0 10px 10px;
+}
+
+.filters_box {
+  border-bottom: 2px solid #ddd;
+  border-left: 2px solid #ddd;
+  border-right: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+.filters_titles {
+  border-bottom: 2px solid #ddd;
+  margin: 0 0 20px 0;
+  padding: 10px 0 10px 10px;
+}
 .filters_button {
   display: none;
   position: fixed;
@@ -399,72 +431,61 @@ export default {
   left: 0;
   align-self: center;
   min-height: 40px;
-  width: 100px;
+  width: 63px;
   margin-bottom: 20px;
   border-radius: 0 10px 10px 0;
   background-color: #ff8c00;
   font-weight: bold;
   cursor: pointer;
 }
-
 .filters_button:hover {
   opacity: 0.7;
 }
-
 .open-button {
-  left: 185px;
+  left: 215px;
 }
-
 .filters_filter {
   display: flex;
   flex-direction: column;
   padding: 15px;
 }
-
 .filters_filter_topic {
   display: flex;
   justify-content: space-between;
-  padding: 5px 0 5px 0;
+  padding: 5px 10px 5px 7px;
 }
-
 .filters_filter_topic_label {
   cursor: pointer;
 }
-
 .filters_filter_topic_label:hover {
   opacity: 0.7;
 }
-
 .filters_filter_topic_container {
   position: absolute;
-  left: 10px;
+  left: 20px;
   border: 1px solid black;
   opacity: 0.4;
   height: 20px;
   width: 20px;
   cursor: pointer;
 }
-
 .filters_filter_topic_container:hover {
   opacity: 0.2;
 }
-
 .filters_filter_topic_checkbox:checked ~ .filters_filter_topic_container {
   background-color: #2196f3;
   opacity: 1;
 }
-
 .filters_filter_topic_checkbox {
   transform: scale(1.5);
   opacity: 0;
 }
-
 .filters_filter_topic_checkmark {
   content: "";
   position: absolute;
   display: none;
   cursor: pointer;
-  left: 18px;
+  left: 27px;
   width: 5px;
   height: 10px;
   padding-top: 4px;
@@ -475,42 +496,35 @@ export default {
   transform: rotate(45deg);
   z-index: 999;
 }
-
 .filters_filter_topic_checkbox:checked ~ .filters_filter_topic_checkmark {
   display: inline-flex;
 }
-
 .filters_filter_topic_label_text {
   cursor: pointer;
-  padding-right: 30px;
+  padding: 0px 30px 0px 10px;
 }
-
 .filters_filter_topic_label_count {
   cursor: pointer;
   font-size: 13px;
   text-align: right;
   color: #6b6b6b;
 }
-
 .products {
   display: flex;
   flex-direction: column;
   flex-basis: 80%;
-  margin: 0 0 0 5%;
+  margin-left: 5%;
   font-weight: 400;
   padding-top: 25px;
 }
-
 .products_count {
   padding-left: 12px;
 }
-
 .products_container {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
 }
-
 .products_product {
   display: flex;
   flex-direction: column;
@@ -518,30 +532,25 @@ export default {
   max-width: 200px;
   border-bottom: 2px solid #ddd;
 }
-
 .products_product_images {
   width: 100%;
   height: auto;
   cursor: pointer;
 }
-
 .products_product_description {
   padding: 1.33em 0 0.5em 0;
 }
-
 .products_product_price {
   padding-bottom: 0.5em;
   font-weight: bold;
   font-size: 21px;
 }
-
 .star {
   color: #ff8c00;
 }
 .star::before {
   content: "\2605";
 }
-
 @media only screen and (max-width: 600px) {
   .filters {
     display: none;
@@ -551,7 +560,7 @@ export default {
     overflow: auto;
     top: 0;
     left: 0;
-    width: 185px;
+    width: 215px;
     height: 100%;
     padding: 12px 12px 0 12px;
     border: 0;
@@ -559,29 +568,26 @@ export default {
     background-color: white;
     box-shadow: 10px 10px 5px #131921;
   }
-
   .open-filters {
     display: flex;
   }
-
   .filters_button {
     display: block;
   }
-
   .results {
     justify-content: center;
     padding: 25px 0 0 0;
   }
-
+  .products {
+    margin: 0;
+  }
   .products_container {
     justify-content: center;
   }
-
   .products_product {
     padding: 0 0 30px 0;
     margin: 10px;
   }
-
   .products_count {
     text-align: center;
     padding: 0;
