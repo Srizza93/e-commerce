@@ -5,7 +5,7 @@
         class="filters_button_text"
         @click="openCloseFiltersOnSmallScreens"
       >
-        Filters
+        Filter
       </button>
     </div>
     <div class="filters">
