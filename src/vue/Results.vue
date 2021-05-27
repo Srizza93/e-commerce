@@ -1,9 +1,22 @@
 <template>
   <div class="results">
-    <button class="filters_button" @click="openFilters">
-      Filters
-    </button>
+    <div class="filters_button">
+      <button
+        class="filters_button_text"
+        @click="openCloseFiltersOnSmallScreens"
+      >
+        Filters
+      </button>
+    </div>
     <div class="filters">
+      <div class="filters_button_close">
+        <span
+          class="filters_button_close_x"
+          @click="openCloseFiltersOnSmallScreens"
+        >
+          x
+        </span>
+      </div>
       <h3 class="filters_by filters_box">Filter by:</h3>
       <div
         v-for="filter in filteredFilters"
@@ -11,29 +24,16 @@
         class="filters_box"
       >
         <h4 class="filters_titles">{{ filter.topic }}</h4>
-        <label
-          v-for="filter in filter.subtopics"
-          :key="filter.text + filter.id"
-          :pkey="'filter-' + filter.id"
-          class="filters_filter_topic"
-        >
-          <div>
-            <input
-              class="filters_filter_topic_checkbox"
-              type="checkbox"
-              :id="filter.id"
-              name="filters_filter"
-              :value="filter.text"
-              @click="filterTicked"
-            />
-            <span class="filters_filter_topic_checkmark"></span>
-            <span class="filters_filter_topic_container"></span>
-            <span class="filters_filter_topic_label_text">
-              {{ filter.text }}
-            </span>
-          </div>
-          <span> ({{ productsForFilter[counter] }}) </span>
-        </label>
+        <Filters
+          v-for="filter1 in filter.subtopics"
+          :key="filter1.text + filter1.id"
+          :id="filter1.id"
+          :text="filter1.text"
+          :items-with-filter="
+            productsForFilter[shownFilters.indexOf(filter1.text)]
+          "
+          @updateShownItemsAndFilters="filterGroupOfFilters(filter1.text)"
+        />
       </div>
     </div>
     <div class="products">
@@ -41,44 +41,33 @@
         {{ filteredProductsLength }} Product(s) Found
       </h2>
       <div class="products_container">
-        <div
-          class="products_product"
+        <Products
           v-for="product in filteredProducts"
-          :key="`products-` + product.id"
-          :pkey="'product-' + product.id"
-        >
-          <h4>
-            {{ product.text }}
-          </h4>
-          <img
-            :src="getImgUrl(product.image)"
-            :alt="product.text"
-            class="products_product_images"
-          />
-          <span class="products_product_brand">{{ product.brand }}</span>
-          <span class="products_product_description">
-            {{ product.descritpion }}
-          </span>
-          <span class="products_product_price">{{ product.price }}</span>
-          <span class="products_product_reviews">
-            <span class="star"></span>
-            {{ product.reviews }}
-          </span>
-        </div>
+          :key="product.text + product.id"
+          :id="product.id"
+          :text="product.text"
+          :image="product.image"
+          :brand="product.brand"
+          :description="product.description"
+          :price="product.price"
+          :reviews="product.reviews"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Filters from "../vue/Filters.vue";
+import Products from "../vue/Products.vue";
 export default {
-  name: "Footer",
+  name: "Results",
   props: ["pkey"],
+  event: "click",
+  components: { Filters, Products },
   data() {
     return {
       tickedFilters: [],
-      shownProducts: [],
-      counter: 0,
       filters: [
         {
           id: 1,
@@ -134,7 +123,7 @@ export default {
         },
         {
           id: 3,
-          topic: "Computer",
+          topic: "Department",
           subtopics: [
             {
               id: 1,
@@ -198,7 +187,7 @@ export default {
           id: 1,
           text: "Shoes",
           image: "shoes.jpeg",
-          descritpion: "Jaguar, Red and white",
+          description: "Jaguar, Red and white",
           price: "21.99€",
           range: "0 to 25€",
           reviews: "Excellent",
@@ -208,7 +197,7 @@ export default {
           id: 2,
           text: "Computer",
           image: "computer-product.jpeg",
-          descritpion: "Mac 120, limited edition",
+          description: "Mac 120, limited edition",
           price: "2199.00€",
           range: "+200€",
           reviews: "Excellent",
@@ -218,7 +207,7 @@ export default {
           id: 3,
           text: "Guitar",
           image: "guitar.jpeg",
-          descritpion: "Kenzo Music, Standard",
+          description: "Kenzo Music, Standard",
           price: "127.51€",
           range: "101 to 200€",
           reviews: "Great",
@@ -228,7 +217,7 @@ export default {
           id: 4,
           text: "Garden",
           image: "garden.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "26 to 50€",
           reviews: "Ok",
@@ -238,7 +227,7 @@ export default {
           id: 5,
           text: "Home",
           image: "home.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "51 to 100€",
           reviews: "Excellent",
@@ -248,7 +237,7 @@ export default {
           id: 6,
           text: "Toys",
           image: "toys.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "26 to 50€",
           reviews: "Bad",
@@ -258,7 +247,7 @@ export default {
           id: 7,
           text: "Food",
           image: "food.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
           reviews: "Good",
@@ -268,7 +257,7 @@ export default {
           id: 8,
           text: "Beauty",
           image: "beauty.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "0 to 25€",
           reviews: "Good",
@@ -278,7 +267,7 @@ export default {
           id: 9,
           text: "Computers",
           image: "computers.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
           reviews: "Excellent",
@@ -288,7 +277,7 @@ export default {
           id: 10,
           text: "Computers",
           image: "computers.jpeg",
-          descritpion: "Under Armour Men's Charged Assert 8 Running Shoe",
+          description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
           reviews: "Excellent",
@@ -298,30 +287,34 @@ export default {
           id: 11,
           text: "Toys",
           image: "ball.jpeg",
-          descritpion: "Nike Sport, white and blue",
+          description: "Nike Sport, white and blue",
           price: "120.99€",
           range: "101 to 200€",
           reviews: "Good",
           brand: "Nike",
         },
+        {
+          id: 12,
+          text: "Music",
+          image: "ball.jpeg",
+          description: "Turntables",
+          price: "145.99€",
+          range: "101 to 200€",
+          reviews: "Bad",
+          brand: "Technics",
+        },
       ],
     };
   },
   methods: {
-    getImgUrl(pic) {
-      var images = require.context("../images/", false, /\.jpeg$/);
-      return images("./" + pic);
-    },
-    filterTicked(event) {
-      const filter = event.target.value;
+    filterGroupOfFilters(filter) {
       if (this.tickedFilters.includes(filter)) {
         this.tickedFilters.splice(this.tickedFilters.indexOf(filter), 1);
       } else {
         this.tickedFilters.push(filter);
       }
-      this.shownProducts = [];
     },
-    openFilters() {
+    openCloseFiltersOnSmallScreens() {
       const container = document.querySelector(".filters");
       const button = document.querySelector(".filters_button");
       container.classList.contains("open-filters")
@@ -334,18 +327,24 @@ export default {
   },
   computed: {
     filteredFilters() {
+      var shownProducts = [];
+      this.filteredProducts.forEach((product) => {
+        shownProducts = shownProducts.concat(Object.values(product));
+      });
       if (this.tickedFilters.length > 0) {
-        this.filteredProducts.forEach((product) => {
-          this.shownProducts = this.shownProducts.concat(
-            Object.values(product)
-          );
-        });
-        return this.filters.filter((filter) => {
-          filter.subtopics = filter.subtopics.filter((subtopic) => {
-            return this.shownProducts.includes(subtopic.text);
+        return this.filters
+          .map((filter) => {
+            return {
+              id: filter.id,
+              topic: filter.topic,
+              subtopics: filter.subtopics.filter((subtopic) => {
+                return shownProducts.includes(subtopic.text);
+              }),
+            };
+          })
+          .filter((filter) => {
+            return filter.subtopics.length > 0;
           });
-          return filter.subtopics.length > 0;
-        });
       }
       return this.filters;
     },
@@ -367,21 +366,27 @@ export default {
     filteredProductsLength() {
       return this.filteredProducts.length;
     },
+    shownFilters() {
+      return this.filteredFilters
+        .map((filter) => {
+          return filter.subtopics.map((subtopic) => {
+            return subtopic.text;
+          });
+        })
+        .flat(1);
+    },
     productsForFilter() {
-      var result = this.filteredFilters.map((filter, index) => {
-        return filter.subtopics.map((subtopic) => {
-          return Object.values(this.filteredProducts).reduce(
-            (products, currentProduct) => {
-              if (Object.values(currentProduct).includes(subtopic.text)) {
-                return products + 1;
-              }
-              return products;
-            },
-            0
-          );
-        });
+      return this.shownFilters.map((filter) => {
+        return Object.values(this.filteredProducts).reduce(
+          (products, currentProduct) => {
+            if (Object.values(currentProduct).includes(filter)) {
+              return products + 1;
+            }
+            return products;
+          },
+          0
+        );
       });
-      return [].concat.apply([], result);
     },
   },
 };
@@ -401,7 +406,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex-basis: 25%;
-  min-width: 170px;
+  min-width: 225px;
   box-sizing: border-box;
   height: 100vh;
   padding: 0 12px;
@@ -429,88 +434,43 @@ export default {
 }
 .filters_button {
   display: none;
-  position: fixed;
-  top: 130px;
-  left: 0;
-  align-self: center;
-  min-height: 40px;
-  width: 63px;
-  margin-bottom: 20px;
-  border-radius: 0 10px 10px 0;
-  background-color: #ff8c00;
+  background-color: #232f3e;
+  justify-content: center;
+  border-bottom: 1px solid black;
+}
+
+.filters_button_text {
+  background-color: #232f3e;
+  color: white;
+  padding: 5px 10px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 10%;
   font-weight: bold;
   cursor: pointer;
 }
-.filters_button:hover {
+.filters_button_text:hover {
   opacity: 0.7;
 }
+.filters_button_close {
+  display: none;
+  justify-content: flex-end;
+  margin: 0 5px 10px 0px;
+}
+
+.filters_button_close_x {
+  border: 2px solid #ddd;
+  background-color: #232f3e;
+  color: #ddd;
+  border-radius: 50%;
+  padding: 0px 8px;
+  cursor: pointer;
+}
+.filters_button_close_x:hover {
+  opacity: .7;
+} 
 .open-button {
   left: 215px;
-}
-.filters_filter {
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-}
-.filters_filter_topic {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 10px 5px 7px;
-}
-.filters_filter_topic_label {
-  cursor: pointer;
-}
-.filters_filter_topic_label:hover {
-  opacity: 0.7;
-}
-.filters_filter_topic_container {
-  position: absolute;
-  left: 20px;
-  border: 1px solid black;
-  opacity: 0.4;
-  height: 20px;
-  width: 20px;
-  cursor: pointer;
-}
-.filters_filter_topic_container:hover {
-  opacity: 0.2;
-}
-.filters_filter_topic_checkbox:checked ~ .filters_filter_topic_container {
-  background-color: #2196f3;
-  opacity: 1;
-}
-.filters_filter_topic_checkbox {
-  transform: scale(1.5);
-  opacity: 0;
-}
-.filters_filter_topic_checkmark {
-  content: "";
-  position: absolute;
-  display: none;
-  cursor: pointer;
-  left: 27px;
-  width: 5px;
-  height: 10px;
-  padding-top: 4px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-  z-index: 999;
-}
-.filters_filter_topic_checkbox:checked ~ .filters_filter_topic_checkmark {
-  display: inline-flex;
-}
-.filters_filter_topic_label_text {
-  cursor: pointer;
-  padding: 0px 30px 0px 10px;
-}
-.filters_filter_topic_label_count {
-  cursor: pointer;
-  font-size: 13px;
-  text-align: right;
-  color: #6b6b6b;
 }
 .products {
   display: flex;
@@ -528,33 +488,11 @@ export default {
   flex-wrap: wrap;
   justify-content: left;
 }
-.products_product {
-  display: flex;
-  flex-direction: column;
-  padding: 0 12px 30px 12px;
-  max-width: 200px;
-  border-bottom: 2px solid #ddd;
-}
-.products_product_images {
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-}
-.products_product_description {
-  padding: 1.33em 0 0.5em 0;
-}
-.products_product_price {
-  padding-bottom: 0.5em;
-  font-weight: bold;
-  font-size: 21px;
-}
-.star {
-  color: #ff8c00;
-}
-.star::before {
-  content: "\2605";
-}
 @media only screen and (max-width: 600px) {
+  .results {
+    flex-direction: column;
+    padding: 0;
+  }
   .filters {
     display: none;
     flex-direction: column;
@@ -563,33 +501,26 @@ export default {
     overflow: auto;
     top: 0;
     left: 0;
-    width: 215px;
+    width: 100%;
     height: 100%;
     padding: 12px 12px 0 12px;
     border: 0;
-    border-radius: 0 10px 10px 0;
     background-color: white;
-    box-shadow: 10px 10px 5px #131921;
+  }
+  .filters_button_close {
+    display: flex;
   }
   .open-filters {
     display: flex;
   }
   .filters_button {
-    display: block;
-  }
-  .results {
-    justify-content: center;
-    padding: 25px 0 0 0;
+    display: flex;
   }
   .products {
     margin: 0;
   }
   .products_container {
     justify-content: center;
-  }
-  .products_product {
-    padding: 0 0 30px 0;
-    margin: 10px;
   }
   .products_count {
     text-align: center;
