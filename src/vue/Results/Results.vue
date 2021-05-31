@@ -1,70 +1,86 @@
 <template>
-  <div class="results">
-    <div class="filters_button">
-      <button
-        class="filters_button_text"
-        @click="openCloseFiltersOnSmallScreens"
-      >
-        Filter
-      </button>
-    </div>
-    <div class="filters">
-      <div class="filters_button_close">
-        <span
-          class="filters_button_close_x"
+  <div class="results-contaienr">
+    <div class="results">
+      <div class="filters_button">
+        <button
+          class="filters_button_text"
           @click="openCloseFiltersOnSmallScreens"
         >
-          x
-        </span>
+          Filter
+        </button>
       </div>
-      <h3 class="filters_by filters_box">Filter by:</h3>
-      <div
-        v-for="filter in filteredFilters"
-        :key="'filter-' + filter.topic + filter.id"
-        class="filters_box"
-      >
-        <h4 class="filters_titles">{{ filter.topic }}</h4>
-        <Filters
-          v-for="filter1 in filter.subtopics"
-          :key="filter1.text + filter1.id"
-          :id="filter1.id"
-          :text="filter1.text"
-          :items-with-filter="
-            productsForFilter[shownFilters.indexOf(filter1.text)]
-          "
-          @updateShownItemsAndFilters="filterGroupOfFilters(filter1.text)"
-        />
+      <div class="filters">
+        <div class="filters_button_close">
+          <span
+            class="filters_button_close_x"
+            @click="openCloseFiltersOnSmallScreens"
+          >
+            x
+          </span>
+        </div>
+        <h3 class="filters_by filters_box">Filter by:</h3>
+        <div
+          v-for="filter in filteredFilters"
+          :key="'filter-' + filter.topic + filter.id"
+          class="filters_box"
+        >
+          <h4 class="filters_titles">{{ filter.topic }}</h4>
+          <Filters
+            v-for="filter1 in filter.subtopics"
+            :key="filter1.text + filter1.id"
+            :id="filter1.id"
+            :text="filter1.text"
+            :items-with-filter="
+              productsForFilter[shownFilters.indexOf(filter1.text)]
+            "
+            @updateShownItemsAndFilters="filterGroupOfFilters(filter1.text)"
+          />
+        </div>
+      </div>
+      <div class="products">
+        <h2 class="products_count">
+          {{ filteredProductsLength }} Product(s) Found
+        </h2>
+        <div class="products_container">
+          <Products
+            v-for="product in filteredProducts"
+            :key="product.text + product.id"
+            :id="product.id"
+            :text="product.text"
+            :image="product.image"
+            :brand="product.brand"
+            :description="product.description"
+            :price="product.price"
+            :reviews="product.reviews"
+            @hideResultsAndShowPurchase="buyProduct(product)"
+          />
+        </div>
       </div>
     </div>
-    <div class="products">
-      <h2 class="products_count">
-        {{ filteredProductsLength }} Product(s) Found
-      </h2>
-      <div class="products_container">
-        <Products
-          v-for="product in filteredProducts"
-          :key="product.text + product.id"
-          :id="product.id"
-          :text="product.text"
-          :image="product.image"
-          :brand="product.brand"
-          :description="product.description"
-          :price="product.price"
-          :reviews="product.reviews"
-        />
-      </div>
-    </div>
+    <Purchase
+      v-for="product in selectedProduct"
+      :key="product.id"
+      :id="product.id"
+      :alt="product.text"
+      :src="product.image"
+      :description="product.description"
+      :price="product.price"
+      :reviews="product.reviews"
+      :galery="product.galery"
+      :quantity="product.quantity"
+    />
   </div>
 </template>
 
 <script>
-import Filters from "../vue/Filters.vue";
-import Products from "../vue/Products.vue";
+import Filters from "../Results/Filters.vue";
+import Products from "../Results/Products.vue";
+import Purchase from "../Results/Purchase.vue";
 export default {
   name: "Results",
   props: ["pkey"],
   event: "click",
-  components: { Filters, Products },
+  components: { Filters, Products, Purchase },
   data() {
     return {
       tickedFilters: [],
@@ -187,123 +203,208 @@ export default {
           id: 1,
           text: "Shoes",
           image: "shoes.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Jaguar, Red and white",
           price: "21.99€",
           range: "0 to 25€",
           reviews: "Excellent",
           brand: "Adidas",
+          quantity: 3
         },
         {
           id: 2,
           text: "Computer",
           image: "computer-product.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Mac 120, limited edition",
           price: "2199.00€",
           range: "+200€",
           reviews: "Excellent",
           brand: "Apple",
+          quantity: 9
         },
         {
           id: 3,
           text: "Guitar",
           image: "guitar.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Kenzo Music, Standard",
           price: "127.51€",
           range: "101 to 200€",
           reviews: "Great",
           brand: "Kenzo",
+          quantity: 7
         },
         {
           id: 4,
           text: "Garden",
           image: "garden.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "26 to 50€",
           reviews: "Ok",
           brand: "Adidas",
+          quantity: 6
         },
         {
           id: 5,
           text: "Home",
           image: "home.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "51 to 100€",
           reviews: "Excellent",
           brand: "Nike",
+          quantity: 3
         },
         {
           id: 6,
           text: "Toys",
           image: "toys.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "26 to 50€",
           reviews: "Bad",
           brand: "Apple",
+          quantity: 4
         },
         {
           id: 7,
           text: "Food",
           image: "food.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
           reviews: "Good",
           brand: "Nike",
+          quantity: 12
         },
         {
           id: 8,
           text: "Beauty",
           image: "beauty.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "0 to 25€",
           reviews: "Good",
           brand: "Samsung",
+          quantity: 1
         },
         {
           id: 9,
           text: "Computers",
           image: "computers.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
           reviews: "Excellent",
           brand: "Lacoste",
+          quantity: 0
         },
         {
           id: 10,
           text: "Computers",
           image: "computers.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
           reviews: "Excellent",
           brand: "Lacoste",
+          quantity: 9
         },
         {
           id: 11,
           text: "Toys",
           image: "ball.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Nike Sport, white and blue",
           price: "120.99€",
           range: "101 to 200€",
           reviews: "Good",
           brand: "Nike",
+          quantity: 2
         },
         {
           id: 12,
           text: "Music",
           image: "ball.jpeg",
+          galery: [
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+            "computer-product.jpeg",
+          ],
           description: "Turntables",
           price: "145.99€",
           range: "101 to 200€",
           reviews: "Bad",
           brand: "Technics",
+          quantity: 4
         },
       ],
+      selectedProduct: [],
     };
   },
   methods: {
@@ -323,6 +424,16 @@ export default {
       button.classList.contains("open-button")
         ? button.classList.remove("open-button")
         : button.classList.add("open-button");
+    },
+    buyProduct(product) {
+      var resultsContainer = document.querySelector(".results");
+      resultsContainer.classList.add("end-selection");
+      this.selectedProduct.push(product);
+      setTimeout(this.openPurchaseProcess, 1);
+    },
+    openPurchaseProcess() {
+      var purchaseProcess = document.querySelector(".booking-process");
+      purchaseProcess.classList.add("start-process");
     },
   },
   computed: {
@@ -408,7 +519,6 @@ export default {
   flex-basis: 25%;
   min-width: 225px;
   box-sizing: border-box;
-  height: 100vh;
   padding: 0 12px;
   border-right: 2px solid #ddd;
 }
@@ -467,8 +577,8 @@ export default {
   cursor: pointer;
 }
 .filters_button_close_x:hover {
-  opacity: .7;
-} 
+  opacity: 0.7;
+}
 .open-button {
   left: 215px;
 }
@@ -487,6 +597,12 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
+}
+.end-selection {
+  display: none;
+}
+.start-process {
+  display: flex;
 }
 @media only screen and (max-width: 600px) {
   .results {
