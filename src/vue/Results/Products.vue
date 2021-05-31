@@ -5,9 +5,11 @@
         {{ text }}
       </h4>
       <img
+        class="products_product_images"
         :src="getImgUrl(image)"
         :alt="text"
-        class="products_product_images"
+        :id="id"
+        @click="$emit('hideResultsAndShowPurchase', { event: $event, id })"
       />
       <span class="products_product_brand">{{ brand }}</span>
       <span class="products_product_description">
@@ -57,7 +59,11 @@ export default {
   },
   methods: {
     getImgUrl(pic) {
-      var images = require.context("../images/", false, /\.jpeg$/);
+      var images = require.context(
+        "/Users/martina/e-commerce/src/images",
+        false,
+        /\.jpeg$/
+      );
       return images("./" + pic);
     },
   },
@@ -76,6 +82,10 @@ export default {
   width: 100%;
   height: auto;
   cursor: pointer;
+}
+
+.products_product_images:hover {
+  opacity: .7;
 }
 .products_product_description {
   padding: 1.33em 0 0.5em 0;

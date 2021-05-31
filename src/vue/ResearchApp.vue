@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-root">
     <SearchBar />
     <NavigationMenu />
     <Banner />
@@ -12,10 +12,10 @@
   import SearchBar from '../vue/SearchBar.vue';
   import NavigationMenu from '../vue/NavigationMenu.vue';
   import Banner from '../vue/Banner.vue';
-  import Results from '../vue/Results.vue';
+  import Results from '../vue/Results/Results.vue';
   import Footer from '../vue/Footer.vue';
   export default {
-    name: "App",
+    name: "ResearchApp",
     components: {
       SearchBar,
       NavigationMenu,
@@ -25,3 +25,10 @@
     }
   }
 </script>
+
+<style scoped>
+.app-root {
+  display: flex;
+  flex-direction: column;
+}
+</style>
