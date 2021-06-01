@@ -68,6 +68,7 @@
       :reviews="product.reviews"
       :galery="product.galery"
       :quantity="product.quantity"
+      @goBacktoSearch="backToSearch()"
     />
   </div>
 </template>
@@ -205,9 +206,9 @@ export default {
           image: "shoes.jpeg",
           galery: [
             "computer-product.jpeg",
+            "shoes.jpeg",
             "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
           ],
           description: "Jaguar, Red and white",
           price: "21.99€",
@@ -221,8 +222,8 @@ export default {
           text: "Computer",
           image: "computer-product.jpeg",
           galery: [
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
+            "shoes.jpeg",
             "computer-product.jpeg",
             "computer-product.jpeg",
           ],
@@ -241,7 +242,7 @@ export default {
             "computer-product.jpeg",
             "computer-product.jpeg",
             "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
           ],
           description: "Kenzo Music, Standard",
           price: "127.51€",
@@ -255,9 +256,9 @@ export default {
           text: "Garden",
           image: "garden.jpeg",
           galery: [
+            "shoes.jpeg",
             "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
             "computer-product.jpeg",
           ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
@@ -272,9 +273,9 @@ export default {
           text: "Home",
           image: "home.jpeg",
           galery: [
-            "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
+            "shoes.jpeg",
+            "shoes.jpeg",
             "computer-product.jpeg",
           ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
@@ -290,9 +291,9 @@ export default {
           image: "toys.jpeg",
           galery: [
             "computer-product.jpeg",
+            "shoes.jpeg",
             "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
           ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
@@ -306,10 +307,10 @@ export default {
           text: "Food",
           image: "food.jpeg",
           galery: [
+            "shoes.jpeg",
             "computer-product.jpeg",
             "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
           ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
@@ -324,8 +325,8 @@ export default {
           image: "beauty.jpeg",
           galery: [
             "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
+            "shoes.jpeg",
             "computer-product.jpeg",
           ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
@@ -340,8 +341,8 @@ export default {
           text: "Computers",
           image: "computers.jpeg",
           galery: [
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
+            "shoes.jpeg",
             "computer-product.jpeg",
             "computer-product.jpeg",
           ],
@@ -360,7 +361,7 @@ export default {
             "computer-product.jpeg",
             "computer-product.jpeg",
             "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
           ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
@@ -374,9 +375,9 @@ export default {
           text: "Toys",
           image: "ball.jpeg",
           galery: [
+            "shoes.jpeg",
             "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
             "computer-product.jpeg",
           ],
           description: "Nike Sport, white and blue",
@@ -393,8 +394,8 @@ export default {
           galery: [
             "computer-product.jpeg",
             "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+            "shoes.jpeg",
+            "shoes.jpeg",
           ],
           description: "Turntables",
           price: "145.99€",
@@ -432,9 +433,16 @@ export default {
       setTimeout(this.openPurchaseProcess, 1);
     },
     openPurchaseProcess() {
-      var purchaseProcess = document.querySelector(".booking-process");
-      purchaseProcess.classList.add("start-process");
+      var purchaseProcess = document.querySelector(".purchase-process");
+      purchaseProcess.classList.add("start-purchase");
     },
+    backToSearch() {
+      var results = document.querySelector('.results');
+      var purchaseProcess = document.querySelector('.purchase-process');
+      purchaseProcess.classList.remove('start-purchase');
+      results.classList.remove('end-selection');
+      this.selectedProduct.splice(0,1);
+    }
   },
   computed: {
     filteredFilters() {
@@ -601,7 +609,7 @@ export default {
 .end-selection {
   display: none;
 }
-.start-process {
+.start-purchase {
   display: flex;
 }
 @media only screen and (max-width: 600px) {
@@ -642,5 +650,8 @@ export default {
     text-align: center;
     padding: 0;
   }
+  .start-purchase {
+  flex-direction: column;
+}
 }
 </style>
