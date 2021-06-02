@@ -279,7 +279,7 @@ export default {
 .logo {
   width: 50px;
   height: 50px;
-  padding: 2px 35px 0px 15px;
+  margin: 2px 35px 0px 15px;
   cursor: pointer;
 }
 

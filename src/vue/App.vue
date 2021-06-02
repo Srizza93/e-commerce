@@ -1,7 +1,7 @@
 <template>
   <div>
-    <SearchBar />
-    <NavigationMenu />
+    <search-bar />
+    <navigation-menu />
     <Banner />
     <Home />
     <Footer />

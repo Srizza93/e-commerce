@@ -66,7 +66,7 @@
       :description="product.description"
       :price="product.price"
       :reviews="product.reviews"
-      :galery="product.galery"
+      :gallery="product.gallery"
       :quantity="product.quantity"
       @goBacktoSearch="backToSearch()"
     />
@@ -204,205 +204,162 @@ export default {
           id: 1,
           text: "Shoes",
           image: "shoes.jpeg",
-          galery: [
-            "computer-product.jpeg",
-            "shoes.jpeg",
-            "computer-product.jpeg",
-            "shoes.jpeg",
-          ],
+          gallery: ["shoes.jpeg", "shoes2.jpeg", "shoes3.jpeg", "shoes4.jpeg"],
           description: "Jaguar, Red and white",
           price: "21.99€",
           range: "0 to 25€",
           reviews: "Excellent",
           brand: "Adidas",
-          quantity: 3
+          quantity: 3,
         },
         {
           id: 2,
           text: "Computer",
-          image: "computer-product.jpeg",
-          galery: [
-            "shoes.jpeg",
-            "shoes.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+          image: "computer.jpeg",
+          gallery: [
+            "computer.jpeg",
+            "computer2.jpeg",
+            "computer3.jpeg",
+            "computer4.jpeg",
           ],
           description: "Mac 120, limited edition",
           price: "2199.00€",
           range: "+200€",
           reviews: "Excellent",
           brand: "Apple",
-          quantity: 9
+          quantity: 9,
         },
         {
           id: 3,
           text: "Guitar",
           image: "guitar.jpeg",
-          galery: [
-            "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
-            "shoes.jpeg",
-          ],
+          gallery: ["guitar.jpeg", "guitar3.jpeg", "guitar4.jpeg"],
           description: "Kenzo Music, Standard",
           price: "127.51€",
           range: "101 to 200€",
           reviews: "Great",
           brand: "Kenzo",
-          quantity: 7
+          quantity: 7,
         },
         {
           id: 4,
           text: "Garden",
           image: "garden.jpeg",
-          galery: [
-            "shoes.jpeg",
-            "computer-product.jpeg",
-            "shoes.jpeg",
-            "computer-product.jpeg",
+          gallery: [
+            "garden.jpeg",
+            "garden2.jpeg",
+            "garden3.jpeg",
+            "garden4.jpeg",
           ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "26 to 50€",
           reviews: "Ok",
           brand: "Adidas",
-          quantity: 6
+          quantity: 6,
         },
         {
           id: 5,
           text: "Home",
           image: "home.jpeg",
-          galery: [
-            "shoes.jpeg",
-            "shoes.jpeg",
-            "shoes.jpeg",
-            "computer-product.jpeg",
-          ],
+          gallery: ["home.jpeg", "home2.jpeg", "home3.jpeg", "home4.jpeg"],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "51 to 100€",
           reviews: "Excellent",
           brand: "Nike",
-          quantity: 3
+          quantity: 3,
         },
         {
           id: 6,
           text: "Toys",
           image: "toys.jpeg",
-          galery: [
-            "computer-product.jpeg",
-            "shoes.jpeg",
-            "computer-product.jpeg",
-            "shoes.jpeg",
-          ],
+          gallery: ["toys.jpeg", "toys2.jpeg", "toys3.jpeg", "toys4.jpeg"],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "26 to 50€",
           reviews: "Bad",
           brand: "Apple",
-          quantity: 4
+          quantity: 4,
         },
         {
           id: 7,
           text: "Food",
           image: "food.jpeg",
-          galery: [
-            "shoes.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
-            "shoes.jpeg",
-          ],
+          gallery: ["food.jpeg", "food2.jpeg", "food4.jpeg"],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
           reviews: "Good",
           brand: "Nike",
-          quantity: 12
+          quantity: 12,
         },
         {
           id: 8,
           text: "Beauty",
           image: "beauty.jpeg",
-          galery: [
-            "computer-product.jpeg",
-            "shoes.jpeg",
-            "shoes.jpeg",
-            "computer-product.jpeg",
-          ],
+          gallery: ["beauty.jpeg", "beauty2.jpeg", "beauty3.jpeg"],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "0 to 25€",
           reviews: "Good",
           brand: "Samsung",
-          quantity: 1
+          quantity: 1,
         },
         {
           id: 9,
           text: "Computers",
           image: "computers.jpeg",
-          galery: [
-            "shoes.jpeg",
-            "shoes.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
+          gallery: [
+            "computers.jpeg",
+            "computers2.jpeg",
+            "computers3.jpeg",
+            "computers4.jpeg",
           ],
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
           reviews: "Excellent",
           brand: "Lacoste",
-          quantity: 0
+          quantity: 0,
         },
         {
           id: 10,
-          text: "Computers",
-          image: "computers.jpeg",
-          galery: [
-            "computer-product.jpeg",
-            "computer-product.jpeg",
-            "computer-product.jpeg",
-            "shoes.jpeg",
-          ],
-          description: "Under Armour Men's Charged Assert 8 Running Shoe",
-          price: "20€",
-          range: "101 to 200€",
+          text: "IMac",
+          image: "mac.jpeg",
+          gallery: ["mac.jpeg", "mac2.jpeg", "mac3.jpeg"],
+          description: `Processor: Intel Core i5 2.7 GHz Diagonal
+          Size: 27 "Installed size: 4 GB / 16 GB (maximum)
+          1 x 1 T`,
+          price: "1299€",
+          range: "+200€",
           reviews: "Excellent",
-          brand: "Lacoste",
-          quantity: 9
+          brand: "Apple",
+          quantity: 9,
         },
         {
           id: 11,
-          text: "Toys",
+          text: "Soccer ball",
           image: "ball.jpeg",
-          galery: [
-            "shoes.jpeg",
-            "computer-product.jpeg",
-            "shoes.jpeg",
-            "computer-product.jpeg",
-          ],
+          gallery: ["ball.jpeg", "ball2.jpeg", "ball3.jpeg"],
           description: "Nike Sport, white and blue",
           price: "120.99€",
           range: "101 to 200€",
           reviews: "Good",
           brand: "Nike",
-          quantity: 2
+          quantity: 2,
         },
         {
           id: 12,
           text: "Music",
-          image: "ball.jpeg",
-          galery: [
-            "computer-product.jpeg",
-            "computer-product.jpeg",
-            "shoes.jpeg",
-            "shoes.jpeg",
-          ],
+          image: "turntable2.jpeg",
+          gallery: ["turntable.jpeg", "turntable2.jpeg", "turntable3.jpeg", "turntable4.jpeg"],
           description: "Turntables",
           price: "145.99€",
           range: "101 to 200€",
           reviews: "Bad",
           brand: "Technics",
-          quantity: 4
+          quantity: 4,
         },
       ],
       selectedProduct: [],
@@ -437,12 +394,12 @@ export default {
       purchaseProcess.classList.add("start-purchase");
     },
     backToSearch() {
-      var results = document.querySelector('.results');
-      var purchaseProcess = document.querySelector('.purchase-process');
-      purchaseProcess.classList.remove('start-purchase');
-      results.classList.remove('end-selection');
-      this.selectedProduct.splice(0,1);
-    }
+      var results = document.querySelector(".results");
+      var purchaseProcess = document.querySelector(".purchase-process");
+      purchaseProcess.classList.remove("start-purchase");
+      results.classList.remove("end-selection");
+      this.selectedProduct.splice(0, 1);
+    },
   },
   computed: {
     filteredFilters() {
@@ -610,7 +567,7 @@ export default {
   display: none;
 }
 .start-purchase {
-  display: flex;
+  display: block;
 }
 @media only screen and (max-width: 600px) {
   .results {
@@ -650,8 +607,5 @@ export default {
     text-align: center;
     padding: 0;
   }
-  .start-purchase {
-  flex-direction: column;
-}
 }
 </style>

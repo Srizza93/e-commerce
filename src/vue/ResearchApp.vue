@@ -1,7 +1,7 @@
 <template>
   <div class="app-root">
-    <SearchBar />
-    <NavigationMenu />
+    <search-bar />
+    <navigation-menu />
     <Banner />
     <Results />
     <Footer />
