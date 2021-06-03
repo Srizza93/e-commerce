@@ -57,31 +57,17 @@
         </div>
       </div>
     </div>
-    <Purchase
-      v-for="product in selectedProduct"
-      :key="product.id"
-      :id="product.id"
-      :alt="product.text"
-      :src="product.image"
-      :description="product.description"
-      :price="product.price"
-      :reviews="product.reviews"
-      :gallery="product.gallery"
-      :quantity="product.quantity"
-      @goBacktoSearch="backToSearch()"
-    />
   </div>
 </template>
 
 <script>
 import Filters from "../Results/Filters.vue";
 import Products from "../Results/Products.vue";
-import Purchase from "../Results/Purchase.vue";
 export default {
   name: "Results",
   props: ["pkey"],
   event: "click",
-  components: { Filters, Products, Purchase },
+  components: { Filters, Products },
   data() {
     return {
       tickedFilters: [],
@@ -328,9 +314,7 @@ export default {
           text: "IMac",
           image: "mac.jpeg",
           gallery: ["mac.jpeg", "mac2.jpeg", "mac3.jpeg"],
-          description: `Processor: Intel Core i5 2.7 GHz Diagonal
-          Size: 27 "Installed size: 4 GB / 16 GB (maximum)
-          1 x 1 T`,
+          description: "Processor: Intel Core i5 2.7 GHz",
           price: "1299€",
           range: "+200€",
           reviews: "Excellent",
@@ -353,7 +337,12 @@ export default {
           id: 12,
           text: "Music",
           image: "turntable2.jpeg",
-          gallery: ["turntable.jpeg", "turntable2.jpeg", "turntable3.jpeg", "turntable4.jpeg"],
+          gallery: [
+            "turntable.jpeg",
+            "turntable2.jpeg",
+            "turntable3.jpeg",
+            "turntable4.jpeg",
+          ],
           description: "Turntables",
           price: "145.99€",
           range: "101 to 200€",
@@ -384,21 +373,23 @@ export default {
         : button.classList.add("open-button");
     },
     buyProduct(product) {
-      var resultsContainer = document.querySelector(".results");
-      resultsContainer.classList.add("end-selection");
-      this.selectedProduct.push(product);
-      setTimeout(this.openPurchaseProcess, 1);
-    },
-    openPurchaseProcess() {
-      var purchaseProcess = document.querySelector(".purchase-process");
-      purchaseProcess.classList.add("start-purchase");
-    },
-    backToSearch() {
-      var results = document.querySelector(".results");
-      var purchaseProcess = document.querySelector(".purchase-process");
-      purchaseProcess.classList.remove("start-purchase");
-      results.classList.remove("end-selection");
-      this.selectedProduct.splice(0, 1);
+      var productClicked =
+        product.id +
+        "-" +
+        product.image +
+        "-" +
+        product.text +
+        "-" +
+        product.description +
+        "-" +
+        product.price +
+        "-" +
+        product.reviews +
+        "-" +
+        product.gallery +
+        "-" +
+        product.quantity;
+      window.open("./purchase.html?product=" + encodeURI(productClicked));
     },
   },
   computed: {
@@ -562,12 +553,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-}
-.end-selection {
-  display: none;
-}
-.start-purchase {
-  display: block;
 }
 @media only screen and (max-width: 600px) {
   .results {

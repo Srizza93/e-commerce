@@ -1,80 +1,64 @@
 <template>
   <div class="purchase-process">
-    <button
+    <a
       class="purchase-process_button purchase-process_back-to-search"
-      @click="$emit('goBacktoSearch', { event: $event, id })"
+      href="./research.html"
     >
       ❮
-    </button>
+    </a>
     <div class="purchase-process_container">
       <slide-show
         :mainImage="showMainImage()"
-        :gallery="gallery"
-        :alt="alt"
+        :gallery="product.gallery"
+        :alt="product.alt"
         @showClickedImageOnMainPic="showClickedImage"
         @changeToNextPic="showPreviousImage"
         @changeToPreviousPic="showNextImage"
       />
       <div class="description">
-        <h2 class="description_title">{{ alt }}</h2>
-        <p>{{ alt }} {{ description }}</p>
+        <h2 class="description_title">{{ product.alt }}</h2>
+        <p>{{ product.alt }} {{ product.description }}</p>
         <span class="products_product_price description_price">{{
-          price
+          product.price
         }}</span>
         <span class="products_product_reviews">
           <span class="star"></span>
-          {{ reviews }}
+          {{ product.reviews }}
         </span>
       </div>
-      <payment-box :quantity-array="quantityArray" :price="price" />
+      <payment-box :quantity-array="quantityArray" :price="product.price" />
     </div>
   </div>
 </template>
 
 <script>
-import SlideShow from "../Results/SlideShow.vue";
-import PaymentBox from "../Results/PaymentBox.vue";
+import SlideShow from "../Purchase-folder/SlideShow.vue";
+import PaymentBox from "../Purchase-folder/PaymentBox.vue";
 export default {
   name: "Purchase",
-  props: {
-    id: {
-      type: String | Number,
-      required: true,
-    },
-    src: {
-      type: String,
-      required: true,
-    },
-    alt: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: String,
-      required: true,
-    },
-    reviews: {
-      type: String,
-      required: true,
-    },
-    gallery: {
-      type: Array,
-      required: true,
-    },
-    quantity: Number,
-    requireed: true,
-  },
   components: { SlideShow, PaymentBox },
   data() {
     return {
       indexSlideShow: 0,
+      product: {
+        id: this.getProduct()[0],
+        src: this.getProduct()[1],
+        alt: this.getProduct()[2],
+        description: this.getProduct()[3],
+        price: this.getProduct()[4],
+        reviews: this.getProduct()[5],
+        gallery: this.getProduct()[6].split(","),
+        quantity: this.getProduct()[7],
+      },
     };
   },
   methods: {
+    getProduct() {
+      const urlParams = new URLSearchParams(window.location.search);
+      var productInfo = urlParams.get("product");
+      productInfo = productInfo.split(/[\n-]+/);
+      return productInfo;
+    },
     getImgUrl(pic) {
       var images = require.context(
         "/Users/martina/e-commerce/src/images",
@@ -84,14 +68,14 @@ export default {
       return images("./" + pic);
     },
     showMainImage() {
-      var gallery = this.$props.gallery;
+      var gallery = this.product.gallery;
       if (this.indexSlideShow < 0) {
         this.indexSlideShow = gallery.length - 1;
       }
       if (this.indexSlideShow > gallery.length - 1) {
         this.indexSlideShow = 0;
       }
-      return this.getImgUrl(this.$props.gallery[this.indexSlideShow]);
+      return this.getImgUrl(this.product.gallery[this.indexSlideShow]);
     },
     showClickedImage(image) {
       this.indexSlideShow = image.event.target.id;
@@ -105,7 +89,8 @@ export default {
   },
   computed: {
     quantityArray() {
-      return Array.from(Array(this.quantity).keys());
+      var quantity = Number(this.product.quantity);
+      return Array.from(Array(quantity).keys());
     },
   },
 };
@@ -113,7 +98,7 @@ export default {
 
 <style>
 .purchase-process {
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -136,12 +121,20 @@ export default {
 }
 .purchase-process_back-to-search {
   position: fixed;
-  font-size: 40px;
+  left: 0;
   margin: 25px 0;
   border-radius: 0 10px 10px 0;
+  font-size: 40px;
+  color: black;
+  text-decoration: none;
 }
 .purchase-process_back-to-search:hover {
   opacity: 0.7;
+}
+.products_product_price {
+  padding-bottom: 0.5em;
+  font-weight: bold;
+  font-size: 21px;
 }
 .description {
   display: flex;
@@ -151,10 +144,15 @@ export default {
 .description_title {
   margin-top: 0;
 }
+.star {
+  color: #ff8c00;
+}
+.star::before {
+  content: "\2605";
+}
 .description_price {
   color: #b12704;
 }
-
 @media only screen and (max-width: 680px) {
   .purchase-process_container {
     flex-wrap: wrap;

@@ -13,6 +13,9 @@ module.exports = {
     research: {
       import: path.resolve(__dirname, './src/scripts/research.js'),
     },
+    purchase: {
+      import: path.resolve(__dirname, './src/scripts/purchase.js'),
+    },
   },
   // devtool: 'inline-source-map', // ONLY FOR DEVLOPMENT MODE
   output: {
@@ -64,6 +67,11 @@ module.exports = {
       title: 'e-commerce',
       filename: 'research.html',
       chunks: ['research'],
+    }),
+    new HtmlWebpackPlugin({
+      title: 'e-commerce',
+      filename: 'purchase.html',
+      chunks: ['purchase'],
     }),
     new VueLoaderPlugin()
     ]
