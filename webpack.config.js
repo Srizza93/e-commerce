@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
   // !!!!!! MAKE SURE TO CHANGE MODE TO PRODUCTION WHEN DOPLOYING FOR PRODUCTION !!!!!!!!!
-  mode: 'production',
+  mode: 'development',
   entry: {
     main:  {
       import: path.resolve(__dirname, './src/scripts/app.js'),
@@ -15,6 +15,9 @@ module.exports = {
     },
     purchase: {
       import: path.resolve(__dirname, './src/scripts/purchase.js'),
+    },
+    cart: {
+      import: path.resolve(__dirname, './src/scripts/cart.js'),
     },
   },
   // devtool: 'inline-source-map', // ONLY FOR DEVLOPMENT MODE
@@ -72,6 +75,11 @@ module.exports = {
       title: 'e-commerce',
       filename: 'purchase.html',
       chunks: ['purchase'],
+    }),
+    new HtmlWebpackPlugin({
+      title: 'e-commerce',
+      filename: 'cart.html',
+      chunks: ['cart'],
     }),
     new VueLoaderPlugin()
     ]
