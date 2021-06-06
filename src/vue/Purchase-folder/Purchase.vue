@@ -10,6 +10,7 @@
       <slide-show
         :mainImage="showMainImage()"
         :gallery="product.gallery"
+        :id="product.id"
         :alt="product.alt"
         @showClickedImageOnMainPic="showClickedImage"
         @changeToNextPic="showPreviousImage"
@@ -26,7 +27,11 @@
           {{ product.reviews }}
         </span>
       </div>
-      <payment-box :quantity-array="quantityArray" :price="product.price" />
+      <payment-box
+        :quantity-array="quantityArray"
+        :price="product.price"
+        :alt="product.alt"
+      />
     </div>
   </div>
 </template>
@@ -113,7 +118,6 @@ export default {
   font-weight: bold;
   border: none;
   border-radius: 5px;
-  padding: 8px;
   margin: 5px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: #ff8c00;
@@ -122,6 +126,7 @@ export default {
 .purchase-process_back-to-search {
   position: fixed;
   left: 0;
+  padding: 8px;
   margin: 25px 0;
   border-radius: 0 10px 10px 0;
   font-size: 40px;
