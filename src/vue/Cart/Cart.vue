@@ -86,21 +86,21 @@ export default {
           identity: "cnumber",
           name: "cardnumber",
           text: "Card number",
-          suggestion: 'XXXX - XXX - XXX'
+          suggestion: "XXXX - XXX - XXX",
         },
         {
           id: 2,
           identity: "edate",
           name: "expirydate",
           text: "Expiry date",
-          suggestion: 'mm/yyyy'
+          suggestion: "mm/yyyy",
         },
         {
           id: 3,
           identity: "cvc",
           name: "cvccode",
           text: "CVC-code",
-          suggestion: '123'
+          suggestion: "123",
         },
       ],
       circuits: [
@@ -242,8 +242,8 @@ export default {
       if (cname.length === 0) {
         cnameLabel.innerHTML = "Invalid Cardholder Name";
         return;
-      }
-      fnameLabel.innerHTML = "";
+      } 
+        cnameLabel.innerHTML = "";
     },
     checkExpiryDate(edate, edateLabel) {
       const regex = /^0[0-9]|1[0-2]\/20[2-6][0-9]$/;
