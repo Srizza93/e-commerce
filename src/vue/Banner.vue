@@ -48,7 +48,7 @@ export default {
 <style scoped>
 .banner {
   padding: 5px 30px 5px 30px;
-  background-color: #7C0A02;;
+  background-color: red;
   border: 1px solid black;
   font-weight: bold;
   cursor: pointer;
@@ -90,7 +90,7 @@ export default {
   height: 20px;
   border: solid black;
   border-width: 0 3px 3px 0;
-  padding: 0 0px 0 20px;
+  padding: 0 0px 0 17px;
   margin: 0 30px 0 0;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);

@@ -22,7 +22,14 @@
         placeholder="Write something..."
         class="search-form"
       />
-      <input type="submit" value="Search" class="lens selected" />
+      <button class="lens selected">
+        <img
+          class="container-cart_cart-logo"
+          :key="magnifying.id"
+          :src="getImgUrl(magnifying.link)"
+          :alt="magnifying.text"
+        />
+      </button>
       <div class="suggestions">
         <span
           class="suggestions_topic"
@@ -41,6 +48,14 @@
         </span>
       </div>
     </div>
+    <a class="container-cart" href="./cart.html">
+      <img
+        class="container-cart_cart-logo"
+        :key="cart.id"
+        :src="getImgUrl(cart.link)"
+        :alt="cart.text"
+      />
+    </a>
   </div>
 </template>
 
@@ -51,9 +66,19 @@ export default {
     return {
       search: [],
       logo: {
-        text: 'doelogo',
-        link: 'doelogo.png'
-
+        id: 1,
+        text: "doelogo",
+        link: "doelogo.png",
+      },
+      magnifying: {
+        id: 2,
+        text: "magnifying-glass",
+        link: "magnifying.png",
+      },
+      cart: {
+        id: 3,
+        text: "cart-logo",
+        link: "shopping-cart.png",
       },
       options: [
         {
@@ -261,6 +286,7 @@ export default {
 <style scoped>
 .search-bar {
   display: flex;
+  align-items: center;
   background-color: #131921;
   color: white;
   padding: 5px;
@@ -271,24 +297,39 @@ export default {
   padding: 12px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
+  margin: 6px 0;
   resize: vertical;
 }
 
 .logo {
-  width: 50px;
-  height: 50px;
-  margin: 2px 35px 0px 15px;
+  width: 45px;
+  height: auto;
+  margin: 0 30px;
   cursor: pointer;
 }
-
+.container-cart {
+  display: flex;
+  justify-content: center;
+  background-color: #ff8c00;
+  border-radius: 10px;
+  margin: 0 10px 0 auto;
+}
+.container-cart_cart-logo {
+  width: 45px;
+  height: auto;
+  padding: 5px;
+  cursor: pointer;
+}
+.container-cart_cart-logo:hover {
+  opacity: 0.8;
+}
 .container-form {
   overflow: hidden;
   display: flex;
   flex-direction: row;
   width: 70%;
   height: 70px;
+  margin-right: 10px;
 }
 .select {
   padding: 12px;
@@ -297,21 +338,22 @@ export default {
   border-right-width: 10px;
   border-radius: 4px 0 0 4px;
   background-color: rgb(202, 202, 202);
-  margin: 6px 0 16px 0;
+  margin: 6px 0;
   cursor: pointer;
 }
 .selected:hover {
   opacity: 0.8;
 }
 .lens {
+  display: flex;
+  align-items: center;
   width: 65px;
-  padding: 12px;
+  padding: 0;
   border: 1px solid #ccc;
   border-radius: 0 4px 4px 0;
   border-right: 0;
   background-color: #ff8c00;
-  margin-top: 6px;
-  margin-bottom: 16px;
+  margin: 6px 0;
   cursor: pointer;
 }
 
@@ -329,7 +371,7 @@ export default {
   line-height: 1.5em;
   z-index: 99999;
   border-radius: 0 5% 5% 5%;
-  transition-duration: 2s;
+  transition-duration: 1s;
 }
 
 .suggestions_topic {
@@ -362,6 +404,10 @@ export default {
 
   .search-form {
     border-radius: 4px 0 0 4px;
+  }
+
+  .logo {
+    margin: 0 10px;
   }
 }
 </style>

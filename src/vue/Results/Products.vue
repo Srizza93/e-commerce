@@ -1,9 +1,6 @@
 <template>
   <div>
     <div class="products_product" :id="id" :pkey="'product-' + id">
-      <h4>
-        {{ text }}
-      </h4>
       <img
         class="products_product_images"
         :src="getImgUrl(image)"
@@ -11,14 +8,13 @@
         :id="id"
         @click="$emit('hideResultsAndShowPurchase', { event: $event, id })"
       />
-      <span class="products_product_brand">{{ brand }}</span>
+      <h4 class="products_product_brand">{{ brand }}</h4>
       <span class="products_product_description">
         {{ description }}
       </span>
       <span class="products_product_price">{{ price }}</span>
       <span class="products_product_reviews">
-        <span class="star"></span>
-        {{ reviews }}
+        <span class="star" v-for="star in reviews" :key="star"></span>
       </span>
     </div>
   </div>
@@ -53,7 +49,7 @@ export default {
       required: true,
     },
     reviews: {
-      type: String,
+      type: Number,
       required: true,
     },
   },
@@ -76,19 +72,24 @@ export default {
   flex-direction: column;
   padding: 0 12px 30px 12px;
   max-width: 200px;
+  min-height: 475px;
   border-bottom: 2px solid #ddd;
 }
 .products_product_images {
   width: 100%;
   height: auto;
   cursor: pointer;
+  margin-top: 50px;
 }
 
 .products_product_images:hover {
-  opacity: .7;
+  opacity: 0.7;
+}
+.products_product_brand {
+  margin-top: 10px;
 }
 .products_product_description {
-  padding: 1.33em 0 0.5em 0;
+  margin-bottom: 10px;
 }
 .products_product_price {
   padding-bottom: 0.5em;

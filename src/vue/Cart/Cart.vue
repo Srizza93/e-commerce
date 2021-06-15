@@ -1,270 +1,132 @@
 <template>
   <div class="cart-container">
-    <div class="cart-container_breakdown">
-      <div class="cart-container_breakdown_detail">
-        <h3>Product</h3>
-        <span> {{ productDetails[0] }}</span>
-      </div>
-      <div class="cart-container_breakdown_detail">
-        <h3>Price</h3>
-        <span> {{ productDetails[1] }} € </span>
-      </div>
-      <div class="cart-container_breakdown_detail">
-        <h3>Number of pieces</h3>
-        <span> {{ productDetails[2] }} </span>
-      </div>
-      <div class="cart-container_breakdown_detail">
-        <h3>Taxes</h3>
-        <span class="payment-box_taxes">
-          + $26.34 Shipping and Import Fees Deposit to France</span
+    <div class="cart-container_products">
+      <div
+        class="cart-container_products_product"
+        v-for="product in products"
+        :key="product.id + product.text"
+      >
+        <img
+          class="cart-container_products_product_img"
+          :alt="product.text"
+          :src="getImgUrl(product.image)"
+        />
+        <div class="cart-container_products_product_info">
+          <h3 class="cart-container_products_product_info_title">
+            {{ product.text }}
+          </h3>
+          <span class="cart-container_products_product_info_span">
+            {{ product.description }}
+          </span>
+          <span class="cart-container_products_product_info_span">
+            {{ product.reviews }}
+          </span>
+          <span class="cart-container_products_product_info_span">
+            {{ product.brand }}
+          </span>
+        </div>
+        <div
+          class="cart-container_products_product_info cart-container_products_product_payment"
         >
-      </div>
-      <div class="cart-container_breakdown_detail">
-        <h3>Total</h3>
-        <span> {{ totalToPay() }} € </span>
+          <h3 class="cart-container_products_product_info_title">Price</h3>
+          <span class="cart-container_products_product_info_span">
+            {{ product.price }}
+          </span>
+          <h3 class="cart-container_products_product_info_title">Quantity</h3>
+          <span class="cart-container_products_product_info_span">
+            {{ product.quantity }}
+          </span>
+          <h3 class="cart-container_products_product_info_title">Total</h3>
+          <span class="cart-container_products_product_info_span">
+            {{ totalProduct(product.price, product.quantity) }}
+          </span>
+        </div>
       </div>
     </div>
-    <div class="cart-container_forms">
-      <personal-info :person="person" :countries="countries"></personal-info>
-      <credit-card :circuits="circuits" :card="card"></credit-card>
-      <button @click="validateForms()" class="payment-button">
-        Complete Purchase
+    <div class="cart-container_products_product cart-container_payment-details">
+      <h2
+        class="cart-container_products_product_info_title cart-container_products_product_info_span"
+      >
+        Total price
+      </h2>
+      <span class="cart-container_products_product_info_span">
+        {{ totalPrice() }}€</span
+      >
+      <span class="payment-box_taxes cart-container_products_product_info_span"
+        >+ €26.34 Shipping and Import Fees Deposit to France</span
+      >
+      <button class="payment-box_button" @click="openPayment()">
+        Buy Now
       </button>
     </div>
   </div>
 </template>
 
 <script>
-import CreditCard from "./CreditCard.vue";
-import PersonalInfo from "./PersonalInfo.vue";
-
 export default {
   name: "Cart",
-  components: { CreditCard, PersonalInfo },
   data() {
     return {
-      countries: [
+      products: [
         {
           id: 1,
-          name: "Italy",
-          prefix: "+39",
+          text: "Soccer ball",
+          image: "ball.jpeg",
+          description: "Nike Sport, white and blue",
+          price: "120.99€",
+          range: "101 to 200€",
+          reviews: "Good",
+          brand: "Nike",
+          quantity: 2,
+          stock: 23,
         },
         {
           id: 2,
-          name: "France",
-          prefix: "+33",
-        },
-        {
-          id: 3,
-          name: "The Netherlands",
-          prefix: "+31",
-        },
-        {
-          id: 4,
-          name: "Spain",
-          prefix: "+34",
-        },
-        {
-          id: 5,
-          name: "Portugal",
-          prefix: "+351",
-        },
-        {
-          id: 6,
-          name: "Germany",
-          prefix: "+49",
-        },
-        {
-          id: 7,
-          name: "Greece",
-          prefix: "+30",
-        },
-      ],
-      card: [
-        {
-          id: 1,
-          identity: "cnumber",
-          name: "cardnumber",
-          text: "Card number",
-          suggestion: "XXXX - XXX - XXX",
-        },
-        {
-          id: 2,
-          identity: "edate",
-          name: "expirydate",
-          text: "Expiry date",
-          suggestion: "mm/yyyy",
-        },
-        {
-          id: 3,
-          identity: "cvc",
-          name: "cvccode",
-          text: "CVC-code",
-          suggestion: "123",
-        },
-      ],
-      circuits: [
-        {
-          id: 1,
-          name: "Visa",
-        },
-        {
-          id: 2,
-          name: "Visa Electron",
-        },
-        {
-          id: 3,
-          name: "American Express",
-        },
-        {
-          id: 4,
-          name: "Maestro",
-        },
-        {
-          id: 5,
-          name: "Mastercard",
-        },
-      ],
-      person: [
-        {
-          id: 1,
-          text: "name",
-          infos: [
-            {
-              id: 1,
-              identity: "fname",
-              name: "firstname",
-              text: "First Name",
-            },
-            {
-              id: 2,
-              identity: "lname",
-              name: "lastname",
-              text: "Last Name",
-            },
-          ],
-        },
-        {
-          id: 2,
-          text: "email",
-          infos: [
-            {
-              id: 1,
-              identity: "email",
-              name: "email-address",
-              text: "Email Address",
-            },
-            {
-              id: 2,
-              identity: "confirm-email",
-              name: "confirm-email-address",
-              text: "Confirm Email Address",
-            },
-          ],
+          text: "Turntable",
+          image: "turntable2.jpeg",
+          description: "Turntables",
+          price: "145.99€",
+          range: "101 to 200€",
+          reviews: "Bad",
+          brand: "Technics",
+          quantity: 3,
+          stock: 1,
         },
       ],
     };
   },
   methods: {
-    getProductDetails() {
-      const urlParams = new URLSearchParams(window.location.search);
-      var productInfo = urlParams.get("final-details");
-      return productInfo.split("-");
-    },
-    totalToPay() {
-      return this.productDetails[1] * this.productDetails[2] + 26.34;
-    },
-    validateForms() {
-      const fname = document.getElementById("fname").value;
-      var fnameLabel = document.querySelector(".firstname");
-      const lname = document.getElementById("lname").value;
-      var lnameLabel = document.querySelector(".lastname");
-      const email = document.getElementById("email").value;
-      var emailLabel = document.querySelector(".email-address");
-      const confirmEmail = document.getElementById("confirm-email").value;
-      var confirmEmailLabel = document.querySelector(".confirm-email-address");
-      const phoneNumber = document.getElementById("phone-number").value;
-      var phoneNumberLabel = document.querySelector(".phone-number");
-      const cname = document.getElementById("cname").value;
-      var cnameLabel = document.querySelector(".cardholdername");
-      const cnumber = document.getElementById("cnumber").value;
-      const edate = document.getElementById("edate").value;
-      var edateLabel = document.querySelector(".expirydate");
-      const cvc = document.getElementById("cvc").value;
-      var cvcLabel = document.querySelector(".cvccode");
-      this.checkUserName(fname, fnameLabel, lname, lnameLabel);
-      this.checkEmailAddress(
-        email,
-        emailLabel,
-        confirmEmail,
-        confirmEmailLabel
+    getImgUrl(pic) {
+      var images = require.context(
+        "/Users/martina/e-commerce/src/images",
+        false,
+        /\.jpeg$/
       );
-      this.checkPhoneNumber(phoneNumber, phoneNumberLabel);
-      this.checkCardholderName(cname, cnameLabel);
-      this.checkExpiryDate(edate, edateLabel);
-      this.checkCVCCode(cvc, cvcLabel);
+      return images("./" + pic);
     },
-    checkUserName(fname, fnameLabel, lname, lnameLabel) {
-      if (fname.length === 0) {
-        fnameLabel.innerHTML = "Invalid First Name";
-      } else {
-        fnameLabel.innerHTML = "";
-      }
-      if (lname.length === 0) {
-        lnameLabel.innerHTML = "Invalid Last Name";
-      } else {
-        lnameLabel.innerHTML = "";
-      }
+    totalProduct(price, quantity) {
+      price = Number(price.substring(0, price.indexOf("€")));
+      return price * quantity;
     },
-    checkEmailAddress(email, emailLabel, confirmEmail, confirmEmailLabel) {
-      const regex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
-      if (!regex.test(email) || email.length === 0) {
-        emailLabel.innerHTML = "Invalid Email Address";
-      } else {
-        emailLabel.innerHTML = "";
-      }
-      if (email !== confirmEmail) {
-        confirmEmailLabel.innerHTML = "Not Matching Email";
-        return;
-      }
-      confirmEmailLabel.innerHTML = "";
+    totalPrice() {
+      return this.products.reduce((accumulator, product) => {
+        var price = product.price;
+        price = Number(price.substring(0, price.indexOf("€")));
+        return price * product.quantity + accumulator;
+      }, 0);
     },
-
-    checkPhoneNumber(phoneNumber, phoneNumberLabel) {
-      const regex = /^[0-9]+$/;
-      if (!regex.test(phoneNumber)) {
-        phoneNumberLabel.innerHTML = "Invalid Phone Number";
-        return;
-      }
-      phoneNumberLabel.innerHTML = "";
-    },
-    checkCardholderName(cname, cnameLabel) {
-      if (cname.length === 0) {
-        cnameLabel.innerHTML = "Invalid Cardholder Name";
-        return;
-      } 
-        cnameLabel.innerHTML = "";
-    },
-    checkExpiryDate(edate, edateLabel) {
-      const regex = /^0[0-9]|1[0-2]\/20[2-6][0-9]$/;
-      if (!regex.test(edate) || edate.length === 0) {
-        edateLabel.innerHTML = "Invalid Expiry Date";
-        return;
-      }
-      edateLabel.innerHTML = "";
-    },
-    checkCVCCode(cvc, cvcLabel) {
-      const regex = /^[0-9]{3}$/;
-      if (!regex.test(cvc) || cvc.length < 3) {
-        cvcLabel.innerHTML = "Invalid CVC";
-        return;
-      }
-      cvcLabel.innerHTML = "";
-    },
-  },
-  computed: {
-    productDetails() {
-      return this.getProductDetails();
+    openPayment() {
+      const price = this.totalPrice();
+      const alt = this.products.map((product) => {
+        return product.text;
+      });
+      const quantity = this.products.reduce((prevVal, currentVal) => {
+        return prevVal + Number(currentVal.quantity);
+      }, 0);
+      window.open(
+        "./payment.html?final-details=" +
+          encodeURI(alt + "-" + price + "-" + quantity)
+      );
     },
   },
 };
@@ -273,89 +135,97 @@ export default {
 <style>
 .cart-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  margin: 5%;
+  min-height: 600px;
+  padding: 25px;
 }
-.cart-container_forms {
+.cart-container_products {
   display: flex;
   flex-direction: column;
+  margin: 25px;
+}
+.cart-container_products_product {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: fit-content;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+.cart-container_products_product_img {
+  width: 300px;
+  height: 300px;
+  margin: 0 25px;
+}
+.cart-container_products_product_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 50%;
-  margin: 5%;
+  height: 400px;
+  padding: 50px;
+  border-right: 1px solid #ddd;
 }
-.cart-container_breakdown {
-  padding: 25px;
-  margin: 5% 0;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  line-height: 2;
+.cart-container_products_product_info_title {
+  margin: 0;
 }
-.cart-container_breakdown_detail {
+.cart-container_products_product_info_span {
   padding: 25px 0;
 }
-.cart-container_form {
-  display: flex;
-  flex-direction: column;
-  padding: 25px;
-  background-color: #ff8c00;
+.cart-container_products_product_payment {
+  border: 0;
 }
-.cart-container_form_card-form {
-  margin: 10% 0;
+.cart-container_payment-details {
+  align-items: baseline;
+  justify-content: space-evenly;
+  border: 0;
 }
-.cart-container_form_input {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
+.payment-box_taxes {
+  color: #565959;
 }
-.cart-container_form_group {
-  display: flex;
-  flex-direction: column;
-}
-.select {
-  padding: 12px;
-  border: 1px solid #ccc;
-  width: 300px;
-  border-right-width: 10px;
-  border-radius: 4px 0 0 4px;
-  background-color: rgb(202, 202, 202);
-  margin: 6px 0 16px 0;
-  cursor: pointer;
-}
-.selected:hover {
-  opacity: 0.8;
-}
-#phone-number {
-  width: 100%;
-}
-.cart-container_form_input_selection {
-  cursor: pointer;
-}
-.cart-container_form_label {
-  color: red;
-  font-weight: bold;
-}
-.payment-button {
+.payment-box_button {
+  width: 200px;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   margin: 5px;
-  text-align: center;
-  padding: 10px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: #ff8c00;
   cursor: pointer;
+  color: black;
+  text-align: center;
+  padding: 10px;
 }
-.payment-button:hover {
+.payment-box_button:hover {
   opacity: 0.7;
 }
-@media only screen and (max-width: 600px) {
-  .cart-container {
+@media only screen and (max-width: 720px) {
+  .cart-container_products_product {
     flex-direction: column;
   }
-  .cart-container_forms {
+  .cart-container_payment-details {
+    margin: 0 50px 50px 50px;
+  }
+  .cart-container_products_product_img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 50px;
+  }
+  .cart-container_products_product_info {
+    padding: 0;
+    border: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .payment-box_button {
     width: auto;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .cart-container_products_product_img {
+    width: 100%;
+    height: auto;
   }
 }
 </style>

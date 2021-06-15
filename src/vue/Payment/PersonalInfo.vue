@@ -1,31 +1,31 @@
 <template>
-  <form class="cart-container_form" action="backend.php">
+  <form class="payment-container_form" action="backend.php">
     <div
-      class="cart-container_form_name-email"
+      class="payment-container_form_name-email"
       v-for="group in person"
       :key="group.id + group.text"
     >
       <div
-        class="cart-container_form_group"
+        class="payment-container_form_group"
         v-for="info in group.infos"
         :key="info.id + info.name"
       >
         <label :for="info.identity">
           {{ info.text }}
         </label>
-        <span :class="'cart-container_form_label ' + info.name"></span>
+        <span :class="'payment-container_form_label ' + info.name"></span>
         <input
-          :class="'cart-container_form_input ' + info.name"
+          :class="'payment-container_form_input ' + info.name"
           type="text"
           :id="info.identity"
           :name="info.name"
         />
       </div>
     </div>
-    <div class="cart-container_form_group">
+    <div class="payment-container_form_group">
       <label for="creg">Country/region</label>
       <select
-        class="cart-container_form_input cart-container_form_input_selection"
+        class="payment-container_form_input payment-container_form_input_selection"
       >
         <option
           v-for="country in countries"
@@ -36,12 +36,12 @@
         </option>
       </select>
     </div>
-    <div class="cart-container_form_group">
+    <div class="payment-container_form_group">
       <label for="phone-number">Telephone (mobile number preferred) </label>
-      <span class="cart-container_form_label phone-number"></span>
+      <span class="payment-container_form_label phone-number"></span>
       <div class="phone-number-container">
         <select
-          class="cart-container_form_input cart-container_form_input_selection cart-container_form_input_prefix"
+          class="payment-container_form_input payment-container_form_input_selection payment-container_form_input_prefix"
         >
           <option
             v-for="country in countries"
@@ -52,7 +52,7 @@
           </option>
         </select>
         <input
-          class="cart-container_form_input"
+          class="payment-container_form_input"
           type="text"
           id="phone-number"
           name="select-country-region"
@@ -82,7 +82,7 @@ export default {
 .phone-number-container {
   display: flex;
 }
-.cart-container_form_input_prefix {
+.payment-container_form_input_prefix {
   background-color: #ccc;
   margin-right: 5px;
 }

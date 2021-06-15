@@ -16,6 +16,9 @@ module.exports = {
     purchase: {
       import: path.resolve(__dirname, './src/scripts/purchase.js'),
     },
+    payment: {
+      import: path.resolve(__dirname, './src/scripts/payment.js'),
+    },
     cart: {
       import: path.resolve(__dirname, './src/scripts/cart.js'),
     },
@@ -75,6 +78,11 @@ module.exports = {
       title: 'e-commerce',
       filename: 'purchase.html',
       chunks: ['purchase'],
+    }),
+    new HtmlWebpackPlugin({
+      title: 'e-commerce',
+      filename: 'payment.html',
+      chunks: ['payment'],
     }),
     new HtmlWebpackPlugin({
       title: 'e-commerce',
