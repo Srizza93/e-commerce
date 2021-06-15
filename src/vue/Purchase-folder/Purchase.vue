@@ -13,8 +13,8 @@
         :id="product.id"
         :alt="product.alt"
         @showClickedImageOnMainPic="showClickedImage"
-        @changeToNextPic="showPreviousImage"
-        @changeToPreviousPic="showNextImage"
+        @changeToPreviousPic="showPreviousImage"
+        @changeToNextPic="showNextImage"
       />
       <div class="description">
         <h2 class="description_title">{{ product.alt }}</h2>
@@ -80,16 +80,25 @@ export default {
       if (this.indexSlideShow > gallery.length - 1) {
         this.indexSlideShow = 0;
       }
+      var photos = Array.from(
+        document.querySelectorAll(".gallery_selection_gallery-image")
+      );
+      photos.forEach((photo) => {
+        photo.classList.remove("selected-photo");
+      });
+      if (photos[this.indexSlideShow]) {
+        photos[this.indexSlideShow].classList.add("selected-photo");
+      }
       return this.getImgUrl(this.product.gallery[this.indexSlideShow]);
     },
     showClickedImage(image) {
       this.indexSlideShow = image.event.target.id;
     },
     showPreviousImage() {
-      this.indexSlideShow -= 1;
+      this.indexSlideShow--;
     },
     showNextImage() {
-      this.indexSlideShow += 1;
+      this.indexSlideShow++;
     },
   },
   computed: {
@@ -157,6 +166,9 @@ export default {
 }
 .description_price {
   color: #b12704;
+}
+.selected-photo {
+  border: 2px solid #ff8c00;
 }
 @media only screen and (max-width: 680px) {
   .purchase-process_container {

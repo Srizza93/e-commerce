@@ -22,7 +22,7 @@
     <button class="purchase-process_button payment-box_button">
       Add to Cart
     </button>
-    <button class="purchase-process_button payment-box_button" @click="openCart()">
+    <button class="purchase-process_button payment-box_button" @click="openPayment()">
       Buy Now
     </button>
   </div>
@@ -46,11 +46,11 @@ export default {
     }
   },
   methods: {
-    openCart() {
+    openPayment() {
       const price = this.$props.price.substring(0, this.$props.price.length - 1);
       const quantity = document.querySelector('.payment-box__quantity_quantity').value;
       const finalDetails = this.$props.alt + '-' + price + '-' + quantity;
-      window.open("./cart.html?final-details=" + encodeURI(finalDetails));
+      window.open("./payment.html?final-details=" + encodeURI(finalDetails));
     }
   },
 };
@@ -62,6 +62,7 @@ export default {
   flex-direction: column;
   border: 1px solid #ddd;
   padding: 25px;
+  margin: 25px;
 }
 
 .payment-box_button {

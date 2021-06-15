@@ -194,7 +194,7 @@ export default {
           description: "Jaguar, Red and white",
           price: "21.99€",
           range: "0 to 25€",
-          reviews: "Excellent",
+          reviews: 5,
           brand: "Adidas",
           quantity: 3,
         },
@@ -211,7 +211,7 @@ export default {
           description: "Mac 120, limited edition",
           price: "2199.00€",
           range: "+200€",
-          reviews: "Excellent",
+          reviews: 5,
           brand: "Apple",
           quantity: 9,
         },
@@ -223,7 +223,7 @@ export default {
           description: "Kenzo Music, Standard",
           price: "127.51€",
           range: "101 to 200€",
-          reviews: "Great",
+          reviews: 2,
           brand: "Kenzo",
           quantity: 7,
         },
@@ -240,7 +240,7 @@ export default {
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "26 to 50€",
-          reviews: "Ok",
+          reviews: 3,
           brand: "Adidas",
           quantity: 6,
         },
@@ -252,7 +252,7 @@ export default {
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "51 to 100€",
-          reviews: "Excellent",
+          reviews: 5,
           brand: "Nike",
           quantity: 3,
         },
@@ -264,7 +264,7 @@ export default {
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "26 to 50€",
-          reviews: "Bad",
+          reviews: 1,
           brand: "Apple",
           quantity: 4,
         },
@@ -276,7 +276,7 @@ export default {
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
-          reviews: "Good",
+          reviews: 4,
           brand: "Nike",
           quantity: 12,
         },
@@ -288,7 +288,7 @@ export default {
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "0 to 25€",
-          reviews: "Good",
+          reviews: 4,
           brand: "Samsung",
           quantity: 1,
         },
@@ -305,7 +305,7 @@ export default {
           description: "Under Armour Men's Charged Assert 8 Running Shoe",
           price: "20€",
           range: "101 to 200€",
-          reviews: "Excellent",
+          reviews: 5,
           brand: "Lacoste",
           quantity: 0,
         },
@@ -317,7 +317,7 @@ export default {
           description: "Processor: Intel Core i5 2.7 GHz",
           price: "1299€",
           range: "+200€",
-          reviews: "Excellent",
+          reviews: 5,
           brand: "Apple",
           quantity: 9,
         },
@@ -329,7 +329,7 @@ export default {
           description: "Nike Sport, white and blue",
           price: "120.99€",
           range: "101 to 200€",
-          reviews: "Good",
+          reviews: 4,
           brand: "Nike",
           quantity: 2,
         },
@@ -346,7 +346,7 @@ export default {
           description: "Turntables",
           price: "145.99€",
           range: "101 to 200€",
-          reviews: "Bad",
+          reviews: 1,
           brand: "Technics",
           quantity: 4,
         },
@@ -464,7 +464,7 @@ export default {
   display: flex;
   flex-direction: row;
   background-color: #f5f5f5;
-  padding: 40px 0 10px 0;
+  padding: 50px 0 10px 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -491,7 +491,7 @@ export default {
   border-bottom: 2px solid #ddd;
   border-left: 2px solid #ddd;
   border-right: 2px solid #ddd;
-  padding-bottom: 10px;
+  padding-bottom: 25px;
 }
 .filters_titles {
   border-bottom: 2px solid #ddd;
@@ -542,11 +542,11 @@ export default {
   display: flex;
   flex-direction: column;
   flex-basis: 80%;
-  margin-left: 5%;
+  margin-left: 25px;
   font-weight: 400;
-  padding-top: 25px;
 }
 .products_count {
+  margin-top: 0;
   padding-left: 12px;
 }
 .products_container {
@@ -591,6 +591,7 @@ export default {
   .products_count {
     text-align: center;
     padding: 0;
+    margin-top: 50px;
   }
 }
 </style>

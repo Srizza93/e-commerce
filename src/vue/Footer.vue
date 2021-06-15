@@ -1,56 +1,66 @@
 <template>
   <div class="footer">
-    <ul class="footer_ul">
-      <li
-        v-for="topic in locations"
-        :key="'locations-' + topic.id"
-        class="footer_ul_li"
-      >
-        <a class="footer_ul_li_link" :href="topic.link">
-          {{ topic.text }}
-        </a>
-      </li>
-    </ul>
-    <ul class="footer_ul">
-      <li
-        v-for="topic in mainProducts"
-        :key="'mainProducts-' + topic.id"
-        class="footer_ul_li"
-      >
-        <a class="footer_ul_li_link" :href="topic.link">
-          {{ topic.text }}
-        </a>
-      </li>
-    </ul>
-    <ul class="footer_ul">
-      <li
-        v-for="topic in company"
-        :key="'company-' + topic.id"
-        class="footer_ul_li"
-      >
-        <a class="footer_ul_li_link" :href="topic.link">
-          {{ topic.text }}
-        </a>
-      </li>
-    </ul>
-    <ul class="footer_ul">
-      <li
-        v-for="topic in general"
-        :key="'general-' + topic.id"
-        class="footer_ul_li"
-      >
-        <a class="footer_ul_li_link" :href="topic.link">
-          {{ topic.text }}
-        </a>
-      </li>
-    </ul>
-    <ul class="footer_ul">
-      <li v-for="topic in news" :key="'news-' + topic.id" class="footer_ul_li">
-        <a class="footer_ul_li_link" :href="topic.link">
-          {{ topic.text }}
-        </a>
-      </li>
-    </ul>
+    <div class="footer_links-container">
+      <ul class="footer_ul">
+        <li
+          v-for="topic in locations"
+          :key="'locations-' + topic.id"
+          class="footer_ul_li"
+        >
+          <a class="footer_ul_li_link" :href="topic.link">
+            {{ topic.text }}
+          </a>
+        </li>
+      </ul>
+      <ul class="footer_ul">
+        <li
+          v-for="topic in mainProducts"
+          :key="'mainProducts-' + topic.id"
+          class="footer_ul_li"
+        >
+          <a class="footer_ul_li_link" :href="topic.link">
+            {{ topic.text }}
+          </a>
+        </li>
+      </ul>
+      <ul class="footer_ul">
+        <li
+          v-for="topic in company"
+          :key="'company-' + topic.id"
+          class="footer_ul_li"
+        >
+          <a class="footer_ul_li_link" :href="topic.link">
+            {{ topic.text }}
+          </a>
+        </li>
+      </ul>
+      <ul class="footer_ul">
+        <li
+          v-for="topic in general"
+          :key="'general-' + topic.id"
+          class="footer_ul_li"
+        >
+          <a class="footer_ul_li_link" :href="topic.link">
+            {{ topic.text }}
+          </a>
+        </li>
+      </ul>
+      <ul class="footer_ul">
+        <li
+          v-for="topic in news"
+          :key="'news-' + topic.id"
+          class="footer_ul_li"
+        >
+          <a class="footer_ul_li_link" :href="topic.link">
+            {{ topic.text }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer_copyright">
+      <span>Copyright © 1993–2021 e-commerce. All rights reserved</span>
+      <span>e-commerce is the world leader in online purchases and related services.</span>
+    </div>
   </div>
 </template>
 
@@ -152,13 +162,20 @@ export default {
 <style scoped>
 .footer {
   display: flex;
+  flex-direction: column;
+  background-color: #232f3e;
+  color: white;
+}
+
+.footer_links-container {
+  display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: hidden;
   height: 100px;
   width: 100%;
-  background-color: #232f3e;
+  margin: 25px;
   text-align: center;
+  overflow-y: hidden;
 }
 
 .footer_ul {
@@ -179,6 +196,13 @@ export default {
 
 .footer_ul_li_link:hover {
   color: orange;
+}
+
+.footer_copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
 @media only screen and (max-width: 600px) {

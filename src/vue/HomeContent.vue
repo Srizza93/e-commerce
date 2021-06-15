@@ -1,9 +1,6 @@
 <template>
   <div class="galery">
     <div v-for="product in products" :key="product.id" class="galery__topics">
-      <h2 class="galery__topics__title">
-        {{ product.text }}
-      </h2>
       <img
         :src="getImgUrl(product.link)"
         alt="Home"
@@ -66,7 +63,13 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #ff8c00;
+  background: rgb(255, 140, 0);
+  background: radial-gradient(
+    circle,
+    rgba(255, 140, 0, 1) 72%,
+    rgba(19, 25, 33, 1) 100%
+  );
+  padding: 50px 0;
 }
 
 .galery__topics {
@@ -82,11 +85,8 @@ export default {
   flex-grow: 1;
 }
 
-.galery__topics__title {
-  margin: 5px;
-}
-
 .galery__topics__pic {
-  border-radius: 0 0 50px 50px;
+  border: 1px solid black;
+  border-radius: 25px;
 }
 </style>
