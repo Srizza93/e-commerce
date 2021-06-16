@@ -8,13 +8,13 @@
         :id="id"
         @click="$emit('hideResultsAndShowPurchase', { event: $event, id })"
       />
-      <h4 class="products_product_brand">{{ brand }}</h4>
+      <h4 class="products_product_brand">{{ text }}</h4>
       <span class="products_product_description">
         {{ description }}
       </span>
       <span class="products_product_price">{{ price }}</span>
       <span class="products_product_reviews">
-        <span class="star" v-for="star in reviews" :key="star"></span>
+        <span class="star" v-for="star in Number(reviews)" :key="star"></span>
       </span>
     </div>
   </div>
@@ -49,7 +49,7 @@ export default {
       required: true,
     },
     reviews: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

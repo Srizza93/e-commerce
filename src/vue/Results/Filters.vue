@@ -1,20 +1,25 @@
 <template>
   <div>
-    <label :pkey="'filter-' + id" class="filters_filter_topic">
+    <label class="filters_filter_topic">
       <div>
         <input
           class="filters_filter_topic_checkbox"
           type="checkbox"
-          :id="id"
-          :value="text"
-          @click="
-            $emit('updateShownItemsAndFilters', { event: $event, id })
-          "
+          :id="value + '-' + id"
+          :value="value"
+          @click="$emit('updateShownItemsAndFilters', { event: $event, id })"
         />
         <span class="filters_filter_topic_checkmark"></span>
         <span class="filters_filter_topic_container"></span>
         <span class="filters_filter_topic_label_text">
-          {{ text }}
+          <span v-if="topic === 'Reviews'">
+            <span
+              v-for="stars in Number(value)"
+              :key="stars + '-' + value"
+              class="star"
+            ></span>
+          </span>
+          <span v-else> {{ value }} </span>
         </span>
       </div>
       <span> ({{ itemsWithFilter }}) </span>
@@ -30,7 +35,11 @@ export default {
       type: Number,
       required: true,
     },
-    text: {
+    value: {
+      type: Number | String,
+      required: true,
+    },
+    topic: {
       type: String,
       required: true,
     },
