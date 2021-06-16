@@ -23,8 +23,7 @@
           product.price
         }}</span>
         <span class="products_product_reviews">
-          <span class="star"></span>
-          {{ product.reviews }}
+          <span class="star" v-for="stars in Number(product.reviews)" :key="stars"></span>
         </span>
       </div>
       <payment-box
