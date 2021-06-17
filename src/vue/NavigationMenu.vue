@@ -47,12 +47,12 @@ export default {
         {
           id: 1,
           text: "All",
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "/research.html",
         },
         {
           id: 2,
           text: `Today's Deal`,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "/research.html",
         },
         {
           id: 3,
@@ -67,7 +67,7 @@ export default {
         {
           id: 5,
           text: "Best Sellers",
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "/research.html",
         },
       ],
     };

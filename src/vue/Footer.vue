@@ -59,7 +59,10 @@
     </div>
     <div class="footer_copyright">
       <span>Copyright © 1993–2021 e-commerce. All rights reserved</span>
-      <span>e-commerce is the world leader in online purchases and related services.</span>
+      <span
+        >e-commerce is the world leader in online purchases and related
+        services.</span
+      >
     </div>
   </div>
 </template>
@@ -163,6 +166,7 @@ export default {
 .footer {
   display: flex;
   flex-direction: column;
+  padding: 25px;
   background-color: #232f3e;
   color: white;
 }
@@ -171,9 +175,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
   width: 100%;
-  margin: 25px;
+  min-height: 100px;
+  margin-top: 25px;
   text-align: center;
   overflow-y: hidden;
 }
@@ -210,6 +214,9 @@ export default {
     flex-wrap: wrap;
     height: 100%;
     margin: 0;
+  }
+  .footer_links-container {
+    flex-direction: column;
   }
 }
 </style>

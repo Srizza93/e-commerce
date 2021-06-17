@@ -92,7 +92,7 @@ export default {
   left: 27px;
   width: 5px;
   height: 10px;
-  padding-top: 4px;
+  padding-top: 14px;
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);

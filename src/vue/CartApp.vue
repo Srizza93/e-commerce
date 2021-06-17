@@ -25,10 +25,3 @@
     }
   }
 </script>
-
-<style scoped>
-.app-root {
-  display: flex;
-  flex-direction: column;
-}
-</style>

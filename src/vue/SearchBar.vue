@@ -22,14 +22,14 @@
         placeholder="Write something..."
         class="search-form"
       />
-      <button class="lens selected">
+      <a class="lens selected" href="./research.html">
         <img
           class="container-cart_cart-logo"
           :key="magnifying.id"
           :src="getImgUrl(magnifying.link)"
           :alt="magnifying.text"
         />
-      </button>
+      </a>
       <div class="suggestions">
         <span
           class="suggestions_topic"
@@ -92,12 +92,12 @@ export default {
             },
             {
               id: 2,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Speakers",
             },
             {
               id: 3,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Earphones",
             },
           ],
@@ -108,17 +108,17 @@ export default {
           subtopics: [
             {
               id: 1,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Colours",
             },
             {
               id: 2,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Pictures",
             },
             {
               id: 3,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Music",
             },
           ],
@@ -129,17 +129,17 @@ export default {
           subtopics: [
             {
               id: 1,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Toys",
             },
             {
               id: 2,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Milk",
             },
             {
               id: 3,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Food",
             },
           ],
@@ -150,17 +150,17 @@ export default {
           subtopics: [
             {
               id: 1,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Thriller",
             },
             {
               id: 2,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Horror",
             },
             {
               id: 3,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Adventure",
             },
           ],
@@ -171,17 +171,17 @@ export default {
           subtopics: [
             {
               id: 1,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Desktop",
             },
             {
               id: 2,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Laptop",
             },
             {
               id: 3,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Tablet",
             },
           ],
@@ -192,17 +192,17 @@ export default {
           subtopics: [
             {
               id: 1,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "LG",
             },
             {
               id: 2,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Samsung",
             },
             {
               id: 3,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Huawei",
             },
           ],
@@ -213,17 +213,17 @@ export default {
           subtopics: [
             {
               id: 1,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Iphone",
             },
             {
               id: 2,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Macbook",
             },
             {
               id: 3,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Ipad",
             },
           ],
@@ -234,17 +234,17 @@ export default {
           subtopics: [
             {
               id: 1,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Food",
             },
             {
               id: 2,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Toys",
             },
             {
               id: 3,
-              link: "https://vuejs.org/v2/api/#v-bind",
+              link: "./research.html",
               text: "Clothes",
             },
           ],

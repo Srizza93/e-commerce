@@ -2,11 +2,12 @@
   <div class="payment-box">
     <span class="products_product_price description_price">{{ price }}</span>
     <span class="payment-box_taxes"
-      >+ $26.34 Shipping and Import Fees Deposit to France</span
+      >+ €26.34 Shipping and Import Fees Deposit outside of France</span
     >
     <span class="payment-box_delivery-date">
       <b>Arrives:</b>Wednesday 20th July 2021</span
     >
+    <span class="quantity-error">Add quantity</span>
     <form class="payment-box__quantity" action="backend.php">
       <label class="payment-box__quantity_label" for="quantity">Qty:</label>
       <select
@@ -22,7 +23,10 @@
     <button class="purchase-process_button payment-box_button">
       Add to Cart
     </button>
-    <button class="purchase-process_button payment-box_button" @click="openPayment()">
+    <button
+      class="purchase-process_button payment-box_button"
+      @click="openPayment()"
+    >
       Buy Now
     </button>
   </div>
@@ -42,16 +46,26 @@ export default {
     },
     alt: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     openPayment() {
-      const price = this.$props.price.substring(0, this.$props.price.length - 1);
-      const quantity = document.querySelector('.payment-box__quantity_quantity').value;
-      const finalDetails = this.$props.alt + '-' + price + '-' + quantity;
+      const errorMessage = document.querySelector(".quantity-error");
+      const price = this.$props.price.substring(
+        0,
+        this.$props.price.length - 1
+      );
+      const quantity = document.querySelector(".payment-box__quantity_quantity")
+        .value;
+      const finalDetails = this.$props.alt + "-" + price + "-" + quantity;
+      if (quantity < 1) {
+        errorMessage.classList.add("quantity-error-show");
+        return;
+      }
+      errorMessage.classList.remove("quantity-error-show");
       window.open("./payment.html?final-details=" + encodeURI(finalDetails));
-    }
+    },
   },
 };
 </script>
@@ -79,11 +93,11 @@ export default {
 }
 
 .payment-box_delivery-date {
-  padding-top: 50px;
+  padding: 50px 0;
 }
 .payment-box__quantity {
   width: 85px;
-  margin: 50px 0;
+  margin-bottom: 50px;
   padding-left: 5px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -100,5 +114,13 @@ export default {
   border: none;
   background-color: #e7e7e7;
   cursor: pointer;
+}
+.quantity-error {
+  visibility: hidden;;
+  color: red;
+  font-weight: bold;
+}
+.quantity-error-show {
+  visibility: visible;
 }
 </style>

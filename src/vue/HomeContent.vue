@@ -63,6 +63,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 600px;
   background: rgb(255, 140, 0);
   background: radial-gradient(
     circle,
