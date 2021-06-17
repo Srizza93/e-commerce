@@ -53,7 +53,7 @@
         {{ totalPrice() }}€</span
       >
       <span class="payment-box_taxes cart-container_products_product_info_span"
-        >+ €26.34 Shipping and Import Fees Deposit to France</span
+        >+ €26.34 Shipping and Import Fees outside of France</span
       >
       <button class="payment-box_button" @click="openPayment()">
         Buy Now

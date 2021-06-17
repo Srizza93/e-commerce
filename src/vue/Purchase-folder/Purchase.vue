@@ -114,6 +114,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 600px;
 }
 .purchase-process_container {
   display: flex;

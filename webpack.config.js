@@ -22,6 +22,9 @@ module.exports = {
     cart: {
       import: path.resolve(__dirname, './src/scripts/cart.js'),
     },
+    transaction: {
+      import: path.resolve(__dirname, './src/scripts/transaction.js'),
+    },
   },
   // devtool: 'inline-source-map', // ONLY FOR DEVLOPMENT MODE
   output: {
@@ -88,6 +91,11 @@ module.exports = {
       title: 'e-commerce',
       filename: 'cart.html',
       chunks: ['cart'],
+    }),
+    new HtmlWebpackPlugin({
+      title: 'e-commerce',
+      filename: 'transaction.html',
+      chunks: ['transaction'],
     }),
     new VueLoaderPlugin()
     ]

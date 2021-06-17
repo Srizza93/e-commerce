@@ -16,7 +16,7 @@
       <div class="payment-container_breakdown_detail">
         <h3>Shipping</h3>
         <span class="payment-box_taxes">
-          + $26.34 Shipping and Import Fees Deposit to France</span
+          + $26.34 Shipping and Import Fees outside of France</span
         >
       </div>
       <div class="payment-container_breakdown_detail">
@@ -173,8 +173,7 @@ export default {
     },
     totalToPay() {
       var quantity = this.productDetails[2];
-      console.log(this.productDetails[2]);
-      if (this.productDetails[0].includes(',')) {
+      if (this.productDetails[0].includes(",")) {
         quantity = 1;
       }
       return (this.productDetails[1] * quantity + 26.34).toFixed(2);
@@ -193,78 +192,113 @@ export default {
       const cname = document.getElementById("cname").value;
       var cnameLabel = document.querySelector(".cardholdername");
       const cnumber = document.getElementById("cnumber").value;
+      var cnumberLabel = document.querySelector(".cardnumber");
       const edate = document.getElementById("edate").value;
       var edateLabel = document.querySelector(".expirydate");
       const cvc = document.getElementById("cvc").value;
       var cvcLabel = document.querySelector(".cvccode");
-      this.checkUserName(fname, fnameLabel, lname, lnameLabel);
-      this.checkEmailAddress(
+      const nameCheck = this.checkFirstName(fname, fnameLabel);
+      const surnameCheck = this.checkLastName(lname, lnameLabel);
+      const emailCheck = this.checkEmailAddress(email, emailLabel);
+      const matchEmail = this.matchEmailAddress(
         email,
         emailLabel,
         confirmEmail,
         confirmEmailLabel
       );
-      this.checkPhoneNumber(phoneNumber, phoneNumberLabel);
-      this.checkCardholderName(cname, cnameLabel);
-      this.checkExpiryDate(edate, edateLabel);
-      this.checkCVCCode(cvc, cvcLabel);
+      const checkPhone = this.checkPhoneNumber(phoneNumber, phoneNumberLabel);
+      const checkCardholder = this.checkCardholderName(cname, cnameLabel);
+      const checkCardNumber = this.checkCardNumber(cnumber, cnumberLabel);
+      const checkDate = this.checkExpiryDate(edate, edateLabel);
+      const checkCVC = this.checkCVCCode(cvc, cvcLabel);
+      if (
+        nameCheck &&
+        surnameCheck &&
+        emailCheck &&
+        matchEmail &&
+        checkPhone &&
+        checkCardholder &&
+        checkDate &&
+        checkCVC
+      ) {
+        window.open("./transaction.html");
+      }
     },
-    checkUserName(fname, fnameLabel, lname, lnameLabel) {
+    checkFirstName(fname, fnameLabel) {
       if (fname.length === 0) {
         fnameLabel.innerHTML = "Invalid First Name";
-      } else {
-        fnameLabel.innerHTML = "";
+        return false;
       }
+      fnameLabel.innerHTML = "";
+      return true;
+    },
+    checkLastName(lname, lnameLabel) {
       if (lname.length === 0) {
         lnameLabel.innerHTML = "Invalid Last Name";
-      } else {
-        lnameLabel.innerHTML = "";
+        return false;
       }
+      lnameLabel.innerHTML = "";
+      return true;
     },
-    checkEmailAddress(email, emailLabel, confirmEmail, confirmEmailLabel) {
+    checkEmailAddress(email, emailLabel) {
       const regex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
       if (!regex.test(email) || email.length === 0) {
         emailLabel.innerHTML = "Invalid Email Address";
-      } else {
-        emailLabel.innerHTML = "";
+        return false;
       }
+      emailLabel.innerHTML = "";
+      return true;
+    },
+    matchEmailAddress(email, emailLabel, confirmEmail, confirmEmailLabel) {
       if (email !== confirmEmail) {
         confirmEmailLabel.innerHTML = "Not Matching Email";
-        return;
+        return false;
       }
       confirmEmailLabel.innerHTML = "";
+      return true;
     },
-
     checkPhoneNumber(phoneNumber, phoneNumberLabel) {
       const regex = /^[0-9]+$/;
       if (!regex.test(phoneNumber)) {
         phoneNumberLabel.innerHTML = "Invalid Phone Number";
-        return;
+        return false;
       }
       phoneNumberLabel.innerHTML = "";
+      return true;
     },
     checkCardholderName(cname, cnameLabel) {
       if (cname.length === 0) {
         cnameLabel.innerHTML = "Invalid Cardholder Name";
-        return;
+        return false;
       }
-        cnameLabel.innerHTML = "";
+      cnameLabel.innerHTML = "";
+      return true;
+    },
+    checkCardNumber(cnumber, cnumberLabel) {
+      if (cnumber.length < 10) {
+        cnumberLabel.innerHTML = "Invalid Card Number";
+        return false;
+      }
+      cnumberLabel.innerHTML = "";
+      return true;
     },
     checkExpiryDate(edate, edateLabel) {
       const regex = /^0[0-9]|1[0-2]\/20[2-6][0-9]$/;
       if (!regex.test(edate) || edate.length === 0) {
         edateLabel.innerHTML = "Invalid Expiry Date";
-        return;
+        return false;
       }
       edateLabel.innerHTML = "";
+      return true;
     },
     checkCVCCode(cvc, cvcLabel) {
       const regex = /^[0-9]{3}$/;
       if (!regex.test(cvc) || cvc.length < 3) {
         cvcLabel.innerHTML = "Invalid CVC";
-        return;
+        return false;
       }
       cvcLabel.innerHTML = "";
+      return true;
     },
   },
   computed: {
@@ -280,6 +314,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  min-height: 600px;
   margin: 25px;
 }
 .payment-container_forms {

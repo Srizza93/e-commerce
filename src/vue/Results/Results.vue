@@ -172,11 +172,11 @@ export default {
           subtopics: [
             {
               id: 1,
-              text: "Adidas",
+              text: "Nike",
             },
             {
               id: 2,
-              text: "Nike",
+              text: "Gemco",
             },
             {
               id: 3,
@@ -184,7 +184,7 @@ export default {
             },
             {
               id: 4,
-              text: "Samsung",
+              text: "Arventia",
             },
             {
               id: 5,
@@ -192,7 +192,19 @@ export default {
             },
             {
               id: 6,
-              text: "Lacoste",
+              text: "Sender",
+            },
+            {
+              id: 7,
+              text: "Disney",
+            },
+            {
+              id: 7,
+              text: "Lekker",
+            },
+            {
+              id: 8,
+              text: "Technics",
             },
           ],
         },
@@ -200,7 +212,7 @@ export default {
       products: [
         {
           id: 1,
-          text: "Adidas hj200",
+          text: "Nike hj200",
           image: "shoes.jpeg",
           department: 'Shoes',
           gallery: ["shoes.jpeg", "shoes2.jpeg", "shoes3.jpeg", "shoes4.jpeg"],
@@ -208,7 +220,7 @@ export default {
           price: "21.99€",
           range: "0 to 25€",
           reviews: '5',
-          brand: "Adidas",
+          brand: "Nike",
           quantity: 3,
         },
         {
@@ -257,7 +269,7 @@ export default {
           price: "29€",
           range: "26 to 50€",
           reviews: '3',
-          brand: "Adidas",
+          brand: "Sender",
           quantity: 6,
         },
         {
@@ -270,7 +282,7 @@ export default {
           price: "68.75€",
           range: "51 to 100€",
           reviews: '5',
-          brand: "Nike",
+          brand: "Gemco",
           quantity: 3,
         },
         {
@@ -283,7 +295,7 @@ export default {
           price: "31€",
           range: "26 to 50€",
           reviews: '1',
-          brand: "Apple",
+          brand: "Disney",
           quantity: 4,
         },
         {
@@ -296,7 +308,7 @@ export default {
           price: "120€",
           range: "101 to 200€",
           reviews: '4',
-          brand: "Nike",
+          brand: "Lekker",
           quantity: 12,
         },
         {
@@ -309,7 +321,7 @@ export default {
           price: "20€",
           range: "0 to 25€",
           reviews: '4',
-          brand: "Samsung",
+          brand: "Arventia",
           quantity: 1,
         },
         {
@@ -487,6 +499,7 @@ export default {
 .results {
   display: flex;
   flex-direction: row;
+  min-height: 600px;
   background-color: #f5f5f5;
   padding: 50px 0 10px 0;
   font-family: Arial, Helvetica, sans-serif;
