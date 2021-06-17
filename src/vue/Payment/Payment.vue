@@ -221,7 +221,7 @@ export default {
         checkDate &&
         checkCVC
       ) {
-        window.open("./transaction.html");
+        window.open("./transaction.html?email=" + encodeURI(email));
       }
     },
     checkFirstName(fname, fnameLabel) {
