@@ -47,27 +47,27 @@ export default {
         {
           id: 1,
           text: "All",
-          link: "/research.html",
+          link: "./research.html",
         },
         {
           id: 2,
           text: `Today's Deal`,
-          link: "/research.html",
+          link: "./research.html",
         },
         {
           id: 3,
           text: "Customer Service",
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
         },
         {
           id: 4,
           text: "Gift Cards",
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
         },
         {
           id: 5,
           text: "Best Sellers",
-          link: "/research.html",
+          link: "./research.html",
         },
       ],
     };

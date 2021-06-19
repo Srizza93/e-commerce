@@ -2,6 +2,7 @@
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
   // !!!!!! MAKE SURE TO CHANGE MODE TO PRODUCTION WHEN DOPLOYING FOR PRODUCTION !!!!!!!!!
@@ -97,6 +98,7 @@ module.exports = {
       filename: 'transaction.html',
       chunks: ['transaction'],
     }),
-    new VueLoaderPlugin()
-    ]
+    new VueLoaderPlugin(),
+    new FaviconsWebpackPlugin('./src/images/doelogo.png')
+    ],
 };

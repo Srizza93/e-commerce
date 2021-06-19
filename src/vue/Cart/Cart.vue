@@ -1,48 +1,32 @@
 <template>
   <div class="cart-container">
-    <div class="cart-container_products">
-      <div
-        class="cart-container_products_product"
-        v-for="product in products"
-        :key="product.id + product.text"
+    <a href="./research.html" class="back-to-search">
+      ❮
+    </a>
+    <div class="cart-container_no-products">
+      <h3>There are no products in your cart</h3>
+      <a
+        class="cart-container_no-products_back-to-search"
+        href="./research.html"
+        >Please go back to search</a
       >
-        <img
-          class="cart-container_products_product_img"
-          :alt="product.text"
-          :src="getImgUrl(product.image)"
-        />
-        <div class="cart-container_products_product_info">
-          <h3 class="cart-container_products_product_info_title">
-            {{ product.text }}
-          </h3>
-          <span class="cart-container_products_product_info_span">
-            {{ product.description }}
-          </span>
-          <span class="cart-container_products_product_info_span">
-            {{ product.reviews }}
-          </span>
-          <span class="cart-container_products_product_info_span">
-            {{ product.brand }}
-          </span>
-        </div>
-        <div
-          class="cart-container_products_product_info cart-container_products_product_payment"
-        >
-          <h3 class="cart-container_products_product_info_title">Price</h3>
-          <span class="cart-container_products_product_info_span">
-            {{ product.price }}
-          </span>
-          <h3 class="cart-container_products_product_info_title">Quantity</h3>
-          <span class="cart-container_products_product_info_span">
-            {{ product.quantity }}
-          </span>
-          <h3 class="cart-container_products_product_info_title">Total</h3>
-          <span class="cart-container_products_product_info_span">
-            {{ totalProduct(product.price, product.quantity) }}
-          </span>
-        </div>
-      </div>
     </div>
+    <cart-product
+      v-for="product in products"
+      :key="product.id + product.text"
+      :pid="product.id"
+      :id="product.id"
+      :text="product.text"
+      :image="product.image"
+      :description="product.description"
+      :reviews="product.reviews"
+      :brand="product.brand"
+      :price="product.price"
+      :quantity="product.quantity"
+      :trash-image="trash.link"
+      :trash-alt="trash.alt"
+      @deleteItem="deleteProduct"
+    />
     <div class="cart-container_products_product cart-container_payment-details">
       <h2
         class="cart-container_products_product_info_title cart-container_products_product_info_span"
@@ -63,8 +47,11 @@
 </template>
 
 <script>
+import CartProduct from "./CartProduct.vue";
+
 export default {
   name: "Cart",
+  components: { CartProduct },
   data() {
     return {
       products: [
@@ -73,7 +60,7 @@ export default {
           text: "Soccer ball",
           image: "ball.jpeg",
           description: "Nike Sport, white and blue",
-          price: "120.99€",
+          price: 120.99,
           range: "101 to 200€",
           reviews: "Good",
           brand: "Nike",
@@ -85,7 +72,7 @@ export default {
           text: "Turntable",
           image: "turntable2.jpeg",
           description: "Turntables",
-          price: "145.99€",
+          price: 145.99,
           range: "101 to 200€",
           reviews: "Bad",
           brand: "Technics",
@@ -93,35 +80,50 @@ export default {
           stock: 1,
         },
       ],
+      trash: {
+        id: 1,
+        link: "trash.png",
+        alt: "trash",
+      },
     };
   },
+  props: ["pid"],
   methods: {
-    getImgUrl(pic) {
-      var images = require.context(
-        "/Users/martina/e-commerce/src/images",
-        false,
-        /\.jpeg$/
-      );
-      return images("./" + pic);
-    },
-    totalProduct(price, quantity) {
-      price = Number(price.substring(0, price.indexOf("€")));
-      return price * quantity;
-    },
     totalPrice() {
       return this.products.reduce((accumulator, product) => {
         var price = product.price;
-        price = Number(price.substring(0, price.indexOf("€")));
         return price * product.quantity + accumulator;
       }, 0);
     },
+    deleteProduct(item) {
+      const product = item.event.currentTarget.closest(
+        ".cart-container_products_product"
+      );
+      const productId = Number(product.getAttribute("pid"));
+      const paymentDetails = document.querySelector(
+        ".cart-container_payment-details"
+      );
+      const backToSearch = document.querySelector(".back-to-search");
+      const noProdMessage = document.querySelector(
+        ".cart-container_no-products"
+      );
+      product.classList.add("delete-product");
+      this.products = this.products.filter((product) => {
+        return product.id !== productId;
+      });
+      if (this.totalPrice() === 0) {
+        paymentDetails.classList.add("delete-product");
+        backToSearch.classList.add("back-to-search-show");
+        noProdMessage.classList.add("cart-container_no-products_show");
+      }
+    },
     openPayment() {
-      const price = this.totalPrice();
       const alt = this.products.map((product) => {
         return product.text;
       });
-      const quantity = this.products.reduce((prevVal, currentVal) => {
-        return prevVal + Number(currentVal.quantity);
+      const price = alt.length > 1 ? this.totalPrice() : this.products[0].price;
+      var quantity = this.products.reduce((prevVal, currentVal) => {
+        return prevVal + currentVal.quantity;
       }, 0);
       window.open(
         "./payment.html?final-details=" +
@@ -154,8 +156,8 @@ export default {
   border: 1px solid #ddd;
 }
 .cart-container_products_product_img {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   margin: 0 25px;
 }
 .cart-container_products_product_info {
@@ -164,7 +166,7 @@ export default {
   justify-content: flex-start;
   width: 50%;
   height: 400px;
-  padding: 50px;
+  padding: 25px;
   border-right: 1px solid #ddd;
 }
 .cart-container_products_product_info_title {
@@ -188,7 +190,7 @@ export default {
   width: 200px;
   font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   margin: 5px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: #ff8c00;
@@ -198,6 +200,60 @@ export default {
   padding: 10px;
 }
 .payment-box_button:hover {
+  opacity: 0.7;
+}
+.container-trash-icon {
+  margin: 10px;
+}
+.container-trash-icon_icon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.delete-product {
+  display: none;
+}
+.back-to-search {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  margin: 25px 0;
+  padding: 8px;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  background-color: #ff8c00;
+  cursor: pointer;
+}
+.back-to-search-show {
+  display: block;
+}
+.back-to-search:hover {
+  opacity: 0.7;
+}
+.cart-container_no-products {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.cart-container_no-products_show {
+  display: flex;
+}
+.cart-container_no-products_back-to-search {
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 15px;
+  border: 2px solid #ff8c00;
+  text-decoration: none;
+}
+.cart-container_no-products_back-to-search:hover {
   opacity: 0.7;
 }
 @media only screen and (max-width: 720px) {

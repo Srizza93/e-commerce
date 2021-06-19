@@ -23,7 +23,11 @@
           product.price
         }}</span>
         <span class="products_product_reviews">
-          <span class="star" v-for="stars in Number(product.reviews)" :key="stars"></span>
+          <span
+            class="star"
+            v-for="stars in Number(product.reviews)"
+            :key="stars"
+          ></span>
         </span>
       </div>
       <payment-box
@@ -126,7 +130,7 @@ export default {
 .purchase-process_button {
   font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   margin: 5px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: #ff8c00;
@@ -134,6 +138,7 @@ export default {
 }
 .purchase-process_back-to-search {
   position: fixed;
+  top: 50%;
   left: 0;
   padding: 8px;
   margin: 25px 0;
@@ -146,7 +151,7 @@ export default {
   opacity: 0.7;
 }
 .products_product_price {
-  padding-bottom: 0.5em;
+  padding-bottom: 25px;
   font-weight: bold;
   font-size: 21px;
 }

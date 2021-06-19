@@ -311,7 +311,7 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #ff8c00;
-  border-radius: 10px;
+  border-radius: 15px;
   margin: 0 10px 0 auto;
 }
 .container-cart_cart-logo {
@@ -370,7 +370,7 @@ export default {
   color: black;
   line-height: 1.5em;
   z-index: 99999;
-  border-radius: 0 5% 5% 5%;
+  border-radius: 0 15px 15px 15px;
   transition-duration: 1s;
 }
 

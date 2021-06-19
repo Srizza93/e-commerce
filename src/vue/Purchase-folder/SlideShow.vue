@@ -77,6 +77,7 @@ export default {
 .main-image {
   width: 300px;
   height: 300px;
+  margin: 5px;
 }
 .gallery_arrow {
   cursor: pointer;

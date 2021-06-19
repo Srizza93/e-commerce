@@ -24,7 +24,7 @@
       <span :class="'payment-container_form_label ' + info.name"></span>
       <input
         :class="'payment-container_form_input ' + info.name"
-        type="text"
+        :type="info.type"
         :id="info.identity"
         :name="info.name"
         :placeholder="info.suggestion"
