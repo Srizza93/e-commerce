@@ -131,7 +131,7 @@ export default {
   opacity: 0.7;
 }
 /* Safari */
-@-webkit-keyframes spin {
+@keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
   }

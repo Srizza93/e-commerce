@@ -82,8 +82,4 @@ export default {
 .phone-number-container {
   display: flex;
 }
-.payment-container_form_input_prefix {
-  background-color: #ccc;
-  margin-right: 5px;
-}
 </style>

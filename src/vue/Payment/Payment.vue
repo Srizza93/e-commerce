@@ -16,7 +16,7 @@
       <div class="payment-container_breakdown_detail">
         <h3>Shipping</h3>
         <span class="payment-box_taxes">
-          + $26.34 Shipping and Import Fees outside of France</span
+          + €26.34 Shipping and Import Fees outside of France</span
         >
       </div>
       <div class="payment-container_breakdown_detail">
@@ -283,8 +283,14 @@ export default {
       return true;
     },
     checkExpiryDate(edate, edateLabel) {
+      const year = edate.substring(edate.indexOf("/") + 1);
+      const today = new Date().toISOString().substr(0, 4);
       const regex = /^0[0-9]|1[0-2]\/20[2-6][0-9]$/;
-      if (!regex.test(edate) || edate.length === 0) {
+      if (
+        !regex.test(edate) ||
+        edate.length === 0 ||
+        Number(year) < Number(today)
+      ) {
         edateLabel.innerHTML = "Invalid Expiry Date";
         return false;
       }
@@ -326,7 +332,7 @@ export default {
 .payment-container_breakdown {
   min-width: 400px;
   padding: 25px;
-  margin: 25px 25px 25px 0;
+  margin: 25px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   line-height: 2;
 }
@@ -337,14 +343,14 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 25px;
-  margin: 25px 0;
+  margin: 25px;
   background-color: #ff8c00;
 }
 
 .payment-container_form_input {
   padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none;
+  border-radius: 15px;
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
@@ -371,6 +377,12 @@ export default {
 }
 .payment-container_form_input_selection {
   cursor: pointer;
+  border-right: 15px solid white;
+}
+.payment-container_form_input_prefix {
+  background-color: #ccc;
+  margin-right: 5px;
+  border-color: #ccc;
 }
 .payment-container_form_label {
   color: red;
@@ -379,7 +391,7 @@ export default {
 .payment-button {
   font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   margin: 25px;
   text-align: center;
   padding: 10px;

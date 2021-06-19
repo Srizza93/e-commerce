@@ -5,7 +5,7 @@
       >+ €26.34 Shipping and Import Fees Deposit outside of France</span
     >
     <span class="payment-box_delivery-date">
-      <b>Arrives:</b>Wednesday 20th July 2021</span
+      <b>Arrives:</b> Wednesday 20th July 2021</span
     >
     <span class="quantity-error">Add quantity</span>
     <form class="payment-box__quantity" action="backend.php">
@@ -20,7 +20,10 @@
         </option>
       </select>
     </form>
-    <button class="purchase-process_button payment-box_button">
+    <button
+      class="purchase-process_button payment-box_button"
+      @click="addToCart()"
+    >
       Add to Cart
     </button>
     <button
@@ -50,8 +53,24 @@ export default {
     },
   },
   methods: {
-    openPayment() {
+    addToCart() {
+      if (this.quantityError()) {
+        return;
+      }
+      window.alert("Item added to cart");
+    },
+    quantityError() {
+      const quantity = document.querySelector(".payment-box__quantity_quantity")
+        .value;
       const errorMessage = document.querySelector(".quantity-error");
+      if (quantity < 1) {
+        errorMessage.classList.add("quantity-error-show");
+        return true;
+      }
+      errorMessage.classList.remove("quantity-error-show");
+      return false;
+    },
+    openPayment() {
       const price = this.$props.price.substring(
         0,
         this.$props.price.length - 1
@@ -59,11 +78,9 @@ export default {
       const quantity = document.querySelector(".payment-box__quantity_quantity")
         .value;
       const finalDetails = this.$props.alt + "-" + price + "-" + quantity;
-      if (quantity < 1) {
-        errorMessage.classList.add("quantity-error-show");
+      if (this.quantityError()) {
         return;
       }
-      errorMessage.classList.remove("quantity-error-show");
       window.open("./payment.html?final-details=" + encodeURI(finalDetails));
     },
   },
@@ -100,7 +117,7 @@ export default {
   margin-bottom: 50px;
   padding-left: 5px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #e7e7e7;
   cursor: pointer;
 }
@@ -116,7 +133,7 @@ export default {
   cursor: pointer;
 }
 .quantity-error {
-  visibility: hidden;;
+  visibility: hidden;
   color: red;
   font-weight: bold;
 }

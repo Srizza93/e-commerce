@@ -1,11 +1,13 @@
 <template>
   <div class="galery">
     <div v-for="product in products" :key="product.id" class="galery__topics">
-      <img
-        :src="getImgUrl(product.link)"
-        alt="Home"
-        class="galery__topics__pic"
-      />
+      <a href="./research.html">
+        <img
+          :src="getImgUrl(product.link)"
+          alt="Home"
+          class="galery__topics__pic"
+        />
+      </a>
     </div>
   </div>
 </template>
@@ -77,17 +79,15 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  max-width: 260px;
   text-align: center;
-  border-radius: 50px;
-  margin: 4%;
-  background-color: white;
+  margin: 50px;
   cursor: pointer;
   flex-grow: 1;
 }
 
 .galery__topics__pic {
   border: 1px solid black;
-  border-radius: 25px;
+  border-radius: 15px;
+  max-width: 260px;
 }
 </style>
