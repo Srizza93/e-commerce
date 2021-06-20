@@ -10,18 +10,13 @@ Link: https://srizza93.github.io/e-commerce/
 
 <ul>
   <li>Homepage</li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
+  <li>Products page</li>
+  <li>Product detail page</li>
+  <li>Cart</li>
+  <li>Payment details page</li>
+  <li>Transaction process</li>
   
 </ul>
-- Products page
-- Product detail page
-- Cart
-- Payment details page
-- Transaction process
 </p>
 <b>Code</b>
 <p>The project is built with Webpack (static module bundler).
