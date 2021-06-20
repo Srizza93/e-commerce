@@ -4,11 +4,19 @@
 Link: https://srizza93.github.io/e-commerce/
 
 <b>Description</b>
-<p>E-commerce website - Purely Frontend.
+<p>E-commerce website - Purely Frontend.</p>
 
-This website is including the following:
+<p>This website is including the following:</p>
 
-- Homepage
+<ul>
+  <li>Homepage</li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  
+</ul>
 - Products page
 - Product detail page
 - Cart
