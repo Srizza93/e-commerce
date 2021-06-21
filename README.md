@@ -4,7 +4,7 @@
 Link: https://srizza93.github.io/e-commerce/
 
 <b>Description</b>
-<p>E-commerce website - Purely Frontend.</p>
+<p>E-commerce website - Purely Frontend - Responsive</p>
 
 <p>This website is including the following:</p>
 
