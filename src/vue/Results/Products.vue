@@ -70,6 +70,7 @@ export default {
 .products_product {
   display: flex;
   flex-direction: column;
+  font-size: 16px;
   padding: 0 12px 30px 12px;
   max-width: 200px;
   min-height: 475px;
@@ -92,8 +93,8 @@ export default {
   margin-bottom: 10px;
 }
 .products_product_price {
-  padding-bottom: 0.5em;
-  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  padding-bottom: 15px;
   font-size: 21px;
 }
 .star {

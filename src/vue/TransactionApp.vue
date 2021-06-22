@@ -14,10 +14,10 @@
       <div class="transaction_loader"></div>
     </div>
     <div class="successful-payment">
-      <h1>Payment successful!</h1>
+      <h1> {{ outcome }}</h1>
       <div class="successful-payment_message">
-        <p>Congratulations! The payment has been processed.</p>
-        <p>You will shortly receive a confirmation email to <b> {{ email }} </b></p>
+        <p> {{ message1 }}</p>
+        <p> {{ message2 }} {{ email }}</p>
       </div>
     </div>
   </div>
@@ -26,7 +26,16 @@
 <script>
 export default {
   name: "TransactionApp",
+  data() {
+    return {
+      outcome: 'Payment successful!',
+      message1: 'Congratulations! The payment has been processed.',
+      message2: 'You will shortly receive a confirmation email to ',
+      email: this.getEmail(),
+    };
+  },
   mounted() {
+    this.successfullOrFailed();
     setTimeout(function() {
       var appRoot = document.querySelector(".app-root");
       var loading = document.querySelector(".transaction");
@@ -38,12 +47,16 @@ export default {
       backToSearch.classList.add("back-to-search-show");
     }, 5000);
   },
-  data() {
-    return {
-      email: this.getEmail(),
-    };
-  },
   methods: {
+    successfullOrFailed() {
+      var chance = Math.random();
+      if (chance >= 0.5) {
+        this.outcome = 'Payment failed',
+        this.message1 = `We're sorry for any inconvenience`,
+        this.message2 = 'Please try again';
+        this.email = '';
+      }
+    },
     getEmail() {
       const urlParams = new URLSearchParams(window.location.search);
       var email = urlParams.get("email");
@@ -158,6 +171,7 @@ export default {
 @media only screen and (max-width: 600px) {
   .transaction_loading-message {
     font-size: 20px;
+    margin: 15px;
   }
   .back-to-search {
     top: 25px;

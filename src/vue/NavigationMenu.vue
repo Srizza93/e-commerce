@@ -95,7 +95,7 @@ export default {
   background-color: #232f3e;
   color: white;
   font-family: auto;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   text-decoration: none;
   white-space: nowrap;

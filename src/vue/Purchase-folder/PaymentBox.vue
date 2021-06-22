@@ -97,6 +97,7 @@ export default {
 }
 
 .payment-box_button {
+  font-size: 14px;
   color: black;
   text-align: center;
   padding: 10px;

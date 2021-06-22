@@ -503,7 +503,6 @@ export default {
   background-color: #f5f5f5;
   padding: 50px 0 10px 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
   line-height: 24px;
 }
 .filters {
