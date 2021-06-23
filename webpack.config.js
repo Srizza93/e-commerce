@@ -6,7 +6,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
   // !!!!!! MAKE SURE TO CHANGE MODE TO PRODUCTION WHEN DOPLOYING FOR PRODUCTION !!!!!!!!!
-  mode: 'development',
+  mode: 'production',
   entry: {
     main:  {
       import: path.resolve(__dirname, './src/scripts/app.js'),
@@ -99,6 +99,11 @@ module.exports = {
       chunks: ['transaction'],
     }),
     new VueLoaderPlugin(),
-    new FaviconsWebpackPlugin('./src/images/doelogo.png')
+  // !!!!!! MAKE SURE TO CHANGE MODE TO "webapp" WHEN DOPLOYING FOR PRODUCTION !!!!!!!!!
+  //                         "light" for development
+  new FaviconsWebpackPlugin({
+      logo: './src/images/doelogo.png',
+      mode: 'webapp',
+    }),
     ],
 };

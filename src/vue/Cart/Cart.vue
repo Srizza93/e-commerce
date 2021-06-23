@@ -187,6 +187,7 @@ export default {
   color: #565959;
 }
 .payment-box_button {
+  font-size: 14px;
   width: 200px;
   font-weight: bold;
   border: none;

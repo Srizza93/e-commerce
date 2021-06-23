@@ -1,16 +1,20 @@
 <template>
   <div class="banner" @click="openBanner">
     <div class="banner_main">
-      <span class="banner_main_text">
+      <p class="banner_text">
         {{ mainText }}
-      </span>
+      </p>
       <i class="banner_main_arrow"></i>
     </div>
     <div class="banner_hidden">
-      <p>
+      <p class="banner_text">
         {{ message.text }}
       </p>
-      <a class="banner_hidden_link" :href="message.link">Read more</a>
+    </div>
+    <div class="banner_hidden">
+      <a class="banner_hidden_link banner_text" :href="message.link"
+        >Read more</a
+      >
     </div>
   </div>
 </template>
@@ -20,26 +24,29 @@ export default {
   name: "Banner",
   methods: {
     openBanner() {
-      const hiddenBanner = document.querySelector(".banner_hidden");
+      const hiddenBanner = document.querySelectorAll(".banner_hidden");
       this.turnArrow();
-      return hiddenBanner.classList.contains("open-banner")
-        ? hiddenBanner.classList.remove("open-banner")
-        : hiddenBanner.classList.add("open-banner");
+      return hiddenBanner.forEach((message) => {
+        return message.classList.contains("open-banner")
+          ? message.classList.remove("open-banner")
+          : message.classList.add("open-banner");
+      });
     },
     turnArrow() {
       const arrow = document.querySelector(".banner_main_arrow");
       return arrow.classList.contains("arrow-clicked")
         ? arrow.classList.remove("arrow-clicked")
         : arrow.classList.add("arrow-clicked");
-    }
+    },
   },
   data() {
     return {
       mainText: "Due to COVID you might experience some delay",
       message: {
-        text: "Some products may not be available after purchase due to restrictions",
-        link: "https://vuejs.org/v2/guide/#Declarative-Rendering"
-      }
+        text:
+          "Some products may not be available after purchase due to restrictions",
+        link: "./research.html",
+      },
     };
   },
 };
@@ -47,7 +54,7 @@ export default {
 
 <style scoped>
 .banner {
-  padding: 5px 30px 5px 30px;
+  padding: 0 25px;
   background-color: red;
   border: 1px solid black;
   font-weight: bold;
@@ -58,12 +65,10 @@ export default {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  width: 100%;
 }
 
 .banner_hidden {
   display: none;
-  padding: 10px 0px 10px 20px;
 }
 
 .banner_hidden_link {
@@ -81,10 +86,6 @@ export default {
   flex-direction: column;
 }
 
-.banner_main_text {
-  padding: 10px 20px 10px 20px;
-}
-
 .banner_main_arrow {
   display: inline-block;
   height: 20px;
@@ -95,6 +96,11 @@ export default {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   cursor: pointer;
+}
+
+.banner_text {
+  padding: 15px;
+  margin: 0;
 }
 
 .arrow-clicked {
@@ -111,7 +117,7 @@ export default {
   .banner {
     padding: 5px;
   }
-  .banner_main_arrow { 
+  .banner_main_arrow {
     margin-top: 15px;
   }
 }

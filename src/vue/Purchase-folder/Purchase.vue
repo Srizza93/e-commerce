@@ -7,18 +7,20 @@
       ❮
     </a>
     <div class="purchase-process_container">
+    <div class="slideshow-container">
+    <!-- Need to create an array with objects (id, image, alt) for slideshow -->
       <slide-show
-        :mainImage="showMainImage()"
-        :gallery="product.gallery"
+        :gallery="slideshowArray" 
+      />
+      <gallery
         :id="product.id"
         :alt="product.alt"
-        @showClickedImageOnMainPic="showClickedImage"
-        @changeToPreviousPic="showPreviousImage"
-        @changeToNextPic="showNextImage"
+        :gallery="product.gallery"
       />
+    </div>
       <div class="description">
         <h2 class="description_title">{{ product.alt }}</h2>
-        <p>{{ product.alt }} {{ product.description }}</p>
+        <p class="description_description">{{ product.alt }} {{ product.description }}</p>
         <span class="products_product_price description_price">{{
           product.price
         }}</span>
@@ -40,11 +42,12 @@
 </template>
 
 <script>
-import SlideShow from "../Purchase-folder/SlideShow.vue";
+import SlideShow from "../SlideShow.vue";
 import PaymentBox from "../Purchase-folder/PaymentBox.vue";
+import Gallery from './Gallery.vue';
 export default {
   name: "Purchase",
-  components: { SlideShow, PaymentBox },
+  components: { SlideShow, PaymentBox, Gallery },
   data() {
     return {
       indexSlideShow: 0,
@@ -75,40 +78,21 @@ export default {
       );
       return images("./" + pic);
     },
-    showMainImage() {
-      var gallery = this.product.gallery;
-      if (this.indexSlideShow < 0) {
-        this.indexSlideShow = gallery.length - 1;
-      }
-      if (this.indexSlideShow > gallery.length - 1) {
-        this.indexSlideShow = 0;
-      }
-      var photos = Array.from(
-        document.querySelectorAll(".gallery_selection_gallery-image")
-      );
-      photos.forEach((photo) => {
-        photo.classList.remove("selected-photo");
-      });
-      if (photos[this.indexSlideShow]) {
-        photos[this.indexSlideShow].classList.add("selected-photo");
-      }
-      return this.getImgUrl(this.product.gallery[this.indexSlideShow]);
-    },
-    showClickedImage(image) {
-      this.indexSlideShow = image.event.target.id;
-    },
-    showPreviousImage() {
-      this.indexSlideShow--;
-    },
-    showNextImage() {
-      this.indexSlideShow++;
-    },
   },
   computed: {
     quantityArray() {
       var quantity = Number(this.product.quantity);
       return Array.from(Array(quantity).keys());
     },
+    slideshowArray() {
+      return this.product.gallery.map((image, index) => {
+        return {
+          id: index,
+          image: image,
+          text: this.product.alt
+        }
+      });
+    }
   },
 };
 </script>
@@ -150,18 +134,27 @@ export default {
 .purchase-process_back-to-search:hover {
   opacity: 0.7;
 }
+.main-image {
+  width: 300px;
+  height: 300px;
+}
 .products_product_price {
   padding-bottom: 25px;
   font-weight: bold;
   font-size: 21px;
+  font-family: 'Times New Roman', Times, serif;
 }
 .description {
   display: flex;
   flex-direction: column;
   padding: 25px;
+  margin: 25px;
 }
 .description_title {
-  margin-top: 0;
+  margin: 0 0 25px 0;
+}
+.description_description {
+  margin: 0 0 25px 0;
 }
 .star {
   color: #ff8c00;
@@ -175,9 +168,16 @@ export default {
 .selected-photo {
   border: 2px solid #ff8c00;
 }
+.slideshow_txt-container {
+  display: none;
+}
 @media only screen and (max-width: 680px) {
   .purchase-process_container {
     flex-wrap: wrap;
+  }
+  .main-image {
+    max-width: 100%;
+    height: auto;
   }
 }
 @media only screen and (max-width: 600px) {

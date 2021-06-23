@@ -389,6 +389,7 @@ export default {
   font-weight: bold;
 }
 .payment-button {
+  font-size: 14px;
   font-weight: bold;
   border: none;
   border-radius: 15px;
