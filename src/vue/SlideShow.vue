@@ -3,24 +3,16 @@
     <div class="slideshow_main-image">
       <img
         class="slideshow_selection_product-image main-image"
-        :src="showMainImage()"
-        :alt="alt"
+        :src="getImgUrl(gallery[index].image)"
+        :alt="gallery[index].text"
       />
       <div class="slideshow_txt-container">
         <h2 class="slideshow_txt-container_text">
-        {{ alt }}
+          {{ gallery[index].text }}
         </h2>
       </div>
-      <a
-        class="slideshow_arrow prev"
-        @click="showPreviousImage()"
-        >❮</a
-      >
-      <a
-        class="slideshow_arrow next"
-        @click="showNextImage()"
-        >❯</a
-      >
+      <a class="slideshow_arrow prev" @click="showPreviousImage()">❮</a>
+      <a class="slideshow_arrow next" @click="showNextImage()">❯</a>
     </div>
   </div>
 </template>
@@ -31,17 +23,9 @@ export default {
   data() {
     return {
       index: 0,
-    }
+    };
   },
   props: {
-    id: {
-      type: String | Number,
-      required: true,
-    },
-    alt: {
-      type: String,
-      required: true,
-    },
     gallery: {
       type: Array,
       required: true,
@@ -56,7 +40,7 @@ export default {
       );
       return images("./" + pic);
     },
-    showMainImage() {
+    updateIndex() {
       var gallery = this.$props.gallery;
       if (this.index < 0) {
         this.index = gallery.length - 1;
@@ -64,7 +48,8 @@ export default {
       if (this.index > gallery.length - 1) {
         this.index = 0;
       }
-      var photos = Array.from(
+      this.reset_animation();
+      const photos = Array.from(
         document.querySelectorAll(".gallery_selection_gallery-image")
       );
       photos.forEach((photo) => {
@@ -73,20 +58,27 @@ export default {
       if (photos[this.index]) {
         photos[this.index].classList.add("selected-photo");
       }
-      return this.getImgUrl(this.$props.gallery[this.index]);
     },
     showPreviousImage() {
       this.index--;
+      this.updateIndex();
     },
     showNextImage() {
       this.index++;
+      this.updateIndex();
     },
     autoPicChange() {
       this.showNextImage();
     },
+    reset_animation() {
+      const image = document.querySelector(".main-image");
+      image.style.animation = "none";
+      image.offsetHeight;
+      image.style.animation = null;
+    },
   },
   mounted() {
-    setInterval(this.autoPicChange, 5000);
+    setInterval(this.autoPicChange, 7000);
   },
 };
 </script>
@@ -120,6 +112,7 @@ export default {
 }
 .slideshow_main-image {
   position: relative;
+  background-color: white;
 }
 .slideshow_arrow {
   cursor: pointer;
@@ -147,6 +140,7 @@ export default {
 }
 .main-image {
   display: block;
+  animation: slideappear 1s 1 ease-in, slidedisappear 1s 1 ease-out 6s;
 }
 .gallery_selection {
   display: flex;
@@ -155,5 +149,21 @@ export default {
 .slideshow_selection_product-image {
   display: block;
   cursor: pointer;
+}
+@keyframes slideappear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slidedisappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 </style>

@@ -1,9 +1,7 @@
 <template>
   <div class="home-container">
     <slideshow
-      :gallery="getGallery()"
-      :id="slideshow[0].id"
-      :alt="slideshow[0].text"
+      :gallery="slideshow"
     />
     <div class="welcome-message">
       <span
@@ -150,11 +148,6 @@ export default {
     getImgUrl(pic) {
       var images = require.context("../images/", false, /\.jpeg$/);
       return images("./" + pic);
-    },
-    getGallery() {
-      return this.slideshow.map((prop) => {
-        return prop.image;
-      });
     },
   },
 };

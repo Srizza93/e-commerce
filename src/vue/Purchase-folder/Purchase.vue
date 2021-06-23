@@ -8,10 +8,9 @@
     </a>
     <div class="purchase-process_container">
     <div class="slideshow-container">
+    <!-- Need to create an array with objects (id, image, alt) for slideshow -->
       <slide-show
-        :gallery="product.gallery"
-        :id="product.id"
-        :alt="product.alt"
+        :gallery="slideshowArray" 
       />
       <gallery
         :id="product.id"
@@ -85,6 +84,15 @@ export default {
       var quantity = Number(this.product.quantity);
       return Array.from(Array(quantity).keys());
     },
+    slideshowArray() {
+      return this.product.gallery.map((image, index) => {
+        return {
+          id: index,
+          image: image,
+          text: this.product.alt
+        }
+      });
+    }
   },
 };
 </script>
@@ -140,6 +148,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 25px;
+  margin: 25px;
 }
 .description_title {
   margin: 0 0 25px 0;
@@ -158,6 +167,9 @@ export default {
 }
 .selected-photo {
   border: 2px solid #ff8c00;
+}
+.slideshow_txt-container {
+  display: none;
 }
 @media only screen and (max-width: 680px) {
   .purchase-process_container {
