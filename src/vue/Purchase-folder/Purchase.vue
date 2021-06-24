@@ -7,20 +7,24 @@
       ❮
     </a>
     <div class="purchase-process_container">
-    <div class="slideshow-container">
-    <!-- Need to create an array with objects (id, image, alt) for slideshow -->
-      <slide-show
-        :gallery="slideshowArray" 
-      />
-      <gallery
-        :id="product.id"
-        :alt="product.alt"
-        :gallery="product.gallery"
-      />
-    </div>
+      <div class="slideshow-container">
+        <slide-show
+          :gallery="slideshowArray"
+          :select-photo="galleryIndex"
+          @childToParent="getGalleryIndexFromSlideshow"
+        />
+        <gallery
+          :id="product.id"
+          :alt="product.alt"
+          :gallery="product.gallery"
+          @getIndexOfClickedPhoto="updateGalleryIndex"
+        />
+      </div>
       <div class="description">
         <h2 class="description_title">{{ product.alt }}</h2>
-        <p class="description_description">{{ product.alt }} {{ product.description }}</p>
+        <p class="description_description">
+          {{ product.alt }} {{ product.description }}
+        </p>
         <span class="products_product_price description_price">{{
           product.price
         }}</span>
@@ -44,13 +48,13 @@
 <script>
 import SlideShow from "../SlideShow.vue";
 import PaymentBox from "../Purchase-folder/PaymentBox.vue";
-import Gallery from './Gallery.vue';
+import Gallery from "./Gallery.vue";
 export default {
   name: "Purchase",
   components: { SlideShow, PaymentBox, Gallery },
   data() {
     return {
-      indexSlideShow: 0,
+      galleryIndex: NaN,
       product: {
         id: this.getProduct()[0],
         src: this.getProduct()[1],
@@ -78,6 +82,13 @@ export default {
       );
       return images("./" + pic);
     },
+    updateGalleryIndex(image) {
+      const imageId = image.event.currentTarget.id;
+      this.galleryIndex = Number(imageId);
+    },
+    getGalleryIndexFromSlideshow(newIndex) {
+      this.galleryIndex = newIndex;
+    },
   },
   computed: {
     quantityArray() {
@@ -89,10 +100,10 @@ export default {
         return {
           id: index,
           image: image,
-          text: this.product.alt
-        }
+          text: this.product.alt,
+        };
       });
-    }
+    },
   },
 };
 </script>
@@ -142,7 +153,7 @@ export default {
   padding-bottom: 25px;
   font-weight: bold;
   font-size: 21px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
 }
 .description {
   display: flex;

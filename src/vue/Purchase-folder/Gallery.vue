@@ -1,19 +1,20 @@
 <template>
   <div class="gallery_selection">
-      <img
-        class="gallery_selection_product-image gallery_selection_gallery-image"
-        v-for="(image, index) in gallery"
-        :key="id + index"
-        :src="getImgUrl(image)"
-        :alt="alt"
-        :id="index"
-      />
-    </div>
+    <img
+      class="gallery_selection_product-image gallery_selection_gallery-image"
+      v-for="(image, index) in gallery"
+      :key="id + index"
+      :src="getImgUrl(image)"
+      :alt="alt"
+      :id="index"
+      @click="$emit('getIndexOfClickedPhoto', { event: $event, id })"
+    />
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Gallery',
+  name: "Gallery",
   props: {
     id: {
       type: String | Number,
@@ -38,7 +39,7 @@ export default {
       return images("./" + pic);
     },
   },
-}
+};
 </script>
 
 <style>
