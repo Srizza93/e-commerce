@@ -2,6 +2,7 @@
   <div class="home-container">
     <slideshow
       :gallery="slideshow"
+      :selectPhoto="0"
     />
     <div class="welcome-message">
       <span

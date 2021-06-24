@@ -103,7 +103,7 @@ module.exports = {
   //                         "light" for development
   new FaviconsWebpackPlugin({
       logo: './src/images/doelogo.png',
-      mode: 'webapp',
+      mode: 'light',
     }),
     ],
 };

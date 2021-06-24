@@ -75,85 +75,85 @@ export default {
       locations: [
         {
           id: 1,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Countries",
         },
         {
           id: 2,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Regions",
         },
         {
           id: 3,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Cities",
         },
       ],
       mainProducts: [
         {
           id: 1,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Computers",
         },
         {
           id: 2,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Home",
         },
         {
           id: 3,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Food",
         },
       ],
       company: [
         {
           id: 1,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "About us",
         },
         {
           id: 2,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Careers",
         },
         {
           id: 3,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "World",
         },
       ],
       general: [
         {
           id: 1,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Reviews",
         },
         {
           id: 2,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Partners",
         },
         {
           id: 3,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Discounts",
         },
       ],
       news: [
         {
           id: 1,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "COVID",
         },
         {
           id: 2,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Growth",
         },
         {
           id: 3,
-          link: "https://vuejs.org/v2/api/#v-bind",
+          link: "./research.html",
           text: "Plans",
         },
       ],

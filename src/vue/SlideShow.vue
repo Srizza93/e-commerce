@@ -20,16 +20,20 @@
 <script>
 export default {
   name: "Slideshow",
-  data() {
-    return {
-      index: 0,
-    };
-  },
   props: {
     gallery: {
       type: Array,
       required: true,
     },
+    selectPhoto: {
+      type: Number,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      index: 0,
+    };
   },
   methods: {
     getImgUrl(pic) {
@@ -41,6 +45,7 @@ export default {
       return images("./" + pic);
     },
     updateIndex() {
+      this.$emit("childToParent", this.index);
       var gallery = this.$props.gallery;
       if (this.index < 0) {
         this.index = gallery.length - 1;
@@ -48,7 +53,10 @@ export default {
       if (this.index > gallery.length - 1) {
         this.index = 0;
       }
-      this.reset_animation();
+      this.resetAnimation();
+      this.highlightSelectedPhoto();
+    },
+    highlightSelectedPhoto() {
       const photos = Array.from(
         document.querySelectorAll(".gallery_selection_gallery-image")
       );
@@ -67,18 +75,24 @@ export default {
       this.index++;
       this.updateIndex();
     },
-    autoPicChange() {
+    autoImageChange() {
       this.showNextImage();
     },
-    reset_animation() {
+    resetAnimation() {
       const image = document.querySelector(".main-image");
       image.style.animation = "none";
       image.offsetHeight;
       image.style.animation = null;
     },
   },
+  watch: {
+    selectPhoto: function(newVal) {
+      this.index = newVal;
+      this.updateIndex();
+    },
+  },
   mounted() {
-    setInterval(this.autoPicChange, 7000);
+    setInterval(this.autoImageChange, 7000);
   },
 };
 </script>
