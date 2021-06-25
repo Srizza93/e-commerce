@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       index: 0,
+      timer: undefined,
     };
   },
   methods: {
@@ -45,6 +46,8 @@ export default {
       return images("./" + pic);
     },
     updateIndex() {
+      clearInterval(this.timer);
+      this.timer = setInterval(this.showNextImage, 7000);
       this.$emit("childToParent", this.index);
       var gallery = this.$props.gallery;
       if (this.index < 0) {
@@ -76,7 +79,7 @@ export default {
       this.updateIndex();
     },
     autoImageChange() {
-      this.showNextImage();
+      this.timer = setInterval(this.showNextImage, 7000);
     },
     resetAnimation() {
       const image = document.querySelector(".main-image");
@@ -92,7 +95,7 @@ export default {
     },
   },
   mounted() {
-    setInterval(this.autoImageChange, 7000);
+    this.autoImageChange();
   },
 };
 </script>
@@ -129,16 +132,20 @@ export default {
   background-color: white;
 }
 .slideshow_arrow {
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 50%;
-  width: auto;
+  width: 50px;
+  height: 75px;
   padding: 16px;
   margin-top: -50px;
   color: white;
   font-weight: bold;
   font-size: 40px;
   border-radius: 0 3px 3px 0;
+  cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
 }
