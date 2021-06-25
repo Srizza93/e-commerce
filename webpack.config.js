@@ -2,11 +2,10 @@
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
   // !!!!!! MAKE SURE TO CHANGE MODE TO PRODUCTION WHEN DOPLOYING FOR PRODUCTION !!!!!!!!!
-  mode: 'production',
+  mode: 'development',
   entry: {
     main:  {
       import: path.resolve(__dirname, './src/scripts/app.js'),
@@ -72,38 +71,38 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'e-commerce',
       chunks: ['main'],
+      favicon: './src/images/doelogo-favicon.png',
     }),
     new HtmlWebpackPlugin({
       title: 'e-commerce',
       filename: 'research.html',
       chunks: ['research'],
+      favicon: './src/images/doelogo-favicon.png',
     }),
     new HtmlWebpackPlugin({
       title: 'e-commerce',
       filename: 'purchase.html',
       chunks: ['purchase'],
+      favicon: './src/images/doelogo-favicon.png',
     }),
     new HtmlWebpackPlugin({
       title: 'e-commerce',
       filename: 'payment.html',
       chunks: ['payment'],
+      favicon: './src/images/doelogo-favicon.png',
     }),
     new HtmlWebpackPlugin({
       title: 'e-commerce',
       filename: 'cart.html',
       chunks: ['cart'],
+      favicon: './src/images/doelogo-favicon.png',
     }),
     new HtmlWebpackPlugin({
       title: 'e-commerce',
       filename: 'transaction.html',
       chunks: ['transaction'],
+      favicon: './src/images/doelogo-favicon.png',
     }),
     new VueLoaderPlugin(),
-  // !!!!!! MAKE SURE TO CHANGE MODE TO "webapp" WHEN DOPLOYING FOR PRODUCTION !!!!!!!!!
-  //                         "light" for development
-  new FaviconsWebpackPlugin({
-      logo: './src/images/doelogo.png',
-      mode: 'light',
-    }),
     ],
 };
