@@ -387,7 +387,6 @@ export default {
           quantity: 4,
         },
       ],
-      selectedProduct: [],
     };
   },
   methods: {

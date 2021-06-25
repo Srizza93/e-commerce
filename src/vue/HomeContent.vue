@@ -1,9 +1,6 @@
 <template>
   <div class="home-container">
-    <slideshow
-      :gallery="slideshow"
-      :selectPhoto="0"
-    />
+    <slideshow :gallery="slideshow" :selectPhoto="0" />
     <div class="welcome-message">
       <span
         >Welcome to <b>e-commerce.com</b>. Please visit the website to discover
@@ -159,10 +156,10 @@ export default {
   display: flex;
   flex-direction: column;
   background: rgb(255, 140, 0);
-  background: radial-gradient(
-    circle,
-    rgba(255, 140, 0, 1) 72%,
-    rgba(19, 25, 33, 1) 100%
+  background: linear-gradient(
+    180deg,
+    rgba(255, 140, 0, 1) 8%,
+    rgba(255, 255, 255, 1) 51%
   );
 }
 .welcome-message {

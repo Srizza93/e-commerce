@@ -182,6 +182,9 @@ export default {
 .slideshow_txt-container {
   display: none;
 }
+.slideshow_arrow {
+  margin-top: -38px;
+}
 @media only screen and (max-width: 680px) {
   .purchase-process_container {
     flex-wrap: wrap;
