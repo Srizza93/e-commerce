@@ -3,7 +3,7 @@
     <div class="results">
       <div class="filters_button">
         <button
-          class="filters_button_text"
+          class="filters-sort_button_text"
           @click="openCloseFiltersOnSmallScreens"
         >
           Filter
@@ -42,6 +42,7 @@
         <h2 class="products_count">
           {{ filteredProductsLength }} Product(s) Found
         </h2>
+        <Sort :sort="sort" />
         <div class="products_container">
           <Products
             v-for="product in filteredProducts"
@@ -64,10 +65,11 @@
 <script>
 import Filters from "../Results/Filters.vue";
 import Products from "../Results/Products.vue";
+import Sort from "../Results/Sort.vue";
 export default {
   name: "Results",
   event: "click",
-  components: { Filters, Products },
+  components: { Filters, Products, Sort },
   data() {
     return {
       tickedFilters: [],
@@ -207,6 +209,28 @@ export default {
               text: "Technics",
             },
           ],
+        },
+      ],
+      sort: [
+        {
+          id: 1,
+          text: "Price (lowest first)",
+          function: this.sortProductsLowerstFirst,
+        },
+        {
+          id: 2,
+          text: "Price (highest first)",
+          function: this.sortProductsHighestFirst,
+        },
+        {
+          id: 3,
+          text: "Review score (highest first)",
+          function: this.sortProductsHighestReviewScore,
+        },
+        {
+          id: 4,
+          text: "Review score (lowest first)",
+          function: this.sortProductsLowestReviewScore,
         },
       ],
       products: [
@@ -426,6 +450,44 @@ export default {
         (product.quantity + 1);
       window.open("./purchase.html?product=" + encodeURI(productClicked));
     },
+    sortProductsLowerstFirst(option) {
+      this.products = this.products.sort((a, b) => {
+        return (
+          Number(a.price.substring(0, a.price.length - 1)) -
+          Number(b.price.substring(0, b.price.length - 1))
+        );
+      });
+      this.selectSortOption(option);
+    },
+    sortProductsHighestFirst(option) {
+      this.products = this.products.sort((a, b) => {
+        return (
+          Number(b.price.substring(0, b.price.length - 1)) -
+          Number(a.price.substring(0, a.price.length - 1))
+        );
+      });
+      this.selectSortOption(option);
+    },
+    sortProductsHighestReviewScore(option) {
+      this.products = this.products.sort((a, b) => {
+        return Number(b.reviews) - Number(a.reviews);
+      });
+      this.selectSortOption(option);
+    },
+    sortProductsLowestReviewScore(option) {
+      this.products = this.products.sort((a, b) => {
+        return Number(a.reviews) - Number(b.reviews);
+      });
+      this.selectSortOption(option);
+    },
+    selectSortOption(event) {
+      var buttons = document.querySelectorAll(".products_sort_option_button");
+      buttons.forEach((button) => {
+        button.classList.remove("selected-sort");
+      });
+      var clickedButton = event.target.closest("a");
+      clickedButton.classList.add("selected-sort");
+    },
   },
   computed: {
     filteredFilters() {
@@ -540,14 +602,17 @@ export default {
   border-bottom: 1px solid black;
 }
 
-.filters_button_text {
-  background-color: #232f3e;
-  color: white;
+.filters-sort_button_text {
+  width: 60px;
+  height: 30px;
   padding: 5px 10px;
   margin: 5px;
   border: 1px solid #ddd;
   border-radius: 15px;
+  font-size: 14px;
   font-weight: bold;
+  background-color: #232f3e;
+  color: white;
   cursor: pointer;
 }
 .filters_button_text:hover {
@@ -618,6 +683,7 @@ export default {
     display: flex;
   }
   .products {
+    align-items: center;
     margin: 0;
   }
   .products_container {
