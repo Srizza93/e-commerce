@@ -16,7 +16,7 @@
           <a href="./research.html">
             <img
               :src="getImgUrl(product.image)"
-              alt="Home"
+              :alt="product.text"
               class="galery_topics_pic"
             />
           </a>
@@ -35,14 +35,14 @@
 import Slideshow from "./SlideShow.vue";
 
 export default {
-  name: "App",
+  name: "Home",
   components: { Slideshow },
   data() {
     return {
       products: [
         {
           id: 1,
-          text: "Computers and accessories",
+          text: "Computers",
           image: "computers.jpeg",
           link: "Shop now",
         },
@@ -165,13 +165,11 @@ export default {
 .welcome-message {
   text-align: center;
   padding: 15px;
-  margin: 25px 50px 0 50px;
   background-color: white;
 }
 .galery {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap-reverse;
+  flex-flow: row wrap;
   justify-content: center;
   min-height: 600px;
   padding-bottom: 50px;
@@ -179,6 +177,7 @@ export default {
 .galery__topics {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background-color: white;
   text-align: left;
   margin: 25px;
@@ -209,10 +208,5 @@ export default {
 .galery__topics_link:hover {
   text-decoration: underline;
   color: red;
-}
-@media only screen and (max-width: 600px) {
-  .welcome-message {
-    margin: 25px;
-  }
 }
 </style>
