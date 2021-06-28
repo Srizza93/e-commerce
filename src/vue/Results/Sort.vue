@@ -39,7 +39,6 @@ export default {
   padding: 0;
   list-style: none;
   font-size: 14px;
-  position: relative;
 }
 .products_sort_option {
   border: 1px solid #232f3e;
