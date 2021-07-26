@@ -5,7 +5,7 @@
         class="logo"
         :key="logo.id"
         :src="getImgUrl(logo.link)"
-        :alt="logo.link"
+        alt="logo"
       />
     </a>
     <div class="container-form">
@@ -67,8 +67,8 @@ export default {
       search: [],
       logo: {
         id: 1,
-        text: "doelogo",
-        link: "doelogo.png",
+        text: "e-commerce logo",
+        link: "e-commerce.ico",
       },
       magnifying: {
         id: 2,
@@ -254,7 +254,7 @@ export default {
   },
   methods: {
     getImgUrl(pic) {
-      var images = require.context("../images/", false, /\.png$/);
+      var images = require.context("../images/", false, /\.png|ico$/);
       return images("./" + pic);
     },
     showSuggestions: function() {

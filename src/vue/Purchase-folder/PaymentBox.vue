@@ -14,7 +14,7 @@
         class="payment-box__quantity_quantity"
         name="quantity"
         id="quantity"
-      >
+      >Qty:
         <option v-for="number in quantityArray" :key="number" :value="number">
           {{ number }}
         </option>

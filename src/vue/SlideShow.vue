@@ -162,6 +162,7 @@ export default {
 .main-image {
   display: block;
   animation: slideappear 1s 1 ease-in, slidedisappear 1s 1 ease-out 6s;
+  object-fit: cover;
 }
 .gallery_selection {
   display: flex;
