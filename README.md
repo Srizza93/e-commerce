@@ -31,3 +31,8 @@ Link: https://srizza93.github.io/e-commerce/
 
 <p>An HTML bridge page is used to connect the github page to HTML index in "deploy" folder.</p>
 
+<b>Testing</b>
+
+Unit testing utility library: Vue Test Utils 
+Framework: Jest
+
