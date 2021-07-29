@@ -42,7 +42,17 @@
         <h2 class="products_count">
           {{ filteredProductsLength }} Product(s) Found
         </h2>
-        <Sort :sort="sort" />
+        <div class="products_sort">
+          <ul class="products_sort_ul">
+            <Sort
+              v-for="option in sort"
+              :key="option.id + option.text"
+              :id="option.id"
+              :text="option.text"
+              @sortProductsAndUpdate="option.function"
+            />
+          </ul>
+        </div>
         <div class="products_container">
           <Products
             v-for="product in filteredProducts"
@@ -480,12 +490,12 @@ export default {
       });
       this.selectSortOption(option);
     },
-    selectSortOption(event) {
+    selectSortOption(option) {
       var buttons = document.querySelectorAll(".products_sort_option_button");
       buttons.forEach((button) => {
         button.classList.remove("selected-sort");
       });
-      var clickedButton = event.target.closest("a");
+      var clickedButton = option.event.target.closest("button");
       clickedButton.classList.add("selected-sort");
     },
   },
