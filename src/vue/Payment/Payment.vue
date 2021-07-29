@@ -326,11 +326,9 @@ export default {
 .payment-container_forms {
   display: flex;
   flex-direction: column;
-  min-width: 400px;
   margin: 25x;
 }
 .payment-container_breakdown {
-  min-width: 400px;
   padding: 25px;
   margin: 25px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
