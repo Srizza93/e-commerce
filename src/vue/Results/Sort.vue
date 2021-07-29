@@ -1,27 +1,26 @@
 <template>
-  <div class="products_sort">
-    <ul class="products_sort_ul">
       <li
         class="products_sort_option"
-        v-for="option in sort"
-        :key="option.id + option.text"
-        @click="option.function"
       >
-        <a class="products_sort_option_button"> {{ option.text }}</a>
+        <button class="products_sort_option_button" @click="$emit('sortProductsAndUpdate', { event: $event, id })">
+          {{ text }}</button
+        >
       </li>
-    </ul>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'Sort',
+  name: "Sort",
   props: {
-    sort: {
-      type: Array,
-      required: true
+    id: {
+      type: Number,
+      required: true,
     },
-  }
+    text: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>
 
@@ -49,11 +48,13 @@ export default {
 }
 .products_sort_option_button {
   display: block;
+  width: 100%;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
   font-weight: 400;
   padding: 7px 12px;
+  border: 0;
   cursor: pointer;
 }
 .products_sort_option_button:hover {
@@ -72,7 +73,7 @@ export default {
   .products_sort_option:first-child {
     border-top-width: 1px;
   }
-  .products_sort_ul { 
+  .products_sort_ul {
     flex-direction: column;
   }
 }
